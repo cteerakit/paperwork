@@ -79,9 +79,6 @@ export function FeedbackDialog() {
                   disabled={status === "sending"}
                   onChange={(event) => setMessage(event.target.value)}
                 />
-                <p className="text-xs text-muted-foreground">
-                  {t("feedback.privacy")}
-                </p>
               </div>
               {(status === "error" || status === "limited") && (
                 <p role="alert" className="text-destructive">

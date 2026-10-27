@@ -223,7 +223,6 @@
     "title": "Feedback",
     "description": "What would you like us to change or improve?",
     "label": "Your feedback",
-    "privacy": "Your message is sent to the developer via Discord. Please leave out sensitive information. No PDF files are attached.",
     "send": "Send feedback",
     "sending": "Sending…",
     "sent": "Thanks! Your feedback has been sent.",
