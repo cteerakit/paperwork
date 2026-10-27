@@ -3,15 +3,16 @@ import { Route, Routes } from "react-router"
 import { AppHeader } from "@/components/AppHeader"
 import { Home } from "@/tools/Home"
 import { Spinner } from "@/components/Spinner"
+import { toolLoaders } from "@/tools/loaders"
 
-const Organize = lazy(() => import("@/tools/Organize"))
-const Merge = lazy(() => import("@/tools/Merge"))
-const Split = lazy(() => import("@/tools/Split"))
-const Compress = lazy(() => import("@/tools/Compress"))
-const PageNumbers = lazy(() => import("@/tools/PageNumbers"))
-const Watermark = lazy(() => import("@/tools/Watermark"))
-const Sign = lazy(() => import("@/tools/Sign"))
-const Annotate = lazy(() => import("@/tools/Annotate"))
+const Organize = lazy(toolLoaders.organize)
+const Merge = lazy(toolLoaders.merge)
+const Split = lazy(toolLoaders.split)
+const Compress = lazy(toolLoaders.compress)
+const PageNumbers = lazy(toolLoaders.pageNumbers)
+const Watermark = lazy(toolLoaders.watermark)
+const Sign = lazy(toolLoaders.sign)
+const Annotate = lazy(toolLoaders.annotate)
 
 export function App() {
   return (

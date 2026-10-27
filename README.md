@@ -34,6 +34,21 @@ pnpm deploy
 
 Production URL: https://paperwork.c-teerakit.workers.dev
 
+## Feedback
+
+The header's Feedback dialog sends messages through `POST /api/feedback` to
+Discord. It sends only the message, with no PDF attachments. Submissions are
+limited to 1,500 characters and three requests per minute per IP.
+
+Set `DISCORD_FEEDBACK_WEBHOOK` in the gitignored `.dev.vars` file for local
+development. For production, set the same Worker secret before deploying:
+
+```sh
+pnpm dlx wrangler secret put DISCORD_FEEDBACK_WEBHOOK --name paperwork
+```
+
+Keep the webhook out of source control and client-side environment variables.
+
 Workers Builds settings for the GitHub integration:
 
 - Production branch: `main`

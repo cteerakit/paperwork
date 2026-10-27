@@ -1,9 +1,7 @@
 /** pdf.js setup and page rendering for thumbnails, previews and the editor. */
-import { getDocument, GlobalWorkerOptions, type PDFDocumentProxy } from "pdfjs-dist"
+import type { PDFDocumentProxy } from "pdfjs-dist"
 import workerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url"
 import { PdfError } from "../pdf/load"
-
-GlobalWorkerOptions.workerSrc = workerUrl
 
 const assets = `${import.meta.env.BASE_URL}pdfjs/`
 
@@ -29,6 +27,8 @@ export async function openPdf(file: File): Promise<LoadedPdf> {
   const bytes = new Uint8Array(await file.arrayBuffer())
   let doc: PdfDoc
   try {
+    const { getDocument, GlobalWorkerOptions } = await import("pdfjs-dist")
+    GlobalWorkerOptions.workerSrc = workerUrl
     doc = await getDocument({
       // pdf.js takes ownership of (detaches) the buffer it's given, so pass a copy.
       data: bytes.slice(),

@@ -1,10 +1,21 @@
 import { ShieldCheck } from "lucide-react"
+import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router"
 import { TOOLS } from "./registry"
+import { preloadTool } from "./loaders"
 
 export function Home() {
   const { t } = useTranslation()
+  useEffect(() => {
+    const warmTools = () => TOOLS.forEach(({ id }) => preloadTool(id))
+    if ("requestIdleCallback" in window) {
+      const idle = window.requestIdleCallback(warmTools, { timeout: 2000 })
+      return () => window.cancelIdleCallback(idle)
+    }
+    const timer = setTimeout(warmTools, 1000)
+    return () => clearTimeout(timer)
+  }, [])
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:py-14">
       <div className="mx-auto max-w-2xl text-center">
@@ -21,6 +32,9 @@ export function Home() {
           <Link
             key={id}
             to={path}
+            onPointerEnter={() => preloadTool(id)}
+            onFocus={() => preloadTool(id)}
+            onTouchStart={() => preloadTool(id)}
             className="group rounded-xl border bg-card p-5 transition-all hover:-translate-y-0.5 hover:border-foreground/20 hover:shadow-md focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
           >
             <div className={`grid size-10 place-items-center rounded-lg ${accent}`}>
