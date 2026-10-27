@@ -31,6 +31,9 @@ export function AppFooter() {
           <Link to="/pricing" className={linkClassName}>
             {t("footer.pricing")}
           </Link>
+          <Link to="/changelog" className={linkClassName}>
+            {t("footer.changelog")}
+          </Link>
           <a
             href="https://www.facebook.com/cteerakit"
             aria-label="Facebook"

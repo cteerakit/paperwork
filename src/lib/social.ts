@@ -23,6 +23,12 @@ export const SOCIAL_PAGES = [
       "An ID card, a signature, and the story behind Paperwork: free PDF tools that keep your documents on your device.",
   },
   {
+    path: "/changelog",
+    title: "Changelog — What’s new in Paperwork",
+    description:
+      "See what’s new in Paperwork: new PDF tools, offline support and other improvements, newest first.",
+  },
+  {
     path: "/merge",
     title: "Merge PDFs — Paperwork",
     description:

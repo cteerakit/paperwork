@@ -63,7 +63,7 @@ Production URL: https://paperwork.c-teerakit.workers.dev
 
 `src/lib/social.ts` defines the production URL, page titles, descriptions, and
 social tags. The Vite plugin in `scripts/social-metadata.ts` writes metadata
-directly into HTML for all 13 public pages. `src/entry-static.tsx` renders the
+directly into HTML for all 14 public pages. `src/entry-static.tsx` renders the
 same React pages, tool headings, and translated guides used by the live app,
 so crawlers can read content and follow links without JavaScript. PDF workspaces
 load on the client and replace their static placeholder. Generated HTML is

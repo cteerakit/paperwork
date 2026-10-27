@@ -12,6 +12,7 @@ import vi from "@/i18n/locales/vi.json"
 import zh from "@/i18n/locales/zh.json"
 import type { LanguageCode } from "@/i18n/languages"
 import { About } from "@/pages/About"
+import { Changelog } from "@/pages/Changelog"
 import { NotFound } from "@/pages/NotFound"
 import { Pricing } from "@/pages/Pricing"
 import { Home } from "@/tools/Home"
@@ -40,6 +41,8 @@ export async function renderPage(path: string, language: LanguageCode = "en") {
       <About />
     ) : path === "/pricing" ? (
       <Pricing />
+    ) : path === "/changelog" ? (
+      <Changelog />
     ) : tool ? (
       <ToolLayout tool={tool.id}>
         <p className="rounded-xl border bg-card p-8 text-center text-muted-foreground">

@@ -5,6 +5,7 @@ import { AppFooter } from "@/components/AppFooter"
 import { LaunchHandler } from "@/components/LaunchHandler"
 import { About } from "@/pages/About"
 import { Pricing } from "@/pages/Pricing"
+import { Changelog } from "@/pages/Changelog"
 import { NotFound } from "@/pages/NotFound"
 import { Open } from "@/pages/Open"
 import { Home } from "@/tools/Home"
@@ -42,6 +43,7 @@ export function App() {
             <Route index element={<Home />} />
             <Route caseSensitive path="about" element={<About />} />
             <Route caseSensitive path="pricing" element={<Pricing />} />
+            <Route caseSensitive path="changelog" element={<Changelog />} />
             <Route caseSensitive path="unlock-protect" element={<Security />} />
             <Route caseSensitive path="organize" element={<Organize />} />
             <Route caseSensitive path="merge" element={<Merge />} />

@@ -54,7 +54,13 @@ describe("public page content", () => {
 
   it("keeps the public URL registry aligned with the tool routes", () => {
     expect(SOCIAL_PAGES.map(({ path }) => path).sort()).toEqual(
-      ["/", "/about", "/pricing", ...TOOLS.map(({ path }) => path)].sort()
+      [
+        "/",
+        "/about",
+        "/pricing",
+        "/changelog",
+        ...TOOLS.map(({ path }) => path),
+      ].sort()
     )
     expect(new Set(SOCIAL_PAGES.map(({ title }) => title)).size).toBe(
       SOCIAL_PAGES.length
