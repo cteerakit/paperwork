@@ -9,7 +9,7 @@
     "prebuild": "node scripts/copy-pdfjs-assets.mjs && node scripts/fetch-fonts.mjs",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "test": "vitest run",
+    "test": "node scripts/fetch-fonts.mjs && vitest run",
     "fonts": "node scripts/fetch-fonts.mjs",
     "render-pdf": "tsx scripts/render-pdf.ts",
     "lint": "eslint .",
