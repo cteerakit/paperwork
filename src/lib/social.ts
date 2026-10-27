@@ -84,18 +84,50 @@ export const SOCIAL_PAGES = [
   },
 ]
 
+export const NOT_FOUND_PAGE = {
+  path: "/404",
+  title: "Page not found — Paperwork",
+  description:
+    "This page doesn’t exist. Browse Paperwork’s free, private PDF tools to find what you need.",
+}
+
+export const WEB_APPLICATION = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "@id": `${SITE_URL}/#application`,
+  name: "Paperwork",
+  url: SITE_URL,
+  description: SOCIAL_PAGES[0].description,
+  applicationCategory: "UtilitiesApplication",
+  operatingSystem: "Any",
+  browserRequirements: "Requires JavaScript and a modern web browser.",
+  isAccessibleForFree: true,
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+}
+
+export const applicationJsonLd = () =>
+  JSON.stringify(WEB_APPLICATION).replaceAll("<", "\\u003c")
+
 export function socialPage(pathname: string) {
   return (
     SOCIAL_PAGES.find(
       (page) => page.path === (pathname.replace(/\/+$/, "") || "/")
-    ) ?? SOCIAL_PAGES[0]!
+    ) ?? NOT_FOUND_PAGE
   )
 }
 
-export function socialTags(page: (typeof SOCIAL_PAGES)[number]) {
+export function socialTags(
+  page: (typeof SOCIAL_PAGES)[number]
+): (
+  { name: string; content: string } | { property: string; content: string }
+)[] {
   const url = `${SITE_URL}${page.path}`
   return [
     { name: "description", content: page.description },
+    {
+      name: "robots",
+      content: page === NOT_FOUND_PAGE ? "noindex, follow" : "index, follow",
+    },
     { property: "og:type", content: "website" },
     { property: "og:site_name", content: "Paperwork" },
     { property: "og:locale", content: "en_US" },

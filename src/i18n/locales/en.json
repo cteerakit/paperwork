@@ -1,4 +1,77 @@
 {
+  "seo": {
+    "navigation": "Main navigation",
+    "howTo": "How to use this PDF tool",
+    "limitations": "Before you begin",
+    "privacyTitle": "Free, private PDF processing",
+    "privacy": "Paperwork processes PDFs in your browser, without uploading your documents. No account or payment is required. Download the result to keep your changes, and keep a copy of your original. Large documents may take longer or exceed your device’s available memory.",
+    "related": "Related PDF tools",
+    "workspacePlaceholder": "Enable JavaScript to choose a PDF and use the tool. Your documents are processed on your device. Instructions are below.",
+    "notFoundTitle": "Page not found",
+    "notFoundDescription": "This page doesn’t exist. Browse the PDF tools to find what you need.",
+    "tools": {
+      "merge": {
+        "step1": "Choose the PDF files you want to combine.",
+        "step2": "Drag the files into the order you want in the final document.",
+        "step3": "Merge the files and download the combined PDF.",
+        "limitation": "Unlock password-protected files before merging. Check the page order in your downloaded document."
+      },
+      "split": {
+        "step1": "Choose the PDF you want to split.",
+        "step2": "Extract page ranges, split into fixed-size chunks, or create one file per page.",
+        "step3": "Download the extracted PDF or the archive of split files.",
+        "limitation": "Page numbers start at 1. Use ranges such as 1-3, 5, 8- to select pages; they must exist in the document."
+      },
+      "compress": {
+        "step1": "Choose the PDF whose file size you want to reduce.",
+        "step2": "Choose light, medium, or strong compression and run it.",
+        "step3": "Compare the resulting size and download the smaller PDF when available.",
+        "limitation": "Some PDFs are already optimized and won’t get smaller. Strong compression turns pages into images, which removes selectable text and may reduce visual quality."
+      },
+      "sign": {
+        "step1": "Choose a PDF, then draw, type, or import your signature.",
+        "step2": "Place and resize the signature on the page where it belongs.",
+        "step3": "Download the signed PDF and check the signature placement.",
+        "limitation": "This adds a visible signature, not a certificate-based digital signature. Check the recipient’s signing requirements before using it."
+      },
+      "annotate": {
+        "step1": "Choose a PDF and navigate to the page you want to annotate.",
+        "step2": "Add text, highlights, notes, or shapes, and adjust their placement.",
+        "step3": "Download the annotated PDF to save your additions.",
+        "limitation": "Annotations add to the document; they don’t edit its original text. Use the redaction tool to remove sensitive text instead of covering it with a shape."
+      },
+      "organize": {
+        "step1": "Choose the PDF whose pages you want to arrange.",
+        "step2": "Reorder, rotate, or remove pages using the page thumbnails.",
+        "step3": "Download the reorganized PDF and review its page order.",
+        "limitation": "Keep at least one page in the document. Removing a page from the output doesn’t change your original file."
+      },
+      "security": {
+        "step1": "Choose unlock or protect, then select your PDF.",
+        "step2": "Enter the current password when required. To protect a file, enter and confirm a new password.",
+        "step3": "Process the document and download the unlocked or protected PDF.",
+        "limitation": "Unlocking requires the password when the document needs one; this tool doesn’t recover forgotten passwords. Keep any new password somewhere safe."
+      },
+      "redact": {
+        "step1": "Choose a PDF and open the page containing sensitive text.",
+        "step2": "Select the text you want to remove and review the marked areas.",
+        "step3": "Download the redacted PDF and check it before sharing.",
+        "limitation": "This tool supports text redaction and rejects areas that overlap images. It isn’t suitable for removing information from scanned images. Review every page for other sensitive content."
+      },
+      "watermark": {
+        "step1": "Choose a PDF and enter the text for your watermark.",
+        "step2": "Adjust its appearance and choose the pages to watermark.",
+        "step3": "Apply the watermark and download the result.",
+        "limitation": "A watermark adds visible text; it doesn’t prevent copying or remove the underlying content. Use redaction for supported sensitive text."
+      },
+      "pageNumbers": {
+        "step1": "Choose the PDF you want to number.",
+        "step2": "Choose the number format, position, starting number, and page range.",
+        "step3": "Apply the numbering and download your PDF.",
+        "limitation": "New numbers are added over the page content. They don’t replace existing page numbers, so check their placement before sharing."
+      }
+    }
+  },
   "footer": {
     "copyright": "© {{year}} Paperwork. Made with 💖 and 😠 by",
     "navigation": "Footer",

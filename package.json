@@ -15,6 +15,7 @@
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc -b --noEmit",
+    "check:seo": "tsx scripts/check-seo.ts",
     "deploy": "cf deploy --prebuilt --mode production"
   },
   "dependencies": {
@@ -69,6 +70,7 @@
     "typescript": "~6.0.2",
     "typescript-eslint": "^8",
     "vite": "^8",
+    "vite-plugin-pwa": "^2.0.0",
     "vitest": "^5.0.5"
   },
   "engines": {

@@ -7,7 +7,8 @@ export default defineConfig({
     entrypoint: "./src/server/feedback.ts",
     compatibilityDate: "2026-10-23",
     assets: {
-      notFoundHandling: "single-page-application",
+      notFoundHandling: "404-page",
+      htmlHandling: "drop-trailing-slash",
       runWorkerFirst: ["/api/*"],
     },
     env: {

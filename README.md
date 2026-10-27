@@ -21,11 +21,27 @@ pnpm test
 pnpm build
 ```
 
+## Install and offline use
+
+On HTTPS (or localhost), use the browser's Install app action. On iOS, use
+Share → Add to Home Screen. The installed app opens in its own window.
+
+The production build caches the app, all PDF tools, PDF engines, and standard
+fonts after the first online visit finishes downloading. Chinese, Japanese,
+and Korean editing fonts are cached on first use; use the desired font online
+once before relying on it offline. Feedback requires a connection. PDFs are
+processed locally and are never added to the service worker cache.
+
+Updates activate after all open app windows close, so editing is not interrupted.
+Service workers are disabled during `pnpm dev`; validate offline behavior with
+a production build. Regenerate install icons with
+`node scripts/generate-pwa-icons.mjs` after changing the favicon artwork.
+
 ## Cloudflare Workers deployment
 
 The `paperwork` Worker belongs to the Personal Cloudflare account, selected in
 `cloudflare.config.ts`. Vite produces static assets in `.cloudflare/output/v0`;
-unknown navigation paths fall back to the SPA entry point.
+public routes serve generated HTML and unknown paths return a custom HTTP 404.
 
 ```sh
 pnpm build
@@ -38,9 +54,30 @@ Production URL: https://paperwork.c-teerakit.workers.dev
 
 `src/lib/social.ts` defines the production URL, page titles, descriptions, and
 social tags. The Vite plugin in `scripts/social-metadata.ts` writes metadata
-directly into HTML for the home page, About page, and each PDF tool, so link
-crawlers do not need JavaScript. It also generates `sitemap.xml` and `robots.txt`.
-Client navigation updates the same metadata through `PageMetadata`.
+directly into HTML for all 13 public pages. `src/entry-static.tsx` renders the
+same React pages, tool headings, and translated guides used by the live app,
+so crawlers can read content and follow links without JavaScript. PDF workspaces
+load on the client and replace their static placeholder. Generated HTML is
+English; the existing language switch also translates the new guides into Thai.
+
+The build also emits WebApplication JSON-LD, `sitemap.xml`, `robots.txt`, and
+a `noindex` 404 page. Client navigation updates the same metadata through
+`PageMetadata`, including restoring indexable metadata when leaving a missing
+page. Cloudflare drops trailing slashes to match canonical URLs. The service
+worker’s navigation fallback is limited to known public routes.
+
+Validate the generated files after building:
+
+```sh
+pnpm build
+pnpm check:seo
+```
+
+After deploying, verify the production URL as a URL-prefix property in Google
+Search Console, then submit `https://paperwork.c-teerakit.workers.dev/sitemap.xml`
+in its Sitemaps report. Use URL Inspection to check the home page and a tool
+page; monitor Page Indexing for unexpected exclusions or soft 404s. Search
+Console verification and submission are account actions performed separately.
 
 The shared 1200 × 630 preview image is `public/og.png`. To regenerate it after
 changing the artwork in `scripts/generate-social-image.mjs`, run:

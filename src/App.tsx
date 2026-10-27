@@ -4,6 +4,7 @@ import { AppHeader } from "@/components/AppHeader"
 import { AppFooter } from "@/components/AppFooter"
 import { About } from "@/pages/About"
 import { Pricing } from "@/pages/Pricing"
+import { NotFound } from "@/pages/NotFound"
 import { Home } from "@/tools/Home"
 import { Spinner } from "@/components/Spinner"
 import { toolLoaders } from "@/tools/loaders"
@@ -35,19 +36,19 @@ export function App() {
         >
           <Routes>
             <Route index element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="pricing" element={<Pricing />} />
-            <Route path="unlock-protect" element={<Security />} />
-            <Route path="organize" element={<Organize />} />
-            <Route path="merge" element={<Merge />} />
-            <Route path="split" element={<Split />} />
-            <Route path="compress" element={<Compress />} />
-            <Route path="page-numbers" element={<PageNumbers />} />
-            <Route path="watermark" element={<Watermark />} />
-            <Route path="sign" element={<Sign />} />
-            <Route path="redact" element={<Redact />} />
-            <Route path="annotate" element={<Annotate />} />
-            <Route path="*" element={<Home />} />
+            <Route caseSensitive path="about" element={<About />} />
+            <Route caseSensitive path="pricing" element={<Pricing />} />
+            <Route caseSensitive path="unlock-protect" element={<Security />} />
+            <Route caseSensitive path="organize" element={<Organize />} />
+            <Route caseSensitive path="merge" element={<Merge />} />
+            <Route caseSensitive path="split" element={<Split />} />
+            <Route caseSensitive path="compress" element={<Compress />} />
+            <Route caseSensitive path="page-numbers" element={<PageNumbers />} />
+            <Route caseSensitive path="watermark" element={<Watermark />} />
+            <Route caseSensitive path="sign" element={<Sign />} />
+            <Route caseSensitive path="redact" element={<Redact />} />
+            <Route caseSensitive path="annotate" element={<Annotate />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </main>
