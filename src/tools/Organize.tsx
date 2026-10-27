@@ -9,8 +9,8 @@ import {
 } from "@dnd-kit/core"
 import { arrayMove, rectSortingStrategy, SortableContext, sortableKeyboardCoordinates, useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
-import { Download, RotateCcw, RotateCw, Trash2, Undo2 } from "lucide-react"
-import { useState } from "react"
+import { Copy, Download, FilePlus, FileText, RotateCcw, RotateCw, Trash2, Undo2 } from "lucide-react"
+import { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
 import { FileBar } from "@/components/FileBar"
@@ -24,18 +24,26 @@ import { Checkbox } from "@/components/Checkbox"
 import { usePdfFile, useTask } from "@/hooks/usePdfFile"
 import { useResult } from "@/hooks/useResult"
 import { outputName } from "@/lib/download"
-import { buildFromPages } from "@/lib/pdf/pages"
-import type { LoadedPdf } from "@/lib/render/pdfjs"
+import { errorMessage } from "@/lib/errors"
+import { buildFromPages, type PageSpec } from "@/lib/pdf/pages"
+import { closePdf, openPdf, type LoadedPdf } from "@/lib/render/pdfjs"
 import { cn } from "@/lib/utils"
 
 interface PageItem {
   id: string
+  /** 0 is the opened file; 1+ are files added with "Insert PDF" (see `extras`). */
+  source: number
+  /** 0-based page in its source. */
   index: number
   rotation: number
+  /** Set for a blank page, which has no source page. */
+  blank?: { width: number; height: number }
 }
 
 const initialItems = (count: number): PageItem[] =>
-  Array.from({ length: count }, (_, index) => ({ id: `p${index}`, index, rotation: 0 }))
+  Array.from({ length: count }, (_, index) => ({ id: `p${index}`, source: 0, index, rotation: 0 }))
+
+const newId = () => crypto.randomUUID()
 
 export default function Organize() {
   const { t } = useTranslation()
@@ -90,10 +98,78 @@ function Editor({
   const { busy, run } = useTask()
   const { result: output, deliver } = useResult()
   const [selected, setSelected] = useState<Set<string>>(new Set())
+  // Files added with "Insert PDF"; an item's `source` n refers to extras[n - 1].
+  const [extras, setExtras] = useState<LoadedPdf[]>([])
+  const picker = useRef<HTMLInputElement>(null)
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   )
+
+  // Release pdf.js documents of inserted files when leaving the tool.
+  const latestExtras = useRef(extras)
+  useEffect(() => {
+    latestExtras.current = extras
+  }, [extras])
+  useEffect(() => () => latestExtras.current.forEach(closePdf), [])
+
+  const sourceOf = (item: PageItem) => (item.source === 0 ? pdf : extras[item.source - 1])
+
+  /** Where inserted pages go: after the last selected page, or at the end. */
+  const insertionPoint = () => {
+    const last = items.findLastIndex((p) => selected.has(p.id))
+    return last === -1 ? items.length : last + 1
+  }
+
+  const insertItems = (news: PageItem[], at: number) => {
+    setItems((list) => [...list.slice(0, at), ...news, ...list.slice(at)])
+    setSelected(new Set(news.map((p) => p.id)))
+  }
+
+  const insertBlank = () => {
+    const at = insertionPoint()
+    // Match the page before the new one, as the reader sees it (rotation included).
+    const neighbour = items[at - 1] ?? items[at]
+    const size = neighbour.blank ?? sourceOf(neighbour).pageSizes[neighbour.index]
+    const sideways = Math.abs(neighbour.rotation % 180) === 90
+    const [width, height] = sideways ? [size.height, size.width] : [size.width, size.height]
+    insertItems([{ id: newId(), source: 0, index: 0, rotation: 0, blank: { width, height } }], at)
+  }
+
+  const insertFiles = async (files: File[]) => {
+    let at = insertionPoint()
+    let count = extras.length
+    for (const file of files) {
+      try {
+        const loaded = await openPdf(file)
+        count += 1
+        setExtras((list) => [...list, loaded])
+        const news = Array.from({ length: loaded.pageCount }, (_, index) => ({
+          id: newId(),
+          source: count,
+          index,
+          rotation: 0,
+        }))
+        insertItems(news, at)
+        at += news.length
+      } catch (error) {
+        toast.error(`${file.name}: ${errorMessage(t, error)}`)
+      }
+    }
+  }
+
+  const duplicate = () => {
+    const copies = new Set<string>()
+    setItems((list) =>
+      list.flatMap((p) => {
+        if (!selected.has(p.id)) return [p]
+        const copy = { ...p, id: newId() }
+        copies.add(copy.id)
+        return [p, copy]
+      })
+    )
+    setSelected(copies)
+  }
 
   const targets = (id?: string) => (id ? [id] : [...selected])
   const rotate = (delta: number, id?: string) => {
@@ -128,15 +204,21 @@ function Editor({
 
   const save = () =>
     run(async () => {
+      const specs: PageSpec[] = items.map((p) =>
+        p.blank ? { blank: p.blank } : { index: p.index, source: p.source, rotate: p.rotation }
+      )
       const bytes = await buildFromPages(
         pdf.bytes,
-        items.map((p) => ({ index: p.index, rotate: p.rotation }))
+        specs,
+        extras.map((e) => e.bytes)
       )
       deliver(bytes, outputName(pdf.name, "organized"))
       toast.success(t("common.done"))
     })
 
-  const changed = items.some((p, i) => p.index !== i || p.rotation % 360 !== 0) || items.length !== pdf.pageCount
+  const changed =
+    items.some((p, i) => p.source !== 0 || p.blank || p.index !== i || p.rotation % 360 !== 0) ||
+    items.length !== pdf.pageCount
   const hasSelection = selected.size > 0
 
   return (
@@ -163,6 +245,30 @@ function Editor({
             <RotateCw />
             <span className="hidden md:inline">{t("tools.organize.rotateRight")}</span>
           </Button>
+          <Button variant="outline" size="sm" disabled={!hasSelection} onClick={duplicate}>
+            <Copy />
+            <span className="hidden md:inline">{t("tools.organize.duplicate")}</span>
+          </Button>
+          <Button variant="outline" size="sm" onClick={insertBlank}>
+            <FilePlus />
+            <span className="hidden md:inline">{t("tools.organize.insertBlank")}</span>
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => picker.current?.click()}>
+            <FileText />
+            <span className="hidden md:inline">{t("tools.organize.insertPdf")}</span>
+          </Button>
+          <input
+            ref={picker}
+            type="file"
+            accept="application/pdf,.pdf"
+            multiple
+            className="hidden"
+            onChange={(e) => {
+              const files = Array.from(e.target.files ?? [])
+              e.target.value = ""
+              if (files.length) void insertFiles(files)
+            }}
+          />
           <Button variant="outline" size="sm" disabled={!hasSelection} onClick={() => remove()}>
             <Trash2 />
             <span className="hidden md:inline">{t("common.delete")}</span>
@@ -174,6 +280,8 @@ function Editor({
             onClick={() => {
               setItems(initialItems(pdf.pageCount))
               setSelected(new Set())
+              extras.forEach(closePdf)
+              setExtras([])
             }}
           >
             <Undo2 />
@@ -194,7 +302,7 @@ function Editor({
                 key={item.id}
                 item={item}
                 position={position}
-                pdf={pdf}
+                pdf={sourceOf(item)}
                 selected={selected.has(item.id)}
                 onToggle={() => toggle(item.id)}
                 onRotate={(d) => rotate(d, item.id)}
@@ -219,7 +327,7 @@ function SortablePage({
 }: {
   item: PageItem
   position: number
-  pdf: LoadedPdf
+  pdf: LoadedPdf | undefined
   selected: boolean
   onToggle: () => void
   onRotate: (delta: number) => void
@@ -241,12 +349,23 @@ function SortablePage({
       {...listeners}
       onClick={onToggle}
     >
-      <PageThumbnail doc={pdf.doc} index={item.index} box={136} size={pdf.pageSizes[item.index]} rotation={item.rotation} />
+      <PageThumbnail
+        doc={item.blank ? undefined : pdf?.doc}
+        index={item.index}
+        box={136}
+        size={item.blank ?? pdf!.pageSizes[item.index]}
+        rotation={item.rotation}
+      />
       <div className="flex w-full items-center justify-between text-xs text-muted-foreground">
         <Checkbox checked={selected} onChange={onToggle} label={t("common.selectPage", { n: position + 1 })} />
         <span className="tabular-nums">
           {position + 1}
-          {item.index !== position && <span className="opacity-60"> ({t("tools.organize.was", { n: item.index + 1 })})</span>}
+          {item.blank ? (
+            <span className="opacity-60"> ({t("tools.organize.blankPage")})</span>
+          ) : (
+            item.source === 0 &&
+            item.index !== position && <span className="opacity-60"> ({t("tools.organize.was", { n: item.index + 1 })})</span>
+          )}
         </span>
       </div>
       <div

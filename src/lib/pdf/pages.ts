@@ -1,31 +1,62 @@
-import { PDFDocument, type PDFRef } from "pdf-lib"
+import { PDFDocument, type PDFPage, type PDFRef } from "pdf-lib"
 import { rotatePage } from "./geometry"
 import { loadPdf, savePdf, type PdfBytes } from "./load"
 import { readOutline, writeOutline, type OutlineNode } from "./outline"
 
-export interface PageSpec {
-  /** 0-based index of the page in the source document. */
-  index: number
-  /** Extra clockwise rotation in degrees (multiple of 90). */
-  rotate?: number
-}
+export type PageSpec =
+  | {
+      /** 0-based index of the page in its source document. */
+      index: number
+      /** Which document the page comes from: 0 is the main file, 1+ are the extra files. */
+      source?: number
+      /** Extra clockwise rotation in degrees (multiple of 90). */
+      rotate?: number
+    }
+  | { blank: { width: number; height: number } }
 
 /**
  * Builds a new PDF from the given pages, in the given order. This one operation
- * covers reorder, rotate, delete and extract.
+ * covers reorder, rotate, delete, extract, duplicate and inserting blank pages
+ * or pages from other files (`extra`).
  */
-export async function buildFromPages(bytes: PdfBytes, specs: PageSpec[]): Promise<Uint8Array> {
-  const source = await loadPdf(bytes)
+export async function buildFromPages(bytes: PdfBytes, specs: PageSpec[], extra: PdfBytes[] = []): Promise<Uint8Array> {
+  const sources = [await loadPdf(bytes)]
+  for (const file of extra) sources.push(await loadPdf(file))
+
+  // Pages are copied together per source so shared fonts and images are stored once. A page used
+  // twice needs a separate copy of its own, so repeats go into later rounds.
+  const rounds = new Map<string, number[]>()
+  const uses = new Map<string, number>()
+  specs.forEach((spec, position) => {
+    if ("blank" in spec) return
+    const use = `${spec.source ?? 0}:${spec.index}`
+    const repeat = uses.get(use) ?? 0
+    uses.set(use, repeat + 1)
+    const round = `${repeat}:${spec.source ?? 0}`
+    rounds.set(round, [...(rounds.get(round) ?? []), position])
+  })
+
   const out = await PDFDocument.create()
-  const copied = await out.copyPages(
-    source,
-    specs.map((s) => s.index)
-  )
-  copied.forEach((page, i) => {
-    if (specs[i].rotate) rotatePage(page, specs[i].rotate!)
+  const copies = new Map<number, PDFPage>()
+  for (const [round, positions] of rounds) {
+    const source = sources[Number(round.split(":")[1])]
+    const pages = await out.copyPages(
+      source,
+      positions.map((position) => (specs[position] as { index: number }).index)
+    )
+    positions.forEach((position, i) => copies.set(position, pages[i]))
+  }
+
+  specs.forEach((spec, position) => {
+    if ("blank" in spec) {
+      out.addPage([spec.blank.width, spec.blank.height])
+      return
+    }
+    const page = copies.get(position)!
+    if (spec.rotate) rotatePage(page, spec.rotate)
     out.addPage(page)
   })
-  copyInfo(source, out)
+  copyInfo(sources[0], out)
   return savePdf(out)
 }
 

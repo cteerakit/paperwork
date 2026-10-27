@@ -206,7 +206,11 @@
       "rotateLeft": "Rotate left",
       "rotateRight": "Rotate right",
       "was": "was {{n}}",
-      "keepOne": "A PDF needs at least one page."
+      "keepOne": "A PDF needs at least one page.",
+      "duplicate": "Duplicate",
+      "insertBlank": "Insert blank page",
+      "insertPdf": "Insert PDF…",
+      "blankPage": "blank"
     },
     "merge": {
       "title": "Merge PDFs",
@@ -377,5 +381,42 @@
     "checkout": "Skip checkout. There isn’t one.",
     "note": "I built this for myself. Feel free to use it. If it makes your day a little easier, that’s enough for me.",
     "story": "How this happened"
+  },
+  "changelog": {
+    "title": "Changelog",
+    "subtitle": "What’s new in Paperwork, newest first.",
+    "types": {
+      "new": "New",
+      "improved": "Improved"
+    },
+    "entries": {
+      "offline": {
+        "title": "Works offline",
+        "items": {
+          "install": "Install Paperwork on your phone or computer and keep using the tools without a connection.",
+          "pricing": "A pricing page, if you’re curious. It’s a short read.",
+          "previews": "Links to Paperwork now show a proper preview when you share them.",
+          "prerender": "Pages appear instantly and can be read by search engines, even before the app finishes loading."
+        }
+      },
+      "protect": {
+        "title": "Redact, protect and unlock",
+        "items": {
+          "redact": "Redact sensitive text from a PDF so it’s gone for good, not just covered up.",
+          "security": "Add a password to a PDF, or remove one you already know.",
+          "feedback": "Send feedback straight from the app, in English or Thai.",
+          "about": "An About page with the story of how Paperwork started.",
+          "preload": "Tools open faster. Paperwork loads them quietly in the background while you browse."
+        }
+      },
+      "launch": {
+        "title": "Paperwork launches",
+        "items": {
+          "tools": "Eight PDF tools: merge, split, compress, organize, page numbers, watermark, sign and annotate.",
+          "thai": "Proper Thai text support when you add text to a document, plus an English and Thai interface.",
+          "private": "Everything runs in your browser. No sign-up, and your files never leave your device."
+        }
+      }
+    }
   }
 }

@@ -3,7 +3,8 @@ import { renderPage, type PdfDoc } from "@/lib/render/pdfjs"
 import { cn } from "@/lib/utils"
 
 interface PageThumbnailProps {
-  doc: PdfDoc
+  /** The document to render from. Omit for a blank page. */
+  doc?: PdfDoc
   /** 0-based page index. */
   index: number
   /** Size of the square cell in CSS pixels; the page is fitted inside it. */
@@ -38,7 +39,7 @@ export function PageThumbnail({ doc, index, box, size, rotation = 0, className }
   }, [])
 
   useEffect(() => {
-    if (!visible) return
+    if (!visible || !doc) return
     const controller = new AbortController()
     // Render once at the largest size the page can take in the box, whatever the rotation.
     const renderScale = (box / Math.min(size.width, size.height)) * Math.min(2, window.devicePixelRatio || 1)

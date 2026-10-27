@@ -46,6 +46,27 @@ describe("page operations", () => {
     ])
   })
 
+  it("inserts blank pages, pages from other files, and duplicates", async () => {
+    const out = await buildFromPages(
+      await makePdf(2),
+      [
+        { index: 0 },
+        { blank: { width: 300, height: 400 } },
+        { index: 1, source: 1, rotate: 90 },
+        { index: 0 },
+        { index: 1 },
+        { index: 1 },
+      ],
+      [await makePdf(3)]
+    )
+    expect(await pdfText(out)).toEqual(["Page 1", "", "Page 2", "Page 1", "Page 2", "Page 2"])
+    const doc = await PDFDocument.load(out)
+    expect(doc.getPage(1).getSize()).toEqual({ width: 300, height: 400 })
+    expect(doc.getPage(2).getRotation().angle).toBe(90)
+    // Repeated pages are distinct page objects, so each can be rotated or removed on its own.
+    expect(new Set(doc.getPages().map((page) => page.ref.tag)).size).toBe(6)
+  })
+
   it("keeps bookmarks when merging, including named destinations and page selections", async () => {
     const bookmarked = await PDFDocument.load(await makePdf(3))
     const fit = (i: number) => bookmarked.context.obj([bookmarked.getPage(i).ref, "Fit"])
