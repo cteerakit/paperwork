@@ -5,6 +5,7 @@ export const toolLoaders = {
   merge: () => import("./Merge"),
   split: () => import("./Split"),
   compress: () => import("./Compress"),
+  toImages: () => import("./ToImages"),
   pageNumbers: () => import("./PageNumbers"),
   watermark: () => import("./Watermark"),
   sign: () => import("./Sign"),

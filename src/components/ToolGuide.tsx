@@ -6,6 +6,7 @@ const related = {
   merge: ["split", "organize", "compress"],
   split: ["merge", "organize", "redact"],
   compress: ["merge", "split", "organize"],
+  toImages: ["split", "compress", "organize"],
   sign: ["annotate", "watermark", "security"],
   annotate: ["sign", "redact", "watermark"],
   organize: ["merge", "split", "pageNumbers"],

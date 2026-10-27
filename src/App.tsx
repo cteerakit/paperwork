@@ -15,6 +15,7 @@ const Organize = lazy(toolLoaders.organize)
 const Merge = lazy(toolLoaders.merge)
 const Split = lazy(toolLoaders.split)
 const Compress = lazy(toolLoaders.compress)
+const ToImages = lazy(toolLoaders.toImages)
 const PageNumbers = lazy(toolLoaders.pageNumbers)
 const Watermark = lazy(toolLoaders.watermark)
 const Sign = lazy(toolLoaders.sign)
@@ -43,6 +44,7 @@ export function App() {
             <Route caseSensitive path="merge" element={<Merge />} />
             <Route caseSensitive path="split" element={<Split />} />
             <Route caseSensitive path="compress" element={<Compress />} />
+            <Route caseSensitive path="pdf-to-images" element={<ToImages />} />
             <Route caseSensitive path="page-numbers" element={<PageNumbers />} />
             <Route caseSensitive path="watermark" element={<Watermark />} />
             <Route caseSensitive path="sign" element={<Sign />} />

@@ -82,6 +82,12 @@ export const SOCIAL_PAGES = [
     description:
       "Number the pages of your PDF right in your browser. Free, no sign-up, and your files stay on your device.",
   },
+  {
+    path: "/pdf-to-images",
+    title: "PDF to images — Paperwork",
+    description:
+      "Save PDF pages as PNG or JPG images right in your browser. Free, no sign-up, and your files never leave your device.",
+  },
 ]
 
 export const NOT_FOUND_PAGE = {

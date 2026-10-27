@@ -10,6 +10,12 @@
     "notFoundTitle": "Page not found",
     "notFoundDescription": "This page doesn’t exist. Browse the PDF tools to find what you need.",
     "tools": {
+      "toImages": {
+        "step1": "Choose the PDF you want to convert.",
+        "step2": "Pick PNG or JPG, a resolution, and which pages to export.",
+        "step3": "Download the image, or a ZIP file when you export several pages.",
+        "limitation": "Each page becomes a flat picture, so text in the images can’t be selected. Very large pages are scaled down to fit your browser’s limits."
+      },
       "merge": {
         "step1": "Choose the PDF files you want to combine.",
         "step2": "Drag the files into the order you want in the final document.",
@@ -211,6 +217,28 @@
       "insertBlank": "Insert blank page",
       "insertPdf": "Insert PDF…",
       "blankPage": "blank"
+    },
+    "toImages": {
+      "title": "PDF to images",
+      "description": "Save PDF pages as PNG or JPG images.",
+      "format": "Image format",
+      "formats": {
+        "png": "PNG",
+        "pngHint": "Sharp text and graphics. Larger files.",
+        "jpg": "JPG",
+        "jpgHint": "Smaller files, best for photos."
+      },
+      "resolution": "Resolution",
+      "dpi": {
+        "72": "72 dpi · Screen",
+        "150": "150 dpi · Standard",
+        "300": "300 dpi · Print"
+      },
+      "quality": "JPG quality",
+      "summary_one": "{{count}} image · about {{width}} × {{height}} px",
+      "summary_other": "{{count}} images · about {{width}} × {{height}} px each",
+      "memoryWarning": "This is a lot of image data and your browser may run out of memory. Try fewer pages or a lower resolution.",
+      "action": "Convert to images"
     },
     "merge": {
       "title": "Merge PDFs",

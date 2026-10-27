@@ -71,6 +71,34 @@ export async function renderPage(doc: PdfDoc, pageIndex: number, scale: number, 
   return canvas
 }
 
+/** Most pixels one exported image may have; bigger pages are scaled down to fit a browser canvas. */
+const MAX_EXPORT_PIXELS = 64_000_000
+
+/** The pixel size an exported page will have at `dpi`, after any scaling down. */
+export function exportSize(size: PageSize, dpi: number) {
+  const scale = Math.min(dpi / 72, Math.sqrt(MAX_EXPORT_PIXELS / (size.width * size.height)))
+  return { scale, width: Math.max(1, Math.floor(size.width * scale)), height: Math.max(1, Math.floor(size.height * scale)) }
+}
+
+/** Renders a page (0-based) to a PNG or JPEG file at the given resolution. */
+export async function renderPageToBlob(
+  doc: PdfDoc,
+  pageIndex: number,
+  dpi: number,
+  type: "image/png" | "image/jpeg",
+  quality: number
+) {
+  const size = (await doc.getPage(pageIndex + 1)).getViewport({ scale: 1 })
+  const canvas = await renderPage(doc, pageIndex, exportSize(size, dpi).scale)
+  try {
+    return await new Promise<Blob>((resolve, reject) =>
+      canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error("Could not create the image."))), type, quality)
+    )
+  } finally {
+    canvas.width = canvas.height = 0
+  }
+}
+
 /** Renders a page to a JPEG data URL, for strong compression. */
 export async function renderPageToJpeg(doc: PdfDoc, pageIndex: number, dpi: number, quality: number) {
   const canvas = await renderPage(doc, pageIndex, dpi / 72)

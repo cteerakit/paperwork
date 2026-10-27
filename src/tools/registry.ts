@@ -3,6 +3,7 @@ import {
   Combine,
   ScanLine,
   Highlighter,
+  Images,
   LayoutGrid,
   ListOrdered,
   Minimize2,
@@ -21,6 +22,7 @@ export interface ToolInfo {
     | "merge"
     | "split"
     | "compress"
+    | "toImages"
     | "pageNumbers"
     | "watermark"
     | "sign"
@@ -49,6 +51,12 @@ export const TOOLS: ToolInfo[] = [
     path: "/compress",
     icon: Minimize2,
     accent: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400",
+  },
+  {
+    id: "toImages",
+    path: "/pdf-to-images",
+    icon: Images,
+    accent: "bg-cyan-500/15 text-cyan-600 dark:text-cyan-400",
   },
   {
     id: "sign",
