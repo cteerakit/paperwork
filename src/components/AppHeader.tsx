@@ -17,14 +17,14 @@ export function AppHeader() {
   return (
     <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur">
       <div className="mx-auto flex h-14 max-w-6xl items-center gap-3 px-4">
-        <Link to="/" className="flex items-center gap-2 font-semibold tracking-tight">
+        <Link
+          to="/"
+          className="flex items-center gap-2 font-semibold tracking-tight"
+        >
           <img src="/favicon.svg" alt="" className="size-6" />
           {t("app.name")}
         </Link>
         <div className="ml-auto flex items-center gap-1">
-          <Link to="/pricing" className="rounded-sm px-2 py-1 text-sm text-muted-foreground hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring">
-            {t("footer.pricing")}
-          </Link>
           <FeedbackDialog />
           <LanguageSwitcher />
           <ThemeToggle />
@@ -39,14 +39,26 @@ function LanguageSwitcher() {
   const current = i18n.resolvedLanguage
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant="ghost" size="sm" aria-label={t("header.language")} />}>
+      <DropdownMenuTrigger
+        render={
+          <Button variant="ghost" size="sm" aria-label={t("header.language")} />
+        }
+      >
         <Languages />
-        <span className="hidden sm:inline">{LANGUAGES.find((l) => l.code === current)?.label}</span>
+        <span className="hidden sm:inline">
+          {LANGUAGES.find((l) => l.code === current)?.label}
+        </span>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         {LANGUAGES.map((lang) => (
-          <DropdownMenuItem key={lang.code} lang={lang.code} onClick={() => i18n.changeLanguage(lang.code)}>
-            <Check className={lang.code === current ? "opacity-100" : "opacity-0"} />
+          <DropdownMenuItem
+            key={lang.code}
+            lang={lang.code}
+            onClick={() => i18n.changeLanguage(lang.code)}
+          >
+            <Check
+              className={lang.code === current ? "opacity-100" : "opacity-0"}
+            />
             {lang.label}
           </DropdownMenuItem>
         ))}
@@ -66,7 +78,15 @@ function ThemeToggle() {
   const { theme, setTheme } = useTheme()
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant="ghost" size="icon-sm" aria-label={t("header.theme")} />}>
+      <DropdownMenuTrigger
+        render={
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            aria-label={t("header.theme")}
+          />
+        }
+      >
         <Sun className="dark:hidden" />
         <Moon className="hidden dark:block" />
       </DropdownMenuTrigger>
@@ -75,7 +95,9 @@ function ThemeToggle() {
           <DropdownMenuItem key={value} onClick={() => setTheme(value)}>
             <Icon />
             {t(`header.themes.${value}`)}
-            <Check className={`ml-auto ${theme === value ? "opacity-100" : "opacity-0"}`} />
+            <Check
+              className={`ml-auto ${theme === value ? "opacity-100" : "opacity-0"}`}
+            />
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

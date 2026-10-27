@@ -2,7 +2,8 @@
   "footer": {
     "copyright": "© {{year}} Paperwork. Made with 💖 and 😠 by",
     "navigation": "Footer",
-    "about": "About Paperwork"
+    "about": "About Paperwork",
+    "pricing": "Pricing"
   },
   "about": {
     "title": "It started with an ID card.",
@@ -284,5 +285,22 @@
     "error": "Could not send your feedback. Please try again.",
     "limited": "Too many submissions. Please wait a minute and try again.",
     "close": "Close"
+  },
+  "pricing": {
+    "title": "One plan. Zero dollars.",
+    "subtitle": "The pricing page could have been an email. A very short one.",
+    "plan": "The whole toolbox",
+    "badge": "The only plan",
+    "period": "/ no, really",
+    "finePrint": "No subscription. No credit card. No catch.",
+    "features": {
+      "tools": "Every PDF tool, included",
+      "signup": "No account to create",
+      "privacy": "Your files stay on your device"
+    },
+    "cta": "Let’s do some paperwork",
+    "checkout": "Skip checkout. There isn’t one.",
+    "note": "I built this for myself. Feel free to use it. If it makes your day a little easier, that’s enough for me.",
+    "story": "How this happened"
   }
 }

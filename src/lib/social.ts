@@ -5,16 +5,16 @@ export const SOCIAL_IMAGE_ALT =
 
 export const SOCIAL_PAGES = [
   {
-    path: "/pricing",
-    title: "Pricing — Paperwork is free",
-    description:
-      "One plan. Zero dollars. I built Paperwork for myself. Feel free to use it. Free PDF tools, no sign-up, and your files stay on your device.",
-  },
-  {
     path: "/",
     title: "Paperwork — Free, private PDF tools",
     description:
       "Merge, split, compress, sign and annotate PDFs right in your browser. Free, no sign-up, and your files never leave your device.",
+  },
+  {
+    path: "/pricing",
+    title: "Pricing — Paperwork is free",
+    description:
+      "One plan. Zero dollars. I built Paperwork for myself. Feel free to use it. Free PDF tools, no sign-up, and your files stay on your device.",
   },
   {
     path: "/about",
