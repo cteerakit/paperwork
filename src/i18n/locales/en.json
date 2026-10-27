@@ -335,7 +335,35 @@
       "loadingText": "Preparing selectable text…",
       "noText": "This page has no selectable PDF text.",
       "textError": "Could not load selectable text. Reopen the PDF and try again.",
-      "selectText": "Drag across text to select it."
+      "selectText": "Drag across text to select it.",
+      "search": {
+        "title": "Find text to redact",
+        "placeholderText": "Text to find on every page",
+        "placeholderRegex": "Pattern to find (regular expression)",
+        "modeText": "Text",
+        "modeRegex": "Pattern",
+        "find": "Find",
+        "presetsLabel": "Quick find:",
+        "presets": {
+          "email": "Emails",
+          "phone": "Phone numbers",
+          "thaiId": "Thai ID numbers",
+          "card": "Card numbers"
+        },
+        "searching": "Searching…",
+        "found_one": "{{count}} match",
+        "found_other": "{{count}} matches",
+        "noMatches": "No matching text found.",
+        "note": "Review the highlighted areas on each page before redacting. Boxes are estimated from the text layout and include a small margin.",
+        "markAll_one": "Redact {{count}} match",
+        "markAll_other": "Redact all {{count}} matches",
+        "clearResults": "Clear results",
+        "failed": "Could not search this PDF.",
+        "errors": {
+          "empty": "Enter something to find.",
+          "invalid": "That pattern isn’t valid."
+        }
+      }
     },
     "security": {
       "title": "Unlock and protect PDF",

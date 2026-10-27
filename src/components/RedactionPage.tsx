@@ -12,12 +12,15 @@ export function RedactionPage({
   pdf,
   page,
   areas,
+  highlights = [],
   disabled,
   onMark,
 }: {
   pdf: LoadedPdf
   page: number
   areas: Redaction[]
+  /** Search matches waiting to be redacted: shown outlined so they can be reviewed first. */
+  highlights?: Redaction[]
   disabled: boolean
   onMark: (areas: Redaction[]) => void
 }) {
@@ -154,6 +157,21 @@ export function RedactionPage({
                 width={area.width}
                 height={area.height}
                 fill="black"
+              />
+            ))}
+          {highlights
+            .filter((area) => area.page === page)
+            .map((area, index) => (
+              <rect
+                key={`match-${index}`}
+                x={area.x}
+                y={area.y}
+                width={area.width}
+                height={area.height}
+                fill="rgb(245 158 11 / 0.3)"
+                stroke="rgb(217 119 6)"
+                strokeWidth={1}
+                vectorEffect="non-scaling-stroke"
               />
             ))}
         </svg>

@@ -5,6 +5,7 @@ import { FileBar } from "@/components/FileBar"
 import { FileDropzone } from "@/components/FileDropzone"
 import { ResultActions } from "@/components/ResultActions"
 import { RedactionPage } from "@/components/RedactionPage"
+import { RedactionSearch } from "@/components/RedactionSearch"
 import { Spinner } from "@/components/Spinner"
 import { ToolLayout } from "@/components/ToolLayout"
 import { Button } from "@/components/ui/button"
@@ -13,6 +14,7 @@ import { useResult } from "@/hooks/useResult"
 import { outputName } from "@/lib/download"
 import type { Redaction } from "@/lib/pdf/redact"
 import { exportRedactedPdf } from "@/lib/pdf/redactClient"
+import type { TextMatch } from "@/lib/pdf/textSearch"
 import type { LoadedPdf } from "@/lib/render/pdfjs"
 
 export default function Redact() {
@@ -37,6 +39,8 @@ function Editor({ pdf, onClose }: { pdf: LoadedPdf; onClose: () => void }) {
   const [page, setPage] = useState(0)
   const [selections, setSelections] = useState<Redaction[][]>([])
   const areas = selections.flat()
+  // Search results are reviewed on the page first; "redact all" turns them into one undoable selection.
+  const [matches, setMatches] = useState<TextMatch[]>([])
   const [progress, setProgress] = useState(0)
   const save = () =>
     run(async () => {
@@ -88,6 +92,17 @@ function Editor({ pdf, onClose }: { pdf: LoadedPdf; onClose: () => void }) {
           {busy ? `${progress} / ${pdf.pageCount}` : t("tools.redact.save")}
         </Button>
       </div>
+      <RedactionSearch
+        pdf={pdf}
+        disabled={busy}
+        matches={matches}
+        onMatches={setMatches}
+        onPage={setPage}
+        onMarkAll={() => {
+          setSelections((previous) => [...previous, matches.flatMap((match) => match.areas)])
+          setMatches([])
+        }}
+      />
       <p className="text-sm text-muted-foreground">
         {t("tools.redact.instructions", { count: areas.length })}
       </p>
@@ -96,6 +111,7 @@ function Editor({ pdf, onClose }: { pdf: LoadedPdf; onClose: () => void }) {
         pdf={pdf}
         page={page}
         areas={areas}
+        highlights={matches.flatMap((match) => match.areas)}
         disabled={busy}
         onMark={(selected) =>
           setSelections((previous) => [...previous, selected])
