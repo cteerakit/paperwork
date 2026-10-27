@@ -8,15 +8,17 @@ import { useAnnotations } from "@/components/editor/useAnnotations"
 import { Workspace, type WorkspaceApi } from "@/components/editor/Workspace"
 import { FileBar } from "@/components/FileBar"
 import { FileDropzone } from "@/components/FileDropzone"
+import { ResultActions } from "@/components/ResultActions"
 import { Spinner } from "@/components/Spinner"
 import { ToolLayout } from "@/components/ToolLayout"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { usePdfFile, useTask } from "@/hooks/usePdfFile"
+import { useResult } from "@/hooks/useResult"
 import { useTextLayout } from "@/hooks/useTextLayout"
 import { TEXT_LINE_HEIGHT } from "@/lib/annotate/model"
-import { downloadPdf, outputName } from "@/lib/download"
+import { outputName } from "@/lib/download"
 import { fitSize, readImageFile } from "@/lib/images"
 import { applyAnnotations } from "@/lib/pdf/annotate"
 import type { LoadedPdf } from "@/lib/render/pdfjs"
@@ -61,18 +63,20 @@ function Editor({ pdf, onClose }: { pdf: LoadedPdf; onClose: () => void }) {
   const { t, i18n } = useTranslation()
   const api = useAnnotations()
   const { busy, run, reportMissing } = useTask()
+  const { result: output, deliver } = useResult()
 
   const save = () =>
     run(async () => {
       const result = await applyAnnotations(pdf.bytes, api.objects, { lang: i18n.resolvedLanguage })
       reportMissing(result.missing)
-      downloadPdf(result.bytes, outputName(pdf.name, "signed"))
+      deliver(result.bytes, outputName(pdf.name, "signed"))
       toast.success(t("common.done"))
     })
 
   return (
     <div className="grid gap-3">
       <FileBar pdf={pdf} onClose={onClose} />
+      {output && <ResultActions result={output} tool="sign" />}
       <Workspace
         pdf={pdf}
         api={api}

@@ -5,14 +5,16 @@ import { toast } from "sonner"
 import { ColorField, Field, NumberField, RangeField, SliderField, usePageRange } from "@/components/fields"
 import { FileBar } from "@/components/FileBar"
 import { FileDropzone } from "@/components/FileDropzone"
+import { ResultActions } from "@/components/ResultActions"
 import { PagePreview } from "@/components/PagePreview"
 import { Spinner } from "@/components/Spinner"
 import { ToolLayout } from "@/components/ToolLayout"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { usePdfFile, useTask } from "@/hooks/usePdfFile"
+import { useResult } from "@/hooks/useResult"
 import { useTextLayout } from "@/hooks/useTextLayout"
-import { downloadPdf, outputName } from "@/lib/download"
+import { outputName } from "@/lib/download"
 import { addPageNumbers, formatPageNumber, pageNumberPlacement, type Position } from "@/lib/pdf/pageNumbers"
 import type { LoadedPdf } from "@/lib/render/pdfjs"
 import { cn } from "@/lib/utils"
@@ -41,6 +43,7 @@ export default function PageNumbers() {
 function Settings({ pdf, onClose }: { pdf: LoadedPdf; onClose: () => void }) {
   const { t, i18n } = useTranslation()
   const { busy, run, reportMissing } = useTask()
+  const { result: output, deliver } = useResult()
   const [position, setPosition] = useState<Position>("bottom-center")
   // Track whether the user edited the template, so it can follow the UI language until then.
   const [customTemplate, setCustomTemplate] = useState<string>()
@@ -68,7 +71,7 @@ function Settings({ pdf, onClose }: { pdf: LoadedPdf; onClose: () => void }) {
         lang: i18n.resolvedLanguage,
       })
       reportMissing(result.missing)
-      downloadPdf(result.bytes, outputName(pdf.name, "numbered"))
+      deliver(result.bytes, outputName(pdf.name, "numbered"))
       toast.success(t("common.done"))
     })
 
@@ -124,6 +127,7 @@ function Settings({ pdf, onClose }: { pdf: LoadedPdf; onClose: () => void }) {
           {busy ? <Spinner className="size-4 text-current" /> : <ListOrdered />}
           {t("tools.pageNumbers.action")}
         </Button>
+        {output && <ResultActions result={output} tool="pageNumbers" />}
       </aside>
     </div>
   )

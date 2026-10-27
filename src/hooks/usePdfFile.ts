@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
 import { errorMessage } from "@/lib/errors"
+import { handoffToFile, takeHandoff } from "@/lib/handoff"
 import { onLargeFontLoad } from "@/lib/text/fonts"
 import { closePdf, openPdf, type LoadedPdf } from "@/lib/render/pdfjs"
 
@@ -36,6 +37,13 @@ export function usePdfFile() {
       return undefined
     })
   }, [])
+
+  // Pick up a file passed on from another tool ("Continue in…").
+  useEffect(() => {
+    const handoff = takeHandoff()
+    // Deferred so the load starts after this effect, and survives StrictMode's double run.
+    if (handoff) queueMicrotask(() => void open(handoffToFile(handoff)))
+  }, [open])
 
   return { pdf, loading, open, reset }
 }

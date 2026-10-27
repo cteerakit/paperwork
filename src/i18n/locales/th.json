@@ -132,7 +132,8 @@
     "fontSize": "ขนาดตัวอักษร",
     "previewOfPage": "ตัวอย่างหน้า {{n}}",
     "missingChars": "มีตัวอักษรบางตัวที่แสดงไม่ได้ จึงแทนที่ด้วย “?”: {{chars}}",
-    "downloadingFont": "กำลังดาวน์โหลดฟอนต์…"
+    "downloadingFont": "กำลังดาวน์โหลดฟอนต์…",
+    "continueIn": "ทำต่อใน…"
   },
   "dropzone": {
     "title": "เลือกไฟล์ PDF",

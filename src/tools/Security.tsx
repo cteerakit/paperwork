@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react"
-import { Download, LockKeyhole, Unlock, X } from "lucide-react"
+import { LockKeyhole, Unlock, X } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { FileDropzone } from "@/components/FileDropzone"
+import { ResultActions } from "@/components/ResultActions"
 import { Spinner } from "@/components/Spinner"
 import { ToolLayout } from "@/components/ToolLayout"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { downloadPdf, outputName } from "@/lib/download"
+import { outputName } from "@/lib/download"
+import { handoffToFile, takeHandoff } from "@/lib/handoff"
 import { SecurityError } from "@/lib/pdf/security"
 import { detectPdfProtection, exportSecurePdf } from "@/lib/pdf/securityClient"
 
@@ -16,6 +18,11 @@ export default function Security() {
   const { t } = useTranslation()
   const [mode, setMode] = useState<"unlock" | "protect">("unlock")
   const [file, setFile] = useState<File>()
+  // Start from a file passed on from another tool ("Continue in…").
+  useEffect(() => {
+    const handoff = takeHandoff()
+    if (handoff) queueMicrotask(() => setFile(handoffToFile(handoff)))
+  }, [])
   const [protection, setProtection] = useState<
     "checking" | "protected" | "unprotected" | "invalid"
   >("checking")
@@ -225,21 +232,16 @@ export default function Security() {
                   <p role="status" className="text-sm">
                     {t(`tools.security.${mode}Success`)}
                   </p>
-                  <Button
-                    type="button"
-                    onClick={() =>
-                      downloadPdf(
-                        result,
-                        outputName(
-                          file.name,
-                          mode === "unlock" ? "unlocked" : "protected"
-                        )
-                      )
-                    }
-                  >
-                    <Download />
-                    {t("common.download")}
-                  </Button>
+                  <ResultActions
+                    result={{
+                      bytes: result,
+                      name: outputName(
+                        file.name,
+                        mode === "unlock" ? "unlocked" : "protected"
+                      ),
+                    }}
+                    tool="security"
+                  />
                 </>
               ) : (
                 <Button

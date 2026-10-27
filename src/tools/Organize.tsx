@@ -15,13 +15,15 @@ import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
 import { FileBar } from "@/components/FileBar"
 import { FileDropzone } from "@/components/FileDropzone"
+import { ResultActions } from "@/components/ResultActions"
 import { PageThumbnail } from "@/components/PageThumbnail"
 import { Spinner } from "@/components/Spinner"
 import { ToolLayout } from "@/components/ToolLayout"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/Checkbox"
 import { usePdfFile, useTask } from "@/hooks/usePdfFile"
-import { downloadPdf, outputName } from "@/lib/download"
+import { useResult } from "@/hooks/useResult"
+import { outputName } from "@/lib/download"
 import { buildFromPages } from "@/lib/pdf/pages"
 import type { LoadedPdf } from "@/lib/render/pdfjs"
 import { cn } from "@/lib/utils"
@@ -86,6 +88,7 @@ function Editor({
 }) {
   const { t } = useTranslation()
   const { busy, run } = useTask()
+  const { result: output, deliver } = useResult()
   const [selected, setSelected] = useState<Set<string>>(new Set())
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
@@ -129,7 +132,7 @@ function Editor({
         pdf.bytes,
         items.map((p) => ({ index: p.index, rotate: p.rotation }))
       )
-      downloadPdf(bytes, outputName(pdf.name, "organized"))
+      deliver(bytes, outputName(pdf.name, "organized"))
       toast.success(t("common.done"))
     })
 
@@ -139,6 +142,7 @@ function Editor({
   return (
     <div className="grid gap-4">
       <FileBar pdf={pdf} onClose={onClose} />
+      {output && <ResultActions result={output} tool="organize" />}
       <div className="sticky top-14 z-30 -mx-1 flex flex-wrap items-center gap-2 rounded-lg border bg-background/95 p-2 backdrop-blur">
         <Button
           variant="ghost"

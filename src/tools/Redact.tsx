@@ -3,12 +3,14 @@ import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
 import { FileBar } from "@/components/FileBar"
 import { FileDropzone } from "@/components/FileDropzone"
+import { ResultActions } from "@/components/ResultActions"
 import { RedactionPage } from "@/components/RedactionPage"
 import { Spinner } from "@/components/Spinner"
 import { ToolLayout } from "@/components/ToolLayout"
 import { Button } from "@/components/ui/button"
 import { usePdfFile, useTask } from "@/hooks/usePdfFile"
-import { downloadPdf, outputName } from "@/lib/download"
+import { useResult } from "@/hooks/useResult"
+import { outputName } from "@/lib/download"
 import type { Redaction } from "@/lib/pdf/redact"
 import { exportRedactedPdf } from "@/lib/pdf/redactClient"
 import type { LoadedPdf } from "@/lib/render/pdfjs"
@@ -31,6 +33,7 @@ export default function Redact() {
 function Editor({ pdf, onClose }: { pdf: LoadedPdf; onClose: () => void }) {
   const { t } = useTranslation()
   const { busy, run } = useTask()
+  const { result: output, deliver } = useResult()
   const [page, setPage] = useState(0)
   const [selections, setSelections] = useState<Redaction[][]>([])
   const areas = selections.flat()
@@ -39,12 +42,13 @@ function Editor({ pdf, onClose }: { pdf: LoadedPdf; onClose: () => void }) {
     run(async () => {
       setProgress(0)
       const bytes = await exportRedactedPdf(pdf.bytes, areas, setProgress)
-      downloadPdf(bytes, outputName(pdf.name, "redacted"))
+      deliver(bytes, outputName(pdf.name, "redacted"))
       toast.success(t("common.done"))
     })
   return (
     <div className="grid gap-4">
       <FileBar pdf={pdf} onClose={busy ? () => {} : onClose} />
+      {output && <ResultActions result={output} tool="redact" />}
       <p className="rounded-lg border bg-muted/40 p-3 text-sm">
         {t("tools.redact.notice")}
       </p>

@@ -76,7 +76,8 @@
     "copyright": "© {{year}} Paperwork. Made with 💖 and 😠 by",
     "navigation": "Footer",
     "about": "About Paperwork",
-    "pricing": "Pricing"
+    "pricing": "Pricing",
+    "changelog": "Changelog"
   },
   "about": {
     "title": "It started with an ID card.",
@@ -134,7 +135,8 @@
     "fontSize": "Font size",
     "previewOfPage": "Preview of page {{n}}",
     "missingChars": "Some characters can't be drawn and were replaced with “?”: {{chars}}",
-    "downloadingFont": "Downloading font…"
+    "downloadingFont": "Downloading font…",
+    "continueIn": "Continue in…"
   },
   "dropzone": {
     "title": "Choose a PDF file",

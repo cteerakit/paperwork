@@ -12,13 +12,16 @@ import { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
 import { FileDropzone } from "@/components/FileDropzone"
+import { ResultActions } from "@/components/ResultActions"
 import { PageThumbnail } from "@/components/PageThumbnail"
 import { Spinner } from "@/components/Spinner"
 import { ToolLayout } from "@/components/ToolLayout"
 import { Button } from "@/components/ui/button"
 import { useTask } from "@/hooks/usePdfFile"
+import { useResult } from "@/hooks/useResult"
 import { useFormat } from "@/hooks/useFormat"
-import { downloadPdf } from "@/lib/download"
+import { outputName } from "@/lib/download"
+import { handoffToFile, takeHandoff } from "@/lib/handoff"
 import { errorMessage } from "@/lib/errors"
 import { mergePdfs } from "@/lib/pdf/pages"
 import { closePdf, openPdf, type LoadedPdf } from "@/lib/render/pdfjs"
@@ -27,6 +30,7 @@ import { cn } from "@/lib/utils"
 export default function Merge() {
   const { t } = useTranslation()
   const { busy, run } = useTask()
+  const { result: output, deliver } = useResult()
   const [files, setFiles] = useState<LoadedPdf[]>([])
   const [loading, setLoading] = useState(0)
   const sensors = useSensors(
@@ -55,6 +59,14 @@ export default function Merge() {
     }
   }
 
+  // Start from a file passed on from another tool ("Continue in…").
+  useEffect(() => {
+    const handoff = takeHandoff()
+    if (handoff) queueMicrotask(() => void add([handoffToFile(handoff)]))
+    // Run once on mount.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const remove = (id: string) =>
     setFiles((list) => {
       closePdf(list.find((f) => f.id === id))
@@ -69,7 +81,7 @@ export default function Merge() {
   const merge = () =>
     run(async () => {
       const bytes = await mergePdfs(files.map((f) => f.bytes))
-      downloadPdf(bytes, "merged.pdf")
+      deliver(bytes, outputName(files[0].name, "merged"))
       toast.success(t("common.done"))
     })
 
@@ -105,6 +117,7 @@ export default function Merge() {
             </Button>
           </div>
           {files.length === 1 && <p className="text-right text-xs text-muted-foreground">{t("tools.merge.needTwo")}</p>}
+          {output && <ResultActions result={output} tool="merge" />}
         </div>
       )}
     </ToolLayout>

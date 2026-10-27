@@ -1,8 +1,9 @@
-import { Download, Minimize2, TriangleAlert } from "lucide-react"
+import { Minimize2, TriangleAlert } from "lucide-react"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { FileBar } from "@/components/FileBar"
 import { FileDropzone } from "@/components/FileDropzone"
+import { ResultActions } from "@/components/ResultActions"
 import { Spinner } from "@/components/Spinner"
 import { ToolLayout } from "@/components/ToolLayout"
 import { Alert, AlertDescription } from "@/components/ui/alert"
@@ -12,7 +13,7 @@ import { Progress } from "@/components/ui/progress"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { useFormat } from "@/hooks/useFormat"
 import { usePdfFile, useTask } from "@/hooks/usePdfFile"
-import { downloadPdf, outputName } from "@/lib/download"
+import { outputName } from "@/lib/download"
 import { compressPdf, type CompressionLevel } from "@/lib/pdf/compress"
 import { recodeJpeg, renderPageToJpeg } from "@/lib/render/pdfjs"
 import { cn } from "@/lib/utils"
@@ -111,13 +112,12 @@ export default function Compress() {
                 />
               </div>
               {saved <= 0.005 && <p className="text-center text-sm text-muted-foreground">{t("tools.compress.noGain")}</p>}
-              <Button
-                onClick={() => downloadPdf(result.bytes, outputName(pdf.name, "compressed"))}
-                disabled={saved <= 0.005}
-              >
-                <Download />
-                {t("common.download")}
-              </Button>
+              {saved > 0.005 && (
+                <ResultActions
+                  result={{ bytes: result.bytes, name: outputName(pdf.name, "compressed") }}
+                  tool="compress"
+                />
+              )}
             </div>
           ) : (
             <Button onClick={compress} disabled={busy}>

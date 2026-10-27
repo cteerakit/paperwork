@@ -8,6 +8,7 @@ import { Workspace, type WorkspaceApi } from "@/components/editor/Workspace"
 import { ColorField, Field, RangeField, SliderField, usePageRange } from "@/components/fields"
 import { FileBar } from "@/components/FileBar"
 import { FileDropzone } from "@/components/FileDropzone"
+import { ResultActions } from "@/components/ResultActions"
 import { PagePreview } from "@/components/PagePreview"
 import { Spinner } from "@/components/Spinner"
 import { ToolLayout } from "@/components/ToolLayout"
@@ -18,9 +19,10 @@ import { Switch } from "@/components/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { usePdfFile, useTask } from "@/hooks/usePdfFile"
+import { useResult } from "@/hooks/useResult"
 import { useTextLayout } from "@/hooks/useTextLayout"
 import type { ImageObject } from "@/lib/annotate/model"
-import { downloadPdf, outputName } from "@/lib/download"
+import { outputName } from "@/lib/download"
 import { fitSize, readImageFile } from "@/lib/images"
 import { addImageStamp, addTextWatermark, centeredPlacement, tileCenters } from "@/lib/pdf/watermark"
 import type { LoadedPdf } from "@/lib/render/pdfjs"
@@ -62,6 +64,7 @@ export default function Watermark() {
 function TextWatermark({ pdf }: { pdf: LoadedPdf }) {
   const { t, i18n } = useTranslation()
   const { busy, run, reportMissing } = useTask()
+  const { result: output, deliver } = useResult()
   const [text, setText] = useState(() => t("tools.watermark.defaultText"))
   const [fontSize, setFontSize] = useState(56)
   const [color, setColor] = useState("#dc2626")
@@ -82,7 +85,7 @@ function TextWatermark({ pdf }: { pdf: LoadedPdf }) {
     run(async () => {
       const result = await addTextWatermark(pdf.bytes, { text, fontSize, color, opacity, angle, layout, bold, pages, lang })
       reportMissing(result.missing)
-      downloadPdf(result.bytes, outputName(pdf.name, "watermarked"))
+      deliver(result.bytes, outputName(pdf.name, "watermarked"))
       toast.success(t("common.done"))
     })
 
@@ -143,6 +146,7 @@ function TextWatermark({ pdf }: { pdf: LoadedPdf }) {
           {busy ? <Spinner className="size-4 text-current" /> : <Stamp />}
           {t("tools.watermark.action")}
         </Button>
+        {output && <ResultActions result={output} tool="watermark" />}
       </aside>
     </div>
   )
@@ -152,6 +156,7 @@ function ImageWatermark({ pdf }: { pdf: LoadedPdf }) {
   const { t, i18n } = useTranslation()
   const api = useAnnotations()
   const { busy, run } = useTask()
+  const { result: output, deliver } = useResult()
   const [range, setRange] = useState("")
   const { pages, error } = usePageRange(range, pdf.pageCount)
   const stamp = api.objects.find((o): o is ImageObject => o.type === "image")
@@ -166,7 +171,7 @@ function ImageWatermark({ pdf }: { pdf: LoadedPdf }) {
         opacity: stamp.opacity,
         pages,
       })
-      downloadPdf(bytes, outputName(pdf.name, "stamped"))
+      deliver(bytes, outputName(pdf.name, "stamped"))
       toast.success(t("common.done"))
     })
 
@@ -181,6 +186,7 @@ function ImageWatermark({ pdf }: { pdf: LoadedPdf }) {
           <StampPicker workspace={ws} hasStamp={Boolean(stamp)} onReplace={() => stamp && api.remove(stamp.id)} />
           <RangeField value={range} onChange={setRange} error={error} />
           <p className="text-xs text-muted-foreground">{t("tools.watermark.imageHint")}</p>
+          {output && <ResultActions result={output} tool="watermark" />}
         </div>
       )}
       actions={
