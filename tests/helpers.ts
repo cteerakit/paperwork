@@ -35,6 +35,34 @@ export async function makeImagePdf() {
   return doc.save()
 }
 
+export interface OutlineEntry {
+  title: string
+  /** 0-based page the bookmark opens, if it has a destination. */
+  page?: number
+  items: OutlineEntry[]
+}
+
+/** Reads bookmarks with pdf.js, independently of the code that writes them. */
+export async function pdfOutline(bytes: Uint8Array): Promise<OutlineEntry[]> {
+  const task = getDocument({ data: bytes.slice(), verbosity: 0 })
+  const pdf = await task.promise
+  const read = async (items: Awaited<ReturnType<typeof pdf.getOutline>>): Promise<OutlineEntry[]> =>
+    Promise.all(
+      (items ?? []).map(async (item) => {
+        const dest = typeof item.dest === "string" ? await pdf.getDestination(item.dest) : item.dest
+        const ref = dest?.[0]
+        return {
+          title: item.title,
+          page: ref && typeof ref === "object" ? await pdf.getPageIndex(ref) : undefined,
+          items: await read(item.items),
+        }
+      })
+    )
+  const outline = await read(await pdf.getOutline())
+  await task.destroy()
+  return outline
+}
+
 export async function pdfText(bytes: Uint8Array): Promise<string[]> {
   const task = getDocument({ data: bytes.slice(), verbosity: 0 })
   const pdf = await task.promise

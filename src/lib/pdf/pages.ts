@@ -1,6 +1,7 @@
-import { PDFDocument } from "pdf-lib"
+import { PDFDocument, type PDFRef } from "pdf-lib"
 import { rotatePage } from "./geometry"
 import { loadPdf, savePdf, type PdfBytes } from "./load"
+import { readOutline, writeOutline, type OutlineNode } from "./outline"
 
 export interface PageSpec {
   /** 0-based index of the page in the source document. */
@@ -28,13 +29,39 @@ export async function buildFromPages(bytes: PdfBytes, specs: PageSpec[]): Promis
   return savePdf(out)
 }
 
-export async function mergePdfs(files: PdfBytes[]): Promise<Uint8Array> {
+export interface MergeSource {
+  bytes: PdfBytes
+  /** Used as the bookmark that holds this file's own bookmarks. */
+  name: string
+  /** 0-based pages to include, in order. Defaults to every page. */
+  pages?: number[]
+}
+
+/**
+ * Joins PDFs in order. Each file's bookmarks are kept under a top-level
+ * bookmark named after the file, and the first file's title and author carry over.
+ */
+export async function mergePdfs(files: MergeSource[]): Promise<Uint8Array> {
   const out = await PDFDocument.create()
-  for (const bytes of files) {
-    const source = await loadPdf(bytes)
-    const pages = await out.copyPages(source, source.getPageIndices())
-    pages.forEach((page) => out.addPage(page))
+  const bookmarks: OutlineNode[] = []
+  for (const [n, file] of files.entries()) {
+    const source = await loadPdf(file.bytes)
+    const indices = file.pages ?? source.getPageIndices()
+    const pages = await out.copyPages(source, indices)
+    const mapped = new Map<string, PDFRef>()
+    pages.forEach((page, i) => {
+      mapped.set(source.getPage(indices[i]).ref.tag, page.ref)
+      out.addPage(page)
+    })
+    if (n === 0) copyInfo(source, out)
+    if (!pages.length) continue
+    bookmarks.push({
+      title: file.name.replace(/\.pdf$/i, "") || "document",
+      dest: out.context.obj([pages[0].ref, "Fit"]),
+      children: readOutline(source, out, mapped),
+    })
   }
+  writeOutline(out, bookmarks)
   return savePdf(out)
 }
 

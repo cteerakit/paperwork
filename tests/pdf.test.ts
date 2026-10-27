@@ -6,8 +6,9 @@ import { compressPdf, type JpegRecoder } from "@/lib/pdf/compress"
 import { loadPdf, PdfError } from "@/lib/pdf/load"
 import { addPageNumbers } from "@/lib/pdf/pageNumbers"
 import { buildFromPages, mergePdfs, splitPdf } from "@/lib/pdf/pages"
+import { writeOutline } from "@/lib/pdf/outline"
 import { addTextWatermark } from "@/lib/pdf/watermark"
-import { makeImagePdf, makePdf, pdfText } from "./helpers"
+import { makeImagePdf, makePdf, pdfOutline, pdfText } from "./helpers"
 
 const nodeRecoder: JpegRecoder = async (jpeg, maxSize, quality) => {
   const image = await loadImage(Buffer.from(jpeg))
@@ -45,8 +46,73 @@ describe("page operations", () => {
     ])
   })
 
+  it("keeps bookmarks when merging, including named destinations and page selections", async () => {
+    const bookmarked = await PDFDocument.load(await makePdf(3))
+    const fit = (i: number) => bookmarked.context.obj([bookmarked.getPage(i).ref, "Fit"])
+    const names = bookmarked.context.obj({})
+    names.set(PDFName.of("sec"), fit(2))
+    bookmarked.catalog.set(PDFName.of("Dests"), names)
+    writeOutline(bookmarked, [
+      { title: "Intro", dest: fit(0), children: [] },
+      { title: "Chapter", dest: fit(1), children: [{ title: "Section", dest: fit(2), children: [] }] },
+    ])
+    // Point "Section" at the named destination instead of an explicit array.
+    const root = bookmarked.catalog.lookup(PDFName.of("Outlines"), PDFDict)
+    const chapter = root.lookup(PDFName.of("First"), PDFDict).lookup(PDFName.of("Next"), PDFDict)
+    chapter.lookup(PDFName.of("First"), PDFDict).set(PDFName.of("Dest"), PDFName.of("sec"))
+    const source = await bookmarked.save()
+
+    const merged = await mergePdfs([
+      { bytes: source, name: "book.pdf" },
+      { bytes: await makePdf(2), name: "plain.pdf" },
+    ])
+    expect(await pdfOutline(merged)).toEqual([
+      {
+        title: "book",
+        page: 0,
+        items: [
+          { title: "Intro", page: 0, items: [] },
+          { title: "Chapter", page: 1, items: [{ title: "Section", page: 2, items: [] }] },
+        ],
+      },
+      { title: "plain", page: 3, items: [] },
+    ])
+
+    // Bookmarks to pages that were left out are dropped; the rest move with their pages.
+    const partial = await mergePdfs([
+      { bytes: await makePdf(1), name: "first.pdf" },
+      { bytes: source, name: "book.pdf", pages: [1, 2] },
+    ])
+    expect(await pdfText(partial)).toEqual(["Page 1", "Page 2", "Page 3"])
+    expect(await pdfOutline(partial)).toEqual([
+      { title: "first", page: 0, items: [] },
+      {
+        title: "book",
+        page: 1,
+        items: [{ title: "Chapter", page: 1, items: [{ title: "Section", page: 2, items: [] }] }],
+      },
+    ])
+  })
+
+  it("keeps the first file's title and author when merging", async () => {
+    const titled = await PDFDocument.load(await makePdf(1))
+    titled.setTitle("Annual report")
+    titled.setAuthor("Ana")
+    const merged = await loadPdf(
+      await mergePdfs([
+        { bytes: await titled.save(), name: "a.pdf" },
+        { bytes: await makePdf(1), name: "b.pdf" },
+      ])
+    )
+    expect(merged.getTitle()).toBe("Annual report")
+    expect(merged.getAuthor()).toBe("Ana")
+  })
+
   it("merges and splits", async () => {
-    const merged = await mergePdfs([await makePdf(2), await makePdf(3)])
+    const merged = await mergePdfs([
+      { bytes: await makePdf(2), name: "a.pdf" },
+      { bytes: await makePdf(3), name: "b.pdf" },
+    ])
     expect(await pdfText(merged)).toEqual([
       "Page 1",
       "Page 2",

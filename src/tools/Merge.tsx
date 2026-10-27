@@ -17,6 +17,7 @@ import { PageThumbnail } from "@/components/PageThumbnail"
 import { Spinner } from "@/components/Spinner"
 import { ToolLayout } from "@/components/ToolLayout"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { useTask } from "@/hooks/usePdfFile"
 import { useResult } from "@/hooks/useResult"
 import { useFormat } from "@/hooks/useFormat"
@@ -24,6 +25,7 @@ import { outputName } from "@/lib/download"
 import { handoffToFile, takeHandoff } from "@/lib/handoff"
 import { errorMessage } from "@/lib/errors"
 import { mergePdfs } from "@/lib/pdf/pages"
+import { PageRangeError, parseRanges } from "@/lib/pdf/ranges"
 import { closePdf, openPdf, type LoadedPdf } from "@/lib/render/pdfjs"
 import { cn } from "@/lib/utils"
 
@@ -33,6 +35,8 @@ export default function Merge() {
   const { result: output, deliver } = useResult()
   const [files, setFiles] = useState<LoadedPdf[]>([])
   const [loading, setLoading] = useState(0)
+  // Optional page selection per file, keyed by file id.
+  const [ranges, setRanges] = useState<Record<string, string>>({})
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
@@ -78,14 +82,19 @@ export default function Merge() {
     setFiles((list) => arrayMove(list, list.findIndex((f) => f.id === active.id), list.findIndex((f) => f.id === over.id)))
   }
 
+  const selections = files.map((f) => selectPages(ranges[f.id] ?? "", f.pageCount))
+  const hasError = selections.some((s) => s.error)
+
   const merge = () =>
     run(async () => {
-      const bytes = await mergePdfs(files.map((f) => f.bytes))
+      const bytes = await mergePdfs(
+        files.map((f, i) => ({ bytes: f.bytes, name: f.name, pages: selections[i].pages }))
+      )
       deliver(bytes, outputName(files[0].name, "merged"))
       toast.success(t("common.done"))
     })
 
-  const totalPages = files.reduce((sum, f) => sum + f.pageCount, 0)
+  const totalPages = selections.reduce((sum, s) => sum + s.pages.length, 0)
 
   return (
     <ToolLayout tool="merge">
@@ -96,7 +105,15 @@ export default function Merge() {
           <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
             <SortableContext items={files.map((f) => f.id)} strategy={verticalListSortingStrategy}>
               {files.map((file, i) => (
-                <FileRow key={file.id} file={file} position={i + 1} onRemove={() => remove(file.id)} />
+                <FileRow
+                  key={file.id}
+                  file={file}
+                  position={i + 1}
+                  range={ranges[file.id] ?? ""}
+                  error={selections[i].error}
+                  onRange={(value) => setRanges((r) => ({ ...r, [file.id]: value }))}
+                  onRemove={() => remove(file.id)}
+                />
               ))}
             </SortableContext>
           </DndContext>
@@ -111,7 +128,7 @@ export default function Merge() {
             <p className="text-sm text-muted-foreground">
               {t("tools.merge.summary", { files: files.length, pages: totalPages })}
             </p>
-            <Button onClick={merge} disabled={busy || files.length < 2}>
+            <Button onClick={merge} disabled={busy || files.length < 2 || hasError}>
               {busy ? <Spinner className="size-4 text-current" /> : <Combine />}
               {t("tools.merge.action")}
             </Button>
@@ -124,7 +141,31 @@ export default function Merge() {
   )
 }
 
-function FileRow({ file, position, onRemove }: { file: LoadedPdf; position: number; onRemove: () => void }) {
+/** Parses a file's page selection; empty means every page. */
+function selectPages(value: string, pageCount: number) {
+  try {
+    return { pages: parseRanges(value, pageCount), error: undefined }
+  } catch (error) {
+    if (error instanceof PageRangeError) return { pages: [], error }
+    throw error
+  }
+}
+
+function FileRow({
+  file,
+  position,
+  range,
+  error,
+  onRange,
+  onRemove,
+}: {
+  file: LoadedPdf
+  position: number
+  range: string
+  error?: PageRangeError
+  onRange: (value: string) => void
+  onRemove: () => void
+}) {
   const { t } = useTranslation()
   const { bytes } = useFormat()
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: file.id })
@@ -149,7 +190,16 @@ function FileRow({ file, position, onRemove }: { file: LoadedPdf; position: numb
         <p className="text-xs text-muted-foreground">
           {t("common.pageCount", { count: file.pageCount })} · {bytes(file.bytes.length)}
         </p>
+        {error && <p className="text-xs text-destructive">{t(`errors.range.${error.code}`, error.values)}</p>}
       </div>
+      <Input
+        value={range}
+        onChange={(e) => onRange(e.target.value)}
+        placeholder={t("common.allPages")}
+        aria-label={t("common.pages")}
+        aria-invalid={Boolean(error)}
+        className="h-8 w-24 sm:w-28"
+      />
       <Button variant="ghost" size="icon-sm" onClick={onRemove} aria-label={t("common.remove")}>
         <X />
       </Button>
