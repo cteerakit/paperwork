@@ -1,4 +1,6 @@
 export const toolLoaders = {
+  security: () => import("./Security"),
+  redact: () => import("./Redact"),
   organize: () => import("./Organize"),
   merge: () => import("./Merge"),
   split: () => import("./Split"),

@@ -1,4 +1,21 @@
 {
+  "footer": {
+    "copyright": "© {{year}} Paperwork. Built with 💖 and 😠 by",
+    "navigation": "Footer",
+    "about": "About Paperwork"
+  },
+  "about": {
+    "title": "It started with an ID card.",
+    "intro": "My girlfriend asked me to sign a copy of my ID card. Somehow, I ended up building an entire web app.",
+    "context": "She needed the copy to handle some paperwork for me. I already kept a PDF in Google Drive, so it should have been easy. In Thailand, we often write a note across an ID copy saying what it can be used for, then sign it. All I needed was a few words in Thai and a signature.",
+    "problem": "But the online PDF tools I tried either struggled with Thai characters or put what I needed behind limits and subscriptions. I switched between websites and my phone until I finally got it done. It took far longer than a single document should.",
+    "girlfriend": "When I asked my girlfriend how she usually did it, she said it was easy. Then she tried, ran into the same limitations, and couldn’t finish it either. We had to laugh.",
+    "question": "Why should an everyday task mean learning new software or paying for a monthly subscription?",
+    "solution": "So I built Paperwork: simple, free tools for everyday PDF jobs. Add text, including Thai, sign a document, merge or split files, and rearrange pages, right in your browser. No sign-up, and your documents stay on your device. I built it for myself first, and wanted other people to be able to use it too.",
+    "invitation": "If a supposedly simple PDF task has ever taken up too much of your day, tell me about it. It might be the next thing I build.",
+    "creator": "Creator of Paperwork",
+    "originalPost": "Read the original story on X"
+  },
   "app": {
     "name": "Paperwork"
   },
@@ -13,7 +30,7 @@
   },
   "home": {
     "title": "Everyday PDF tools, right in your browser",
-    "subtitle": "Organize, merge, split, compress, sign and annotate PDFs. Works with Thai and other languages, with no sign-up."
+    "subtitle": "Organize, merge, split, compress, sign and annotate PDFs. No sign-up required."
   },
   "common": {
     "privacy": "Your files never leave your device",
@@ -217,6 +234,44 @@
       "restored_one": "Restored {{count}} unsaved annotation.",
       "restored_other": "Restored {{count}} unsaved annotations.",
       "discard": "Discard"
+    },
+    "redact": {
+      "title": "Redact PDF",
+      "description": "Permanently remove sensitive PDF text and replace it with black bars.",
+      "notice": "Saving permanently removes selected PDF text and adds black bars. Other text stays searchable and selectable. Background artwork is preserved; links over redacted text are removed. Your original file stays unchanged.",
+      "instructions": "Select text on the page, then choose “Redact selected text”. Review every page before saving. Marked text areas: {{count}}.",
+      "previous": "Previous page",
+      "next": "Next page",
+      "undo": "Undo last selection",
+      "clear": "Clear all",
+      "save": "Save redacted PDF",
+      "textOnly": "This text selection crosses an image, form field, or comment that cannot be redacted as PDF text.",
+      "markSelection": "Redact selected text",
+      "loadingText": "Preparing selectable text…",
+      "noText": "This page has no selectable PDF text.",
+      "textError": "Could not load selectable text. Reopen the PDF and try again.",
+      "selectText": "Drag across text to select it."
+    },
+    "security": {
+      "title": "Unlock and protect PDF",
+      "description": "Remove a PDF password or add password protection.",
+      "unlock": "Unlock PDF",
+      "protect": "Protect PDF",
+      "unlockHint": "Enter the current password to save a copy without password protection.",
+      "protectHint": "Set a password that will be required to open the PDF. Keep it somewhere safe.",
+      "currentPassword": "Current password",
+      "currentHint": "Leave empty if the PDF opens without a password.",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm new password",
+      "mismatch": "Passwords do not match.",
+      "unlockSuccess": "Your PDF is ready without password protection.",
+      "protectSuccess": "Your password-protected PDF is ready.",
+      "errors": {
+        "password": "The password is incorrect. Please try again.",
+        "invalid": "This file could not be opened. It may be damaged or not a PDF.",
+        "failed": "Could not change password protection. Try the owner password if this PDF has editing restrictions.",
+        "emptyPassword": "Enter a password of up to 127 UTF-8 bytes, without null characters."
+      }
     }
   },
   "feedback": {
