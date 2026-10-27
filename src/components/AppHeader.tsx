@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { LANGUAGES } from "@/i18n"
+import { changeLanguage, LANGUAGES } from "@/i18n"
 import { FeedbackDialog } from "@/components/FeedbackDialog"
 
 export function AppHeader() {
@@ -54,7 +54,7 @@ function LanguageSwitcher() {
           <DropdownMenuItem
             key={lang.code}
             lang={lang.code}
-            onClick={() => i18n.changeLanguage(lang.code)}
+            onClick={() => void changeLanguage(lang.code)}
           >
             <Check
               className={lang.code === current ? "opacity-100" : "opacity-0"}

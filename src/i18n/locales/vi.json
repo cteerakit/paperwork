@@ -1,0 +1,489 @@
+{
+  "seo": {
+    "navigation": "Điều hướng chính",
+    "howTo": "Cách sử dụng công cụ PDF này",
+    "limitations": "Trước khi bắt đầu",
+    "privacyTitle": "Xử lý PDF miễn phí và riêng tư",
+    "privacy": "Paperwork xử lý PDF ngay trong trình duyệt của bạn mà không tải tài liệu lên. Không cần tài khoản hay thanh toán. Hãy tải kết quả về để giữ các thay đổi và giữ lại một bản sao của tệp gốc. Tài liệu lớn có thể mất nhiều thời gian hơn hoặc vượt quá bộ nhớ khả dụng của thiết bị.",
+    "related": "Các công cụ PDF liên quan",
+    "workspacePlaceholder": "Hãy bật JavaScript để chọn PDF và dùng công cụ. Tài liệu của bạn được xử lý trên thiết bị của bạn. Hướng dẫn ở bên dưới.",
+    "notFoundTitle": "Không tìm thấy trang",
+    "notFoundDescription": "Trang này không tồn tại. Hãy xem các công cụ PDF để tìm thứ bạn cần.",
+    "tools": {
+      "toImages": {
+        "step1": "Chọn tệp PDF bạn muốn chuyển đổi.",
+        "step2": "Chọn PNG hoặc JPG, độ phân giải và các trang cần xuất.",
+        "step3": "Tải ảnh về, hoặc tệp ZIP nếu bạn xuất nhiều trang.",
+        "limitation": "Mỗi trang trở thành một bức ảnh phẳng nên không thể chọn văn bản trong ảnh. Những trang rất lớn sẽ được thu nhỏ để vừa với giới hạn của trình duyệt."
+      },
+      "merge": {
+        "step1": "Chọn các tệp PDF bạn muốn ghép lại.",
+        "step2": "Kéo các tệp theo thứ tự bạn muốn trong tài liệu cuối cùng.",
+        "step3": "Ghép các tệp và tải về tệp PDF đã ghép.",
+        "limitation": "Hãy mở khóa các tệp có mật khẩu trước khi ghép. Kiểm tra thứ tự trang trong tài liệu đã tải về."
+      },
+      "split": {
+        "step1": "Chọn tệp PDF bạn muốn tách.",
+        "step2": "Trích xuất các khoảng trang, tách thành các phần có số trang cố định, hoặc tạo mỗi trang một tệp.",
+        "step3": "Tải về tệp PDF đã trích xuất hoặc kho lưu trữ chứa các tệp đã tách.",
+        "limitation": "Số trang bắt đầu từ 1. Dùng các khoảng như 1-3, 5, 8- để chọn trang; các trang đó phải có trong tài liệu."
+      },
+      "compress": {
+        "step1": "Chọn tệp PDF bạn muốn giảm dung lượng.",
+        "step2": "Chọn mức nén nhẹ, vừa hoặc mạnh rồi chạy.",
+        "step3": "So sánh dung lượng kết quả và tải về tệp PDF nhỏ hơn khi có.",
+        "limitation": "Một số tệp PDF đã được tối ưu sẵn và sẽ không nhỏ đi. Nén mạnh biến các trang thành ảnh, khiến không thể chọn văn bản và có thể làm giảm chất lượng hình ảnh."
+      },
+      "sign": {
+        "step1": "Chọn PDF, sau đó vẽ, gõ hoặc nhập chữ ký của bạn.",
+        "step2": "Đặt chữ ký vào đúng chỗ trên trang và chỉnh kích thước.",
+        "step3": "Tải về tệp PDF đã ký và kiểm tra vị trí chữ ký.",
+        "limitation": "Công cụ này thêm một chữ ký nhìn thấy được, không phải chữ ký số dựa trên chứng thư. Hãy kiểm tra yêu cầu về chữ ký của bên nhận trước khi dùng."
+      },
+      "annotate": {
+        "step1": "Chọn PDF và chuyển đến trang bạn muốn chú thích.",
+        "step2": "Thêm văn bản, đánh dấu, ghi chú hoặc hình khối, rồi chỉnh vị trí.",
+        "step3": "Tải về tệp PDF đã chú thích để lưu những gì bạn đã thêm.",
+        "limitation": "Chú thích được thêm vào tài liệu; chúng không chỉnh sửa văn bản gốc. Hãy dùng công cụ che thông tin để xóa văn bản nhạy cảm thay vì phủ hình khối lên trên."
+      },
+      "organize": {
+        "step1": "Chọn tệp PDF có các trang bạn muốn sắp xếp.",
+        "step2": "Sắp xếp lại, xoay hoặc xóa trang bằng ảnh thu nhỏ của các trang.",
+        "step3": "Tải về tệp PDF đã sắp xếp và xem lại thứ tự trang.",
+        "limitation": "Hãy giữ lại ít nhất một trang trong tài liệu. Việc bỏ một trang khỏi kết quả không thay đổi tệp gốc của bạn."
+      },
+      "security": {
+        "step1": "Chọn mở khóa hoặc bảo vệ, rồi chọn tệp PDF của bạn.",
+        "step2": "Nhập mật khẩu hiện tại khi cần. Để bảo vệ tệp, hãy nhập và xác nhận mật khẩu mới.",
+        "step3": "Xử lý tài liệu và tải về tệp PDF đã mở khóa hoặc đã được bảo vệ.",
+        "limitation": "Việc mở khóa cần mật khẩu nếu tài liệu yêu cầu; công cụ này không khôi phục được mật khẩu đã quên. Hãy cất mật khẩu mới ở nơi an toàn."
+      },
+      "redact": {
+        "step1": "Chọn PDF và mở trang có văn bản nhạy cảm.",
+        "step2": "Chọn văn bản bạn muốn xóa và xem lại các vùng đã đánh dấu.",
+        "step3": "Tải về tệp PDF đã che thông tin và kiểm tra trước khi chia sẻ.",
+        "limitation": "Công cụ này hỗ trợ che văn bản và từ chối các vùng chồng lên hình ảnh. Nó không phù hợp để xóa thông tin khỏi ảnh quét. Hãy xem từng trang để tìm thêm nội dung nhạy cảm khác."
+      },
+      "watermark": {
+        "step1": "Chọn PDF và nhập nội dung cho hình mờ của bạn.",
+        "step2": "Chỉnh giao diện và chọn các trang cần thêm hình mờ.",
+        "step3": "Áp dụng hình mờ và tải kết quả về.",
+        "limitation": "Hình mờ chỉ thêm văn bản nhìn thấy được; nó không ngăn việc sao chép hay xóa nội dung bên dưới. Hãy dùng chức năng che thông tin cho văn bản nhạy cảm được hỗ trợ."
+      },
+      "pageNumbers": {
+        "step1": "Chọn tệp PDF bạn muốn đánh số trang.",
+        "step2": "Chọn định dạng số, vị trí, số bắt đầu và khoảng trang.",
+        "step3": "Áp dụng đánh số và tải về tệp PDF của bạn.",
+        "limitation": "Số mới được thêm lên trên nội dung trang. Chúng không thay thế số trang có sẵn, nên hãy kiểm tra vị trí trước khi chia sẻ."
+      }
+    }
+  },
+  "footer": {
+    "copyright": "© {{year}} Paperwork. Làm bằng 💖 và 😠 bởi",
+    "navigation": "Chân trang",
+    "about": "Về Paperwork",
+    "pricing": "Giá",
+    "changelog": "Nhật ký thay đổi"
+  },
+  "about": {
+    "title": "Mọi chuyện bắt đầu từ một tấm căn cước.",
+    "intro": "Bạn gái nhờ tôi ký vào bản sao căn cước của mình. Không hiểu sao, cuối cùng tôi lại xây cả một ứng dụng web.",
+    "context": "Cô ấy cần bản sao đó để làm một số giấy tờ giúp tôi. Tôi đã có sẵn một tệp PDF trong Google Drive nên lẽ ra phải rất dễ. Ở Thái Lan, chúng tôi thường viết một dòng lên bản sao căn cước để ghi mục đích sử dụng, rồi ký tên. Tất cả những gì tôi cần chỉ là vài chữ tiếng Thái và một chữ ký.",
+    "problem": "Nhưng các công cụ PDF trực tuyến tôi thử hoặc xử lý chữ Thái rất kém, hoặc đặt thứ tôi cần sau các giới hạn và gói đăng ký. Tôi chuyển qua lại giữa các trang web và điện thoại cho đến khi cuối cùng cũng xong. Việc đó mất nhiều thời gian hơn rất nhiều so với một tài liệu duy nhất.",
+    "girlfriend": "Khi tôi hỏi bạn gái thường làm việc này thế nào, cô ấy bảo là dễ. Rồi cô ấy thử, gặp đúng những giới hạn đó và cũng không làm xong được. Chúng tôi chỉ biết bật cười.",
+    "question": "Tại sao một việc thường ngày lại phải học phần mềm mới hay trả phí hằng tháng?",
+    "solution": "Vì vậy tôi đã làm ra Paperwork: những công cụ đơn giản, miễn phí cho các việc PDF hằng ngày. Thêm văn bản, kể cả tiếng Thái, ký tài liệu, ghép hoặc tách tệp và sắp xếp lại trang, ngay trong trình duyệt. Không cần đăng ký, và tài liệu của bạn ở nguyên trên thiết bị. Tôi làm nó trước hết cho chính mình, và muốn người khác cũng dùng được.",
+    "invitation": "Nếu một việc PDF tưởng chừng đơn giản từng ngốn quá nhiều thời gian của bạn, hãy kể cho tôi nghe. Biết đâu đó sẽ là thứ tiếp theo tôi làm.",
+    "creator": "Người tạo ra Paperwork",
+    "originalPost": "Đọc câu chuyện gốc trên X"
+  },
+  "app": {
+    "name": "Paperwork"
+  },
+  "header": {
+    "language": "Ngôn ngữ",
+    "theme": "Giao diện",
+    "themes": {
+      "light": "Sáng",
+      "dark": "Tối",
+      "system": "Theo hệ thống"
+    }
+  },
+  "home": {
+    "title": "Công cụ PDF hằng ngày, ngay trong trình duyệt",
+    "subtitle": "Sắp xếp, ghép, tách, nén, ký và chú thích PDF. Không cần đăng ký."
+  },
+  "common": {
+    "privacy": "Tệp của bạn không bao giờ rời khỏi thiết bị",
+    "allTools": "Tất cả công cụ",
+    "save": "Lưu",
+    "download": "Tải về",
+    "cancel": "Hủy",
+    "delete": "Xóa",
+    "remove": "Gỡ bỏ",
+    "reset": "Đặt lại",
+    "done": "Xong! Tệp của bạn đã được tải về.",
+    "loading": "Đang mở…",
+    "closeFile": "Đóng tệp",
+    "pageCount_other": "{{count}} trang",
+    "pages": "Trang",
+    "allPages": "Tất cả các trang",
+    "pagesList": "Trang {{pages}}",
+    "rangeHint": "Để trống để chọn tất cả các trang, hoặc nhập ví dụ 1-3, 5, 8-",
+    "selectAll": "Chọn tất cả",
+    "selectNone": "Bỏ chọn",
+    "selectPage": "Chọn trang {{n}}",
+    "selectedCount_other": "Đã chọn {{count}} trang",
+    "dragToReorder": "Kéo để sắp xếp lại",
+    "color": "Màu",
+    "fontSize": "Cỡ chữ",
+    "previewOfPage": "Xem trước trang {{n}}",
+    "missingChars": "Một số ký tự không thể vẽ và đã được thay bằng “?”: {{chars}}",
+    "downloadingFont": "Đang tải phông chữ…",
+    "continueIn": "Tiếp tục trong…"
+  },
+  "open": {
+    "title": "Mở bằng Paperwork",
+    "subtitle": "Chọn công cụ để dùng với tệp PDF của bạn.",
+    "none": "Chưa nhận được tệp PDF nào. Hãy chọn một công cụ từ trang chủ, rồi chọn tệp.",
+    "multiple": "Bạn đã mở {{n}} tệp. Công cụ Ghép PDF dùng tất cả; các công cụ khác dùng tệp đầu tiên."
+  },
+  "dropzone": {
+    "title": "Chọn tệp PDF",
+    "titleMultiple": "Chọn các tệp PDF",
+    "orDrop": "hoặc thả tệp vào đây",
+    "addMore": "Thêm tệp",
+    "notPdf": "Chỉ có thể dùng tệp PDF ở đây."
+  },
+  "errors": {
+    "encrypted": "Tệp PDF này được bảo vệ bằng mật khẩu. Hãy gỡ mật khẩu rồi thử lại.",
+    "invalid": "Không thể mở tệp này. Tệp có thể bị hỏng hoặc không phải PDF.",
+    "generic": "Đã xảy ra lỗi. Vui lòng thử lại.",
+    "range": {
+      "invalid": "“{{part}}” không phải là trang hoặc khoảng trang hợp lệ.",
+      "outOfRange_other": "Trang {{page}} không tồn tại. Tài liệu này có {{count}} trang.",
+      "empty": "Hãy nhập ít nhất một trang.",
+      "chunkSize": "Hãy nhập một số nguyên từ 1 trở lên."
+    }
+  },
+  "editor": {
+    "tools": {
+      "select": "Chọn",
+      "text": "Văn bản",
+      "image": "Hình ảnh",
+      "rect": "Hình chữ nhật",
+      "ellipse": "Hình elip",
+      "line": "Đường thẳng",
+      "arrow": "Mũi tên",
+      "pen": "Bút",
+      "highlight": "Đánh dấu",
+      "note": "Ghi chú dán"
+    },
+    "props": {
+      "opacity": "Độ mờ đục",
+      "bold": "In đậm",
+      "stroke": "Viền",
+      "strokeWidth": "Độ dày nét",
+      "fill": "Tô màu",
+      "align": {
+        "left": "Căn trái",
+        "center": "Căn giữa",
+        "right": "Căn phải"
+      }
+    },
+    "undo": "Hoàn tác",
+    "redo": "Làm lại",
+    "zoomIn": "Phóng to",
+    "zoomOut": "Thu nhỏ",
+    "fitPage": "Vừa trang",
+    "pages": "Trang",
+    "nothingSelected": "Chọn một đối tượng để chỉnh sửa, hoặc chọn một công cụ để thêm thứ mới.",
+    "newObjectStyle": "{{tool}} mới",
+    "hint": "Nhấp đúp vào văn bản để sửa. Phím Delete xóa đối tượng đã chọn; phím mũi tên dịch nhẹ đối tượng.",
+    "imageError": "Không thể mở hình ảnh đó.",
+    "editNote": "Sửa bình luận",
+    "noteTitle": "Ghi chú dán",
+    "noteDescription": "Được lưu thành bình luận PDF và hiển thị trong bảng bình luận của trình xem PDF.",
+    "notePlaceholder": "Viết bình luận…"
+  },
+  "tools": {
+    "organize": {
+      "title": "Sắp xếp trang",
+      "description": "Đổi thứ tự, xoay và xóa trang.",
+      "hint": "Kéo các trang để sắp xếp lại. Nhấp để chọn nhiều trang.",
+      "selectHint": "Nhấp vào các trang để chọn",
+      "rotateLeft": "Xoay trái",
+      "rotateRight": "Xoay phải",
+      "was": "trước là {{n}}",
+      "keepOne": "Một tệp PDF cần có ít nhất một trang.",
+      "duplicate": "Nhân đôi",
+      "insertBlank": "Chèn trang trống",
+      "insertPdf": "Chèn PDF…",
+      "blankPage": "trống"
+    },
+    "toImages": {
+      "title": "PDF sang ảnh",
+      "description": "Lưu các trang PDF thành ảnh PNG hoặc JPG.",
+      "format": "Định dạng ảnh",
+      "formats": {
+        "png": "PNG",
+        "pngHint": "Chữ và đồ họa sắc nét. Tệp lớn hơn.",
+        "jpg": "JPG",
+        "jpgHint": "Tệp nhỏ hơn, phù hợp nhất với ảnh chụp."
+      },
+      "resolution": "Độ phân giải",
+      "dpi": {
+        "72": "72 dpi · Màn hình",
+        "150": "150 dpi · Tiêu chuẩn",
+        "300": "300 dpi · In ấn"
+      },
+      "quality": "Chất lượng JPG",
+      "summary_other": "{{count}} ảnh · mỗi ảnh khoảng {{width}} × {{height}} px",
+      "memoryWarning": "Lượng dữ liệu ảnh này rất lớn và trình duyệt có thể hết bộ nhớ. Hãy thử ít trang hơn hoặc độ phân giải thấp hơn.",
+      "action": "Chuyển thành ảnh"
+    },
+    "merge": {
+      "title": "Ghép PDF",
+      "description": "Gộp nhiều tệp PDF thành một tệp.",
+      "action": "Ghép PDF",
+      "summary": "{{files}} tệp · tổng cộng {{pages}} trang",
+      "needTwo": "Hãy thêm ít nhất hai tệp để ghép."
+    },
+    "split": {
+      "title": "Tách PDF",
+      "description": "Chia một tệp PDF thành các tệp riêng.",
+      "modes": {
+        "ranges": "Theo khoảng trang",
+        "rangesHint": "Chọn chính xác những trang nào vào từng tệp.",
+        "every": "Cứ vài trang",
+        "everyHint": "Tạo tệp mới sau mỗi N trang.",
+        "single": "Từng trang",
+        "singleHint": "Tạo một tệp cho mỗi trang."
+      },
+      "rangesLabel": "Khoảng trang",
+      "rangesHint": "Mỗi dấu phẩy tạo một tệp mới, ví dụ 1-3, 4-6, 7",
+      "everyLabel": "Số trang mỗi tệp",
+      "fileN": "Tệp {{n}}",
+      "andMore_other": "…và {{count}} tệp nữa",
+      "action_other": "Tạo {{count}} tệp"
+    },
+    "compress": {
+      "title": "Nén PDF",
+      "description": "Làm PDF nhỏ hơn để gửi email và tải lên.",
+      "levels": {
+        "light": "Nhẹ",
+        "lightHint": "Dọn dẹp không mất dữ liệu. Dung lượng thay đổi ít nhất.",
+        "medium": "Khuyên dùng",
+        "mediumHint": "Thu nhỏ ảnh lớn. Chữ vẫn sắc nét và chọn được.",
+        "strong": "Mạnh",
+        "strongHint": "Biến các trang thành ảnh. Tệp nhỏ nhất.",
+        "custom": "Tùy chỉnh",
+        "customHint": "Tự chọn kích thước và chất lượng ảnh."
+      },
+      "maxSize": "Cạnh dài nhất của ảnh",
+      "quality": "Chất lượng ảnh",
+      "customNote": "Những ảnh lớn hơn mức này sẽ được thu nhỏ và lưu lại với chất lượng này. Chữ vẫn sắc nét và chọn được.",
+      "strongWarning": "Nén mạnh biến mọi trang thành ảnh. Văn bản sẽ không thể chọn, tìm kiếm hay sao chép nữa.",
+      "action": "Nén",
+      "before": "Trước",
+      "after": "Sau",
+      "saved": "Tiết kiệm",
+      "noGain": "Tệp PDF này đã được nén tốt rồi. Hãy thử mức mạnh hơn."
+    },
+    "pageNumbers": {
+      "title": "Đánh số trang",
+      "description": "Thêm số trang bằng bất kỳ ngôn ngữ nào.",
+      "position": "Vị trí",
+      "positions": {
+        "top-left": "Trên cùng bên trái",
+        "top-center": "Trên cùng ở giữa",
+        "top-right": "Trên cùng bên phải",
+        "bottom-left": "Dưới cùng bên trái",
+        "bottom-center": "Dưới cùng ở giữa",
+        "bottom-right": "Dưới cùng bên phải"
+      },
+      "template": "Định dạng",
+      "templateHint": "{n} là số trang, {total} là số cuối cùng.",
+      "defaultTemplate": "Trang {n} / {total}",
+      "startAt": "Bắt đầu từ",
+      "action": "Thêm số trang"
+    },
+    "watermark": {
+      "title": "Hình mờ",
+      "description": "Đóng dấu chữ hoặc logo lên các trang của bạn.",
+      "textTab": "Văn bản",
+      "imageTab": "Hình ảnh hoặc logo",
+      "text": "Chữ của hình mờ",
+      "textHint": "Nhấn Enter để xuống dòng. Hỗ trợ tiếng Thái, tiếng Trung, tiếng Ả Rập và nhiều ngôn ngữ khác.",
+      "defaultText": "BẢO MẬT",
+      "layout": "Bố cục",
+      "center": "Giữa trang",
+      "tile": "Lặp lại",
+      "angle": "Góc",
+      "action": "Thêm hình mờ",
+      "chooseImage": "Chọn hình ảnh",
+      "replaceImage": "Đổi hình ảnh",
+      "imageHint": "Kéo hình ảnh vào đúng chỗ và đổi kích thước. Hình được thêm vào cùng một vị trí trên mọi trang đã chọn."
+    },
+    "sign": {
+      "title": "Ký tên",
+      "description": "Vẽ, gõ hoặc tải lên chữ ký của bạn.",
+      "create": "Chữ ký của bạn",
+      "draw": "Vẽ",
+      "type": "Gõ",
+      "upload": "Tải lên",
+      "drawHere": "Vẽ chữ ký của bạn ở đây",
+      "clear": "Xóa",
+      "use": "Đặt lên trang",
+      "typePlaceholder": "Gõ tên của bạn",
+      "uploadHint": "Ảnh PNG có nền trong suốt cho kết quả tốt nhất.",
+      "chooseImage": "Chọn hình ảnh",
+      "saved": "Đã lưu trên thiết bị này — nhấp để đặt lại",
+      "placeAgain": "Đặt lên trang",
+      "saveAs": "Lưu thành",
+      "categories": {
+        "signature": "Chữ ký",
+        "initials": "Chữ viết tắt",
+        "stamp": "Con dấu"
+      },
+      "rename": "Đổi tên",
+      "unnamed": "Chưa đặt tên",
+      "addStamp": "Thêm ảnh con dấu"
+    },
+    "annotate": {
+      "title": "Chú thích",
+      "description": "Thêm văn bản, đánh dấu, hình khối, nét vẽ và bình luận.",
+      "restored_other": "Đã khôi phục {{count}} chú thích chưa lưu.",
+      "discard": "Bỏ"
+    },
+    "redact": {
+      "title": "Che thông tin PDF",
+      "description": "Xóa vĩnh viễn văn bản nhạy cảm trong PDF và thay bằng các thanh đen.",
+      "notice": "Khi lưu, văn bản PDF đã chọn sẽ bị xóa vĩnh viễn và thay bằng thanh đen. Phần văn bản còn lại vẫn tìm kiếm và chọn được. Hình nền được giữ nguyên; các liên kết nằm trên văn bản bị che sẽ bị gỡ. Tệp gốc của bạn không thay đổi.",
+      "instructions": "Chọn văn bản trên trang, rồi chọn “Che văn bản đã chọn”. Hãy xem lại mọi trang trước khi lưu. Số vùng văn bản đã đánh dấu: {{count}}.",
+      "previous": "Trang trước",
+      "next": "Trang sau",
+      "undo": "Hoàn tác lần chọn gần nhất",
+      "clear": "Xóa tất cả",
+      "save": "Lưu PDF đã che thông tin",
+      "textOnly": "Vùng văn bản này đi qua một hình ảnh, trường biểu mẫu hoặc bình luận không thể che như văn bản PDF.",
+      "markSelection": "Che văn bản đã chọn",
+      "loadingText": "Đang chuẩn bị văn bản có thể chọn…",
+      "noText": "Trang này không có văn bản PDF để chọn.",
+      "textError": "Không thể tải văn bản có thể chọn. Hãy mở lại PDF và thử lại.",
+      "selectText": "Kéo qua văn bản để chọn.",
+      "search": {
+        "title": "Tìm văn bản cần che",
+        "placeholderText": "Văn bản cần tìm trên mọi trang",
+        "placeholderRegex": "Mẫu cần tìm (biểu thức chính quy)",
+        "modeText": "Văn bản",
+        "modeRegex": "Mẫu",
+        "find": "Tìm",
+        "presetsLabel": "Tìm nhanh:",
+        "presets": {
+          "email": "Email",
+          "phone": "Số điện thoại",
+          "thaiId": "Số căn cước Thái Lan",
+          "card": "Số thẻ"
+        },
+        "searching": "Đang tìm…",
+        "found_other": "{{count}} kết quả khớp",
+        "noMatches": "Không tìm thấy văn bản khớp.",
+        "note": "Hãy xem lại các vùng được tô sáng trên từng trang trước khi che. Khung được ước tính từ bố cục văn bản và có chừa một chút lề.",
+        "markAll_other": "Che tất cả {{count}} kết quả khớp",
+        "clearResults": "Xóa kết quả",
+        "failed": "Không thể tìm trong PDF này.",
+        "errors": {
+          "empty": "Hãy nhập nội dung cần tìm.",
+          "invalid": "Mẫu đó không hợp lệ."
+        }
+      }
+    },
+    "security": {
+      "title": "Mở khóa và bảo vệ PDF",
+      "description": "Gỡ mật khẩu PDF hoặc thêm bảo vệ bằng mật khẩu.",
+      "unlock": "Mở khóa PDF",
+      "protect": "Bảo vệ PDF",
+      "unlockHint": "Nhập mật khẩu hiện tại để lưu một bản sao không có mật khẩu.",
+      "protectHint": "Đặt mật khẩu sẽ được yêu cầu khi mở PDF. Hãy cất nó ở nơi an toàn.",
+      "currentPassword": "Mật khẩu hiện tại",
+      "currentHint": "Để trống nếu PDF mở được mà không cần mật khẩu.",
+      "newPassword": "Mật khẩu mới",
+      "confirmPassword": "Xác nhận mật khẩu mới",
+      "mismatch": "Mật khẩu không khớp.",
+      "unlockSuccess": "PDF của bạn đã sẵn sàng, không còn mật khẩu.",
+      "protectSuccess": "PDF được bảo vệ bằng mật khẩu của bạn đã sẵn sàng.",
+      "errors": {
+        "password": "Mật khẩu không đúng. Vui lòng thử lại.",
+        "invalid": "Không thể mở tệp này. Tệp có thể bị hỏng hoặc không phải PDF.",
+        "failed": "Không thể thay đổi bảo vệ bằng mật khẩu. Hãy thử mật khẩu chủ sở hữu nếu PDF này có hạn chế chỉnh sửa.",
+        "emptyPassword": "Nhập mật khẩu dài tối đa 127 byte UTF-8 và không chứa ký tự null."
+      }
+    }
+  },
+  "feedback": {
+    "title": "Phản hồi",
+    "description": "Bạn muốn chúng tôi thay đổi hoặc cải thiện điều gì?",
+    "label": "Phản hồi của bạn",
+    "send": "Gửi phản hồi",
+    "sending": "Đang gửi…",
+    "sent": "Cảm ơn bạn! Phản hồi của bạn đã được gửi.",
+    "error": "Không thể gửi phản hồi của bạn. Vui lòng thử lại.",
+    "limited": "Bạn đã gửi quá nhiều lần. Vui lòng đợi một phút rồi thử lại.",
+    "close": "Đóng"
+  },
+  "pricing": {
+    "title": "Một gói. Không đồng nào.",
+    "subtitle": "Trang giá này lẽ ra chỉ cần là một email. Một email rất ngắn.",
+    "plan": "Cả bộ công cụ",
+    "badge": "Gói duy nhất",
+    "period": "/ thật đấy",
+    "finePrint": "Không đăng ký định kỳ. Không thẻ tín dụng. Không có điều kiện ẩn.",
+    "features": {
+      "tools": "Đầy đủ mọi công cụ PDF",
+      "signup": "Không cần tạo tài khoản",
+      "privacy": "Tệp của bạn ở nguyên trên thiết bị"
+    },
+    "cta": "Cùng xử lý giấy tờ nào",
+    "checkout": "Bỏ qua bước thanh toán. Vì làm gì có.",
+    "note": "Tôi làm ra cái này cho chính mình. Cứ thoải mái dùng. Nếu nó giúp ngày của bạn nhẹ nhàng hơn một chút, thế là đủ với tôi rồi.",
+    "story": "Chuyện này bắt đầu thế nào"
+  },
+  "changelog": {
+    "title": "Nhật ký thay đổi",
+    "subtitle": "Có gì mới ở Paperwork, mới nhất ở trên cùng.",
+    "types": {
+      "new": "Mới",
+      "improved": "Cải thiện"
+    },
+    "entries": {
+      "offline": {
+        "title": "Dùng được khi không có mạng",
+        "items": {
+          "install": "Cài Paperwork lên điện thoại hoặc máy tính và tiếp tục dùng các công cụ khi không có kết nối.",
+          "pricing": "Thêm một trang giá, nếu bạn tò mò. Đọc rất nhanh.",
+          "previews": "Liên kết đến Paperwork giờ hiển thị bản xem trước đàng hoàng khi bạn chia sẻ.",
+          "prerender": "Các trang hiện ra ngay lập tức và công cụ tìm kiếm đọc được, kể cả trước khi ứng dụng tải xong."
+        }
+      },
+      "protect": {
+        "title": "Che thông tin, bảo vệ và mở khóa",
+        "items": {
+          "redact": "Che thông tin nhạy cảm trong PDF để nó biến mất hẳn, không chỉ bị phủ lên.",
+          "security": "Thêm mật khẩu cho PDF, hoặc gỡ mật khẩu mà bạn đã biết.",
+          "feedback": "Gửi phản hồi ngay trong ứng dụng, bằng tiếng Anh hoặc tiếng Thái.",
+          "about": "Thêm trang Giới thiệu kể câu chuyện Paperwork ra đời như thế nào.",
+          "preload": "Công cụ mở nhanh hơn. Paperwork lặng lẽ tải chúng ở nền trong lúc bạn duyệt."
+        }
+      },
+      "launch": {
+        "title": "Paperwork ra mắt",
+        "items": {
+          "tools": "Tám công cụ PDF: ghép, tách, nén, sắp xếp, đánh số trang, hình mờ, ký tên và chú thích.",
+          "thai": "Hỗ trợ chữ Thái đúng chuẩn khi bạn thêm văn bản vào tài liệu, cùng giao diện tiếng Anh và tiếng Thái.",
+          "private": "Mọi thứ chạy trong trình duyệt của bạn. Không cần đăng ký, và tệp của bạn không bao giờ rời khỏi thiết bị."
+        }
+      }
+    }
+  }
+}

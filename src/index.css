@@ -300,6 +300,14 @@
     --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* Chinese and Japanese share characters but draw them differently, so each language lists its own fonts. */
+html:lang(ja) {
+  font-family: "Inter Variable", "Hiragino Sans", "Yu Gothic UI", "Meiryo", "Noto Sans CJK JP", sans-serif;
+}
+html:lang(zh) {
+  font-family: "Inter Variable", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

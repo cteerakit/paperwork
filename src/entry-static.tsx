@@ -5,19 +5,31 @@ import { Link, StaticRouter } from "react-router"
 import { AppFooter } from "@/components/AppFooter"
 import { ToolLayout } from "@/components/ToolLayout"
 import en from "@/i18n/locales/en.json"
+import es from "@/i18n/locales/es.json"
+import ja from "@/i18n/locales/ja.json"
 import th from "@/i18n/locales/th.json"
+import vi from "@/i18n/locales/vi.json"
+import zh from "@/i18n/locales/zh.json"
+import type { LanguageCode } from "@/i18n/languages"
 import { About } from "@/pages/About"
 import { NotFound } from "@/pages/NotFound"
 import { Pricing } from "@/pages/Pricing"
 import { Home } from "@/tools/Home"
 import { TOOLS } from "@/tools/registry"
 
-export async function renderPage(path: string, language: "en" | "th" = "en") {
+export async function renderPage(path: string, language: LanguageCode = "en") {
   const i18n = createInstance()
   await i18n.init({
     lng: language,
     fallbackLng: "en",
-    resources: { en: { translation: en }, th: { translation: th } },
+    resources: {
+      en: { translation: en },
+      th: { translation: th },
+      ja: { translation: ja },
+      zh: { translation: zh },
+      vi: { translation: vi },
+      es: { translation: es },
+    },
     interpolation: { escapeValue: false },
   })
   const tool = TOOLS.find((tool) => tool.path === path)

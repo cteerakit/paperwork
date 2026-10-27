@@ -1,0 +1,489 @@
+{
+  "seo": {
+    "navigation": "主导航",
+    "howTo": "如何使用这个 PDF 工具",
+    "limitations": "开始之前",
+    "privacyTitle": "免费且私密的 PDF 处理",
+    "privacy": "Paperwork 在浏览器中处理 PDF，不会上传您的文档。无需注册账号，也无需付费。请下载处理结果以保存您的更改，并保留一份原始文件的副本。较大的文档可能需要更长时间，或超出设备的可用内存。",
+    "related": "相关的 PDF 工具",
+    "workspacePlaceholder": "请启用 JavaScript 以选择 PDF 并使用此工具。您的文档在您的设备上处理。使用说明见下方。",
+    "notFoundTitle": "找不到页面",
+    "notFoundDescription": "此页面不存在。请浏览 PDF 工具，找到您需要的功能。",
+    "tools": {
+      "toImages": {
+        "step1": "选择要转换的 PDF。",
+        "step2": "选择 PNG 或 JPG、分辨率，以及要导出的页面。",
+        "step3": "下载图片；如果导出了多页，则会得到一个 ZIP 文件。",
+        "limitation": "每一页都会变成一张平面图片，因此图片中的文字无法选择。尺寸特别大的页面会被缩小，以适应浏览器的限制。"
+      },
+      "merge": {
+        "step1": "选择要合并的 PDF 文件。",
+        "step2": "拖动文件，按最终文档中的顺序排列。",
+        "step3": "合并文件并下载合并后的 PDF。",
+        "limitation": "合并之前请先解除受密码保护的文件的锁定。请在下载的文档中检查页面顺序。"
+      },
+      "split": {
+        "step1": "选择要拆分的 PDF。",
+        "step2": "提取页面范围、按固定页数拆分，或每页生成一个文件。",
+        "step3": "下载提取出的 PDF，或拆分后文件的压缩包。",
+        "limitation": "页码从 1 开始。使用 1-3, 5, 8- 这样的范围来选择页面；所选页面必须存在于文档中。"
+      },
+      "compress": {
+        "step1": "选择要减小文件大小的 PDF。",
+        "step2": "选择轻度、中度或强力压缩并运行。",
+        "step3": "比较压缩后的大小，并在文件变小时下载更小的 PDF。",
+        "limitation": "有些 PDF 已经过优化，无法再变小。强力压缩会把页面转换为图片，因此无法再选择文字，画质也可能下降。"
+      },
+      "sign": {
+        "step1": "选择 PDF，然后绘制、输入或导入您的签名。",
+        "step2": "将签名放到页面上合适的位置，并调整大小。",
+        "step3": "下载已签名的 PDF，并检查签名位置。",
+        "limitation": "这里添加的是可见签名，而不是基于证书的数字签名。使用前请确认接收方的签名要求。"
+      },
+      "annotate": {
+        "step1": "选择 PDF，并转到要添加批注的页面。",
+        "step2": "添加文字、高亮、便笺或形状，并调整其位置。",
+        "step3": "下载带批注的 PDF，以保存您添加的内容。",
+        "limitation": "批注是添加到文档上的内容，不会编辑原有文字。若要删除敏感文字，请使用涂黑工具，而不是用形状遮盖。"
+      },
+      "organize": {
+        "step1": "选择要整理页面的 PDF。",
+        "step2": "使用页面缩略图重新排序、旋转或删除页面。",
+        "step3": "下载整理后的 PDF，并检查页面顺序。",
+        "limitation": "文档中至少要保留一页。从输出中删除页面不会改变您的原始文件。"
+      },
+      "security": {
+        "step1": "选择解锁或保护，然后选择您的 PDF。",
+        "step2": "需要时输入当前密码。若要保护文件，请输入并确认新密码。",
+        "step3": "处理文档，并下载已解锁或已保护的 PDF。",
+        "limitation": "如果文档需要密码，解锁时必须输入该密码；此工具无法找回忘记的密码。请将新密码保存在安全的地方。"
+      },
+      "redact": {
+        "step1": "选择 PDF，并打开包含敏感文字的页面。",
+        "step2": "选择要删除的文字，并检查已标记的区域。",
+        "step3": "下载涂黑后的 PDF，并在分享前检查。",
+        "limitation": "此工具支持文字涂黑，会拒绝与图片重叠的区域。它不适合用于清除扫描图像中的信息。请检查每一页是否还有其他敏感内容。"
+      },
+      "watermark": {
+        "step1": "选择 PDF，并输入水印文字。",
+        "step2": "调整外观，并选择要添加水印的页面。",
+        "step3": "应用水印并下载结果。",
+        "limitation": "水印只是添加可见的文字，既不能防止复制，也不会删除底层内容。对于支持的敏感文字，请使用涂黑功能。"
+      },
+      "pageNumbers": {
+        "step1": "选择要添加页码的 PDF。",
+        "step2": "选择页码格式、位置、起始编号和页面范围。",
+        "step3": "应用页码并下载您的 PDF。",
+        "limitation": "新页码会添加在页面内容之上，不会替换已有的页码，因此分享之前请检查它们的位置。"
+      }
+    }
+  },
+  "footer": {
+    "copyright": "© {{year}} Paperwork。带着 💖 和 😠 制作，作者：",
+    "navigation": "页脚",
+    "about": "关于 Paperwork",
+    "pricing": "价格",
+    "changelog": "更新日志"
+  },
+  "about": {
+    "title": "一切都始于一张身份证。",
+    "intro": "女朋友让我在一份身份证复印件上签名。不知怎么的，我最后做出了一整个网页应用。",
+    "context": "她需要这份复印件来替我办一些手续。我的 Google 云端硬盘里本来就存着一份 PDF，按理说应该很容易。在泰国，我们常常会在身份证复印件上写一句说明用途的话，然后签名。我需要的只是几个泰语词和一个签名。",
+    "problem": "可是我试过的在线 PDF 工具，要么处理不好泰语字符，要么把我需要的功能锁在使用限制和订阅之后。我在各个网站和手机之间来回切换，终于把它做完了。对一份文件来说，这花的时间实在太长了。",
+    "girlfriend": "我问女朋友她平时是怎么做的，她说很简单。结果她一试，遇到了同样的限制，也没能完成。我们只好相视一笑。",
+    "question": "为什么一件日常小事，就得去学新软件，或者按月付订阅费？",
+    "solution": "于是我做了 Paperwork：为日常 PDF 任务准备的简单、免费的工具。添加文字（包括泰语）、签署文件、合并或拆分文件、调整页面顺序，直接在浏览器里就能完成。无需注册，您的文档也不会离开您的设备。我首先是为自己做的，也希望其他人都能用上。",
+    "invitation": "如果某个本该很简单的 PDF 任务曾经占用了您太多时间，请告诉我。它也许就是我接下来要做的东西。",
+    "creator": "Paperwork 的作者",
+    "originalPost": "在 X 上阅读原帖"
+  },
+  "app": {
+    "name": "Paperwork"
+  },
+  "header": {
+    "language": "语言",
+    "theme": "主题",
+    "themes": {
+      "light": "浅色",
+      "dark": "深色",
+      "system": "跟随系统"
+    }
+  },
+  "home": {
+    "title": "日常 PDF 工具，就在您的浏览器里",
+    "subtitle": "整理、合并、拆分、压缩、签名和批注 PDF。无需注册。"
+  },
+  "common": {
+    "privacy": "您的文件不会离开您的设备",
+    "allTools": "所有工具",
+    "save": "保存",
+    "download": "下载",
+    "cancel": "取消",
+    "delete": "删除",
+    "remove": "移除",
+    "reset": "重置",
+    "done": "完成！您的文件已下载。",
+    "loading": "正在打开…",
+    "closeFile": "关闭文件",
+    "pageCount_other": "{{count}} 页",
+    "pages": "页面",
+    "allPages": "所有页面",
+    "pagesList": "第 {{pages}} 页",
+    "rangeHint": "留空表示所有页面，或输入如 1-3, 5, 8-",
+    "selectAll": "全选",
+    "selectNone": "取消全选",
+    "selectPage": "选择第 {{n}} 页",
+    "selectedCount_other": "已选择 {{count}} 页",
+    "dragToReorder": "拖动以重新排序",
+    "color": "颜色",
+    "fontSize": "字号",
+    "previewOfPage": "第 {{n}} 页预览",
+    "missingChars": "有些字符无法绘制，已替换为“?”：{{chars}}",
+    "downloadingFont": "正在下载字体…",
+    "continueIn": "继续使用…"
+  },
+  "open": {
+    "title": "用 Paperwork 打开",
+    "subtitle": "请选择要用于这份 PDF 的工具。",
+    "none": "没有收到 PDF。请在首页选择一个工具，然后选取文件。",
+    "multiple": "您打开了 {{n}} 个文件。合并会使用全部文件，其他工具只使用第一个文件。"
+  },
+  "dropzone": {
+    "title": "选择 PDF 文件",
+    "titleMultiple": "选择 PDF 文件",
+    "orDrop": "或将文件拖放到这里",
+    "addMore": "添加更多文件",
+    "notPdf": "这里只能使用 PDF 文件。"
+  },
+  "errors": {
+    "encrypted": "此 PDF 受密码保护。请先移除密码，然后重试。",
+    "invalid": "无法打开此文件。它可能已损坏，或者不是 PDF。",
+    "generic": "出了点问题，请重试。",
+    "range": {
+      "invalid": "“{{part}}”不是有效的页码或范围。",
+      "outOfRange_other": "第 {{page}} 页不存在。此文档共有 {{count}} 页。",
+      "empty": "请至少输入一页。",
+      "chunkSize": "请输入不小于 1 的整数。"
+    }
+  },
+  "editor": {
+    "tools": {
+      "select": "选择",
+      "text": "文字",
+      "image": "图片",
+      "rect": "矩形",
+      "ellipse": "椭圆",
+      "line": "直线",
+      "arrow": "箭头",
+      "pen": "画笔",
+      "highlight": "高亮",
+      "note": "便笺"
+    },
+    "props": {
+      "opacity": "不透明度",
+      "bold": "粗体",
+      "stroke": "轮廓",
+      "strokeWidth": "线宽",
+      "fill": "填充",
+      "align": {
+        "left": "左对齐",
+        "center": "居中对齐",
+        "right": "右对齐"
+      }
+    },
+    "undo": "撤销",
+    "redo": "重做",
+    "zoomIn": "放大",
+    "zoomOut": "缩小",
+    "fitPage": "适应页面",
+    "pages": "页面",
+    "nothingSelected": "选择一个对象以修改它，或选择一个工具来添加新内容。",
+    "newObjectStyle": "新建{{tool}}",
+    "hint": "双击文字即可编辑。按 Delete 删除所选对象，用方向键微调位置。",
+    "imageError": "无法打开该图片。",
+    "editNote": "编辑评论",
+    "noteTitle": "便笺",
+    "noteDescription": "保存为 PDF 评论，会显示在 PDF 阅读器的评论面板中。",
+    "notePlaceholder": "写下评论…"
+  },
+  "tools": {
+    "organize": {
+      "title": "整理页面",
+      "description": "重新排序、旋转和删除页面。",
+      "hint": "拖动页面以重新排序。点击可选择多个页面。",
+      "selectHint": "点击页面即可选中",
+      "rotateLeft": "向左旋转",
+      "rotateRight": "向右旋转",
+      "was": "原为 {{n}}",
+      "keepOne": "PDF 至少需要一页。",
+      "duplicate": "复制",
+      "insertBlank": "插入空白页",
+      "insertPdf": "插入 PDF…",
+      "blankPage": "空白"
+    },
+    "toImages": {
+      "title": "PDF 转图片",
+      "description": "将 PDF 页面保存为 PNG 或 JPG 图片。",
+      "format": "图片格式",
+      "formats": {
+        "png": "PNG",
+        "pngHint": "文字和图形清晰锐利，文件较大。",
+        "jpg": "JPG",
+        "jpgHint": "文件较小，最适合照片。"
+      },
+      "resolution": "分辨率",
+      "dpi": {
+        "72": "72 dpi · 屏幕",
+        "150": "150 dpi · 标准",
+        "300": "300 dpi · 打印"
+      },
+      "quality": "JPG 质量",
+      "summary_other": "{{count}} 张图片 · 每张约 {{width}} × {{height}} 像素",
+      "memoryWarning": "图片数据量很大，浏览器可能会内存不足。请减少页数或降低分辨率。",
+      "action": "转换为图片"
+    },
+    "merge": {
+      "title": "合并 PDF",
+      "description": "将多个 PDF 合并为一个文件。",
+      "action": "合并 PDF",
+      "summary": "共 {{files}} 个文件 · {{pages}} 页",
+      "needTwo": "请至少添加两个文件再合并。"
+    },
+    "split": {
+      "title": "拆分 PDF",
+      "description": "将一个 PDF 分成多个文件。",
+      "modes": {
+        "ranges": "按页面范围",
+        "rangesHint": "精确选择每个文件包含哪些页面。",
+        "every": "每隔几页",
+        "everyHint": "每 N 页生成一个新文件。",
+        "single": "每一页",
+        "singleHint": "每页生成一个文件。"
+      },
+      "rangesLabel": "页面范围",
+      "rangesHint": "每个逗号生成一个新文件，例如 1-3, 4-6, 7",
+      "everyLabel": "每个文件的页数",
+      "fileN": "文件 {{n}}",
+      "andMore_other": "…以及另外 {{count}} 个文件",
+      "action_other": "创建 {{count}} 个文件"
+    },
+    "compress": {
+      "title": "压缩 PDF",
+      "description": "缩小 PDF，方便邮件发送和上传。",
+      "levels": {
+        "light": "轻度",
+        "lightHint": "无损清理，体积变化最小。",
+        "medium": "推荐",
+        "mediumHint": "缩小大尺寸照片，文字保持清晰且可选择。",
+        "strong": "强力",
+        "strongHint": "将页面转为图片，文件最小。",
+        "custom": "自定义",
+        "customHint": "自己选择图片尺寸和质量。"
+      },
+      "maxSize": "图片最长边",
+      "quality": "图片质量",
+      "customNote": "大于此尺寸的图片会被缩小，并以此质量重新保存。文字保持清晰且可选择。",
+      "strongWarning": "强力压缩会把每一页都变成图片。文字将无法再被选择、搜索或复制。",
+      "action": "压缩",
+      "before": "压缩前",
+      "after": "压缩后",
+      "saved": "节省",
+      "noGain": "此 PDF 已经压缩得很好了。请尝试更强的级别。"
+    },
+    "pageNumbers": {
+      "title": "页码",
+      "description": "以任何语言添加页码。",
+      "position": "位置",
+      "positions": {
+        "top-left": "左上",
+        "top-center": "上方居中",
+        "top-right": "右上",
+        "bottom-left": "左下",
+        "bottom-center": "下方居中",
+        "bottom-right": "右下"
+      },
+      "template": "格式",
+      "templateHint": "{n} 为页码，{total} 为最后一个页码。",
+      "defaultTemplate": "第 {n} 页，共 {total} 页",
+      "startAt": "起始编号",
+      "action": "添加页码"
+    },
+    "watermark": {
+      "title": "水印",
+      "description": "在页面上加盖文字或徽标。",
+      "textTab": "文字",
+      "imageTab": "图片或徽标",
+      "text": "水印文字",
+      "textHint": "按 Enter 换行。支持泰语、中文、阿拉伯语等多种语言。",
+      "defaultText": "机密",
+      "layout": "布局",
+      "center": "居中",
+      "tile": "重复平铺",
+      "angle": "角度",
+      "action": "添加水印",
+      "chooseImage": "选择图片",
+      "replaceImage": "更换图片",
+      "imageHint": "拖动图片到合适位置并调整大小。它会添加到所选每一页的同一位置。"
+    },
+    "sign": {
+      "title": "签名",
+      "description": "绘制、输入或上传您的签名。",
+      "create": "您的签名",
+      "draw": "绘制",
+      "type": "输入",
+      "upload": "上传",
+      "drawHere": "在这里绘制您的签名",
+      "clear": "清除",
+      "use": "放置到页面",
+      "typePlaceholder": "输入您的姓名",
+      "uploadHint": "背景透明的 PNG 效果最好。",
+      "chooseImage": "选择图片",
+      "saved": "已保存在此设备上 — 点击可再次放置",
+      "placeAgain": "放置到页面",
+      "saveAs": "保存为",
+      "categories": {
+        "signature": "签名",
+        "initials": "姓名缩写",
+        "stamp": "印章"
+      },
+      "rename": "重命名",
+      "unnamed": "未命名",
+      "addStamp": "添加印章图片"
+    },
+    "annotate": {
+      "title": "批注",
+      "description": "添加文字、高亮、形状、手绘和评论。",
+      "restored_other": "已恢复 {{count}} 条未保存的批注。",
+      "discard": "放弃"
+    },
+    "redact": {
+      "title": "涂黑 PDF",
+      "description": "永久删除 PDF 中的敏感文字，并用黑色条块替换。",
+      "notice": "保存后，所选的 PDF 文字将被永久删除，并添加黑色条块。其他文字仍可搜索和选择。背景图案会保留；涂黑文字上的链接会被移除。您的原始文件不会改变。",
+      "instructions": "在页面上选择文字，然后选择“涂黑所选文字”。保存前请检查每一页。已标记的文字区域：{{count}}。",
+      "previous": "上一页",
+      "next": "下一页",
+      "undo": "撤销上一次选择",
+      "clear": "全部清除",
+      "save": "保存涂黑后的 PDF",
+      "textOnly": "此文字选区跨越了图片、表单域或评论，无法按 PDF 文字进行涂黑。",
+      "markSelection": "涂黑所选文字",
+      "loadingText": "正在准备可选择的文字…",
+      "noText": "此页面没有可选择的 PDF 文字。",
+      "textError": "无法加载可选择的文字。请重新打开 PDF 后重试。",
+      "selectText": "拖动鼠标划过文字即可选择。",
+      "search": {
+        "title": "查找要涂黑的文字",
+        "placeholderText": "要在每一页中查找的文字",
+        "placeholderRegex": "要查找的模式（正则表达式）",
+        "modeText": "文字",
+        "modeRegex": "模式",
+        "find": "查找",
+        "presetsLabel": "快速查找：",
+        "presets": {
+          "email": "电子邮件",
+          "phone": "电话号码",
+          "thaiId": "泰国身份证号",
+          "card": "银行卡号"
+        },
+        "searching": "正在查找…",
+        "found_other": "{{count}} 处匹配",
+        "noMatches": "没有找到匹配的文字。",
+        "note": "涂黑之前，请检查每一页上高亮的区域。方框是根据文字布局估算的，并包含少量边距。",
+        "markAll_other": "涂黑全部 {{count}} 处匹配",
+        "clearResults": "清除结果",
+        "failed": "无法搜索此 PDF。",
+        "errors": {
+          "empty": "请输入要查找的内容。",
+          "invalid": "该模式无效。"
+        }
+      }
+    },
+    "security": {
+      "title": "解锁与保护 PDF",
+      "description": "移除 PDF 密码，或添加密码保护。",
+      "unlock": "解锁 PDF",
+      "protect": "保护 PDF",
+      "unlockHint": "输入当前密码，即可保存一份没有密码保护的副本。",
+      "protectHint": "设置打开此 PDF 时需要输入的密码。请将它保存在安全的地方。",
+      "currentPassword": "当前密码",
+      "currentHint": "如果此 PDF 无需密码即可打开，请留空。",
+      "newPassword": "新密码",
+      "confirmPassword": "确认新密码",
+      "mismatch": "两次输入的密码不一致。",
+      "unlockSuccess": "您的 PDF 已解除密码保护，可以使用了。",
+      "protectSuccess": "您的受密码保护的 PDF 已准备好。",
+      "errors": {
+        "password": "密码不正确，请重试。",
+        "invalid": "无法打开此文件。它可能已损坏，或者不是 PDF。",
+        "failed": "无法更改密码保护。如果此 PDF 有编辑限制，请尝试使用所有者密码。",
+        "emptyPassword": "请输入不超过 127 个 UTF-8 字节且不含空字符的密码。"
+      }
+    }
+  },
+  "feedback": {
+    "title": "反馈",
+    "description": "您希望我们更改或改进什么？",
+    "label": "您的反馈",
+    "send": "发送反馈",
+    "sending": "正在发送…",
+    "sent": "谢谢！您的反馈已发送。",
+    "error": "无法发送您的反馈，请重试。",
+    "limited": "提交次数过多。请等待一分钟后再试。",
+    "close": "关闭"
+  },
+  "pricing": {
+    "title": "只有一个方案。零元。",
+    "subtitle": "定价页面本来可以写成一封邮件。一封很短的邮件。",
+    "plan": "整个工具箱",
+    "badge": "唯一的方案",
+    "period": "/ 真的",
+    "finePrint": "没有订阅。不用信用卡。没有陷阱。",
+    "features": {
+      "tools": "包含所有 PDF 工具",
+      "signup": "无需创建账号",
+      "privacy": "您的文件留在您的设备上"
+    },
+    "cta": "开始处理文书吧",
+    "checkout": "跳过结账。因为根本没有结账。",
+    "note": "这是我为自己做的。欢迎使用。如果它能让您的一天稍微轻松一点，对我来说就足够了。",
+    "story": "它是怎么来的"
+  },
+  "changelog": {
+    "title": "更新日志",
+    "subtitle": "Paperwork 的最新动态，最新的在最前面。",
+    "types": {
+      "new": "新增",
+      "improved": "改进"
+    },
+    "entries": {
+      "offline": {
+        "title": "支持离线使用",
+        "items": {
+          "install": "把 Paperwork 安装到手机或电脑上，没有网络时也能继续使用这些工具。",
+          "pricing": "新增了定价页面，如果您好奇的话。内容很短。",
+          "previews": "现在分享 Paperwork 的链接时，会显示像样的预览。",
+          "prerender": "页面会立即显示，搜索引擎也能读取，甚至在应用加载完成之前就是如此。"
+        }
+      },
+      "protect": {
+        "title": "涂黑、保护和解锁",
+        "items": {
+          "redact": "涂黑 PDF 中的敏感文字，让它彻底消失，而不只是被遮住。",
+          "security": "为 PDF 添加密码，或移除您已知的密码。",
+          "feedback": "直接在应用里发送反馈，支持英语或泰语。",
+          "about": "新增“关于”页面，讲述 Paperwork 的诞生故事。",
+          "preload": "工具打开得更快了。您浏览时，Paperwork 会在后台悄悄加载它们。"
+        }
+      },
+      "launch": {
+        "title": "Paperwork 上线",
+        "items": {
+          "tools": "八个 PDF 工具：合并、拆分、压缩、整理、页码、水印、签名和批注。",
+          "thai": "向文档添加文字时对泰语提供完善的支持，并提供英语和泰语界面。",
+          "private": "一切都在您的浏览器中运行。无需注册，您的文件不会离开您的设备。"
+        }
+      }
+    }
+  }
+}

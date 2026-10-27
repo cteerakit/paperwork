@@ -1,0 +1,498 @@
+{
+  "seo": {
+    "navigation": "Navegación principal",
+    "howTo": "Cómo usar esta herramienta de PDF",
+    "limitations": "Antes de empezar",
+    "privacyTitle": "Procesamiento de PDF gratuito y privado",
+    "privacy": "Paperwork procesa los PDF en tu navegador, sin subir tus documentos. No hace falta crear una cuenta ni pagar. Descarga el resultado para conservar tus cambios y guarda una copia del original. Los documentos grandes pueden tardar más o superar la memoria disponible de tu dispositivo.",
+    "related": "Herramientas de PDF relacionadas",
+    "workspacePlaceholder": "Activa JavaScript para elegir un PDF y usar la herramienta. Tus documentos se procesan en tu dispositivo. Las instrucciones están más abajo.",
+    "notFoundTitle": "Página no encontrada",
+    "notFoundDescription": "Esta página no existe. Explora las herramientas de PDF para encontrar lo que necesitas.",
+    "tools": {
+      "toImages": {
+        "step1": "Elige el PDF que quieres convertir.",
+        "step2": "Elige PNG o JPG, una resolución y las páginas que quieres exportar.",
+        "step3": "Descarga la imagen, o un archivo ZIP si exportas varias páginas.",
+        "limitation": "Cada página se convierte en una imagen plana, así que el texto de las imágenes no se puede seleccionar. Las páginas muy grandes se reducen para ajustarse a los límites de tu navegador."
+      },
+      "merge": {
+        "step1": "Elige los archivos PDF que quieres combinar.",
+        "step2": "Arrastra los archivos al orden que quieres en el documento final.",
+        "step3": "Une los archivos y descarga el PDF combinado.",
+        "limitation": "Desbloquea los archivos protegidos con contraseña antes de unirlos. Revisa el orden de las páginas en el documento descargado."
+      },
+      "split": {
+        "step1": "Elige el PDF que quieres dividir.",
+        "step2": "Extrae rangos de páginas, divide en bloques de tamaño fijo o crea un archivo por página.",
+        "step3": "Descarga el PDF extraído o el archivo comprimido con los archivos divididos.",
+        "limitation": "Los números de página empiezan en 1. Usa rangos como 1-3, 5, 8- para seleccionar páginas; deben existir en el documento."
+      },
+      "compress": {
+        "step1": "Elige el PDF cuyo tamaño de archivo quieres reducir.",
+        "step2": "Elige compresión ligera, media o fuerte y ejecútala.",
+        "step3": "Compara el tamaño resultante y descarga el PDF más pequeño cuando esté disponible.",
+        "limitation": "Algunos PDF ya están optimizados y no se reducirán. La compresión fuerte convierte las páginas en imágenes, lo que elimina el texto seleccionable y puede reducir la calidad visual."
+      },
+      "sign": {
+        "step1": "Elige un PDF y luego dibuja, escribe o importa tu firma.",
+        "step2": "Coloca la firma en la página donde corresponde y ajusta su tamaño.",
+        "step3": "Descarga el PDF firmado y comprueba la posición de la firma.",
+        "limitation": "Esto añade una firma visible, no una firma digital basada en certificado. Comprueba los requisitos de firma del destinatario antes de usarla."
+      },
+      "annotate": {
+        "step1": "Elige un PDF y ve a la página que quieres anotar.",
+        "step2": "Añade texto, resaltados, notas o formas y ajusta su posición.",
+        "step3": "Descarga el PDF anotado para guardar lo que añadiste.",
+        "limitation": "Las anotaciones se suman al documento; no editan su texto original. Usa la herramienta de tachado para eliminar texto sensible en lugar de taparlo con una forma."
+      },
+      "organize": {
+        "step1": "Elige el PDF cuyas páginas quieres ordenar.",
+        "step2": "Reordena, gira o elimina páginas con las miniaturas.",
+        "step3": "Descarga el PDF reorganizado y revisa el orden de las páginas.",
+        "limitation": "Deja al menos una página en el documento. Quitar una página del resultado no cambia tu archivo original."
+      },
+      "security": {
+        "step1": "Elige desbloquear o proteger y selecciona tu PDF.",
+        "step2": "Introduce la contraseña actual cuando haga falta. Para proteger un archivo, introduce y confirma una contraseña nueva.",
+        "step3": "Procesa el documento y descarga el PDF desbloqueado o protegido.",
+        "limitation": "Para desbloquear hace falta la contraseña si el documento la requiere; esta herramienta no recupera contraseñas olvidadas. Guarda cualquier contraseña nueva en un lugar seguro."
+      },
+      "redact": {
+        "step1": "Elige un PDF y abre la página que contiene texto sensible.",
+        "step2": "Selecciona el texto que quieres eliminar y revisa las zonas marcadas.",
+        "step3": "Descarga el PDF tachado y compruébalo antes de compartirlo.",
+        "limitation": "Esta herramienta admite el tachado de texto y rechaza las zonas que se superponen con imágenes. No sirve para eliminar información de imágenes escaneadas. Revisa todas las páginas por si hay otro contenido sensible."
+      },
+      "watermark": {
+        "step1": "Elige un PDF e introduce el texto de tu marca de agua.",
+        "step2": "Ajusta su aspecto y elige las páginas que llevarán la marca de agua.",
+        "step3": "Aplica la marca de agua y descarga el resultado.",
+        "limitation": "Una marca de agua añade texto visible; no impide copiar ni elimina el contenido que hay debajo. Usa el tachado para el texto sensible compatible."
+      },
+      "pageNumbers": {
+        "step1": "Elige el PDF que quieres numerar.",
+        "step2": "Elige el formato del número, la posición, el número inicial y el rango de páginas.",
+        "step3": "Aplica la numeración y descarga tu PDF.",
+        "limitation": "Los números nuevos se añaden sobre el contenido de la página. No sustituyen a los números de página existentes, así que revisa su posición antes de compartir."
+      }
+    }
+  },
+  "footer": {
+    "copyright": "© {{year}} Paperwork. Hecho con 💖 y 😠 por",
+    "navigation": "Pie de página",
+    "about": "Acerca de Paperwork",
+    "pricing": "Precios",
+    "changelog": "Novedades"
+  },
+  "about": {
+    "title": "Todo empezó con un documento de identidad.",
+    "intro": "Mi novia me pidió que firmara una copia de mi documento de identidad. De alguna manera, acabé construyendo una aplicación web entera.",
+    "context": "Necesitaba la copia para hacer unos trámites por mí. Ya tenía un PDF guardado en Google Drive, así que debería haber sido fácil. En Tailandia, es común escribir en la copia del documento una nota que diga para qué se puede usar y luego firmarla. Solo necesitaba unas palabras en tailandés y una firma.",
+    "problem": "Pero las herramientas de PDF en línea que probé o manejaban mal los caracteres tailandeses, o dejaban lo que necesitaba detrás de límites y suscripciones. Estuve saltando entre sitios web y mi teléfono hasta que por fin lo conseguí. Tardé mucho más de lo que debería llevar un solo documento.",
+    "girlfriend": "Cuando le pregunté a mi novia cómo lo hacía normalmente, me dijo que era fácil. Luego lo intentó, se topó con las mismas limitaciones y tampoco pudo terminarlo. No nos quedó más remedio que reírnos.",
+    "question": "¿Por qué una tarea cotidiana tiene que significar aprender un programa nuevo o pagar una suscripción mensual?",
+    "solution": "Así que creé Paperwork: herramientas sencillas y gratuitas para las tareas de PDF de todos los días. Añadir texto, incluido el tailandés, firmar un documento, unir o dividir archivos y reordenar páginas, todo en tu navegador. Sin registrarte, y tus documentos se quedan en tu dispositivo. Lo hice primero para mí, y quise que otras personas también pudieran usarlo.",
+    "invitation": "Si alguna vez una tarea de PDF supuestamente sencilla te ha robado demasiado tiempo del día, cuéntamelo. Podría ser lo siguiente que construya.",
+    "creator": "Creador de Paperwork",
+    "originalPost": "Lee la historia original en X"
+  },
+  "app": {
+    "name": "Paperwork"
+  },
+  "header": {
+    "language": "Idioma",
+    "theme": "Tema",
+    "themes": {
+      "light": "Claro",
+      "dark": "Oscuro",
+      "system": "Sistema"
+    }
+  },
+  "home": {
+    "title": "Herramientas de PDF para el día a día, en tu navegador",
+    "subtitle": "Organiza, une, divide, comprime, firma y anota PDF. Sin registrarte."
+  },
+  "common": {
+    "privacy": "Tus archivos nunca salen de tu dispositivo",
+    "allTools": "Todas las herramientas",
+    "save": "Guardar",
+    "download": "Descargar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "remove": "Quitar",
+    "reset": "Restablecer",
+    "done": "¡Listo! Tu archivo se ha descargado.",
+    "loading": "Abriendo…",
+    "closeFile": "Cerrar archivo",
+    "pageCount_one": "{{count}} página",
+    "pageCount_other": "{{count}} páginas",
+    "pages": "Páginas",
+    "allPages": "Todas las páginas",
+    "pagesList": "Páginas {{pages}}",
+    "rangeHint": "Déjalo vacío para todas las páginas, o escribe por ejemplo 1-3, 5, 8-",
+    "selectAll": "Seleccionar todo",
+    "selectNone": "No seleccionar nada",
+    "selectPage": "Seleccionar la página {{n}}",
+    "selectedCount_one": "{{count}} página seleccionada",
+    "selectedCount_other": "{{count}} páginas seleccionadas",
+    "dragToReorder": "Arrastra para reordenar",
+    "color": "Color",
+    "fontSize": "Tamaño de fuente",
+    "previewOfPage": "Vista previa de la página {{n}}",
+    "missingChars": "Algunos caracteres no se pueden dibujar y se sustituyeron por “?”: {{chars}}",
+    "downloadingFont": "Descargando fuente…",
+    "continueIn": "Continuar en…"
+  },
+  "open": {
+    "title": "Abrir con Paperwork",
+    "subtitle": "Elige una herramienta para usar con tu PDF.",
+    "none": "No se recibió ningún PDF. Elige una herramienta en la página de inicio y luego selecciona un archivo.",
+    "multiple": "Abriste {{n}} archivos. Unir PDF usa todos; las demás herramientas usan el primero."
+  },
+  "dropzone": {
+    "title": "Elige un archivo PDF",
+    "titleMultiple": "Elige archivos PDF",
+    "orDrop": "o suéltalo aquí",
+    "addMore": "Añadir más archivos",
+    "notPdf": "Aquí solo se pueden usar archivos PDF."
+  },
+  "errors": {
+    "encrypted": "Este PDF está protegido con contraseña. Quita la contraseña e inténtalo de nuevo.",
+    "invalid": "No se pudo abrir este archivo. Puede estar dañado o no ser un PDF.",
+    "generic": "Algo salió mal. Inténtalo de nuevo.",
+    "range": {
+      "invalid": "“{{part}}” no es una página ni un rango válido.",
+      "outOfRange_one": "La página {{page}} no existe. Este documento tiene {{count}} página.",
+      "outOfRange_other": "La página {{page}} no existe. Este documento tiene {{count}} páginas.",
+      "empty": "Introduce al menos una página.",
+      "chunkSize": "Introduce un número entero de al menos 1."
+    }
+  },
+  "editor": {
+    "tools": {
+      "select": "Seleccionar",
+      "text": "Texto",
+      "image": "Imagen",
+      "rect": "Rectángulo",
+      "ellipse": "Elipse",
+      "line": "Línea",
+      "arrow": "Flecha",
+      "pen": "Lápiz",
+      "highlight": "Resaltar",
+      "note": "Nota adhesiva"
+    },
+    "props": {
+      "opacity": "Opacidad",
+      "bold": "Negrita",
+      "stroke": "Contorno",
+      "strokeWidth": "Grosor de línea",
+      "fill": "Relleno",
+      "align": {
+        "left": "Alinear a la izquierda",
+        "center": "Centrar",
+        "right": "Alinear a la derecha"
+      }
+    },
+    "undo": "Deshacer",
+    "redo": "Rehacer",
+    "zoomIn": "Acercar",
+    "zoomOut": "Alejar",
+    "fitPage": "Ajustar a la página",
+    "pages": "Páginas",
+    "nothingSelected": "Selecciona un objeto para cambiarlo, o elige una herramienta para añadir algo nuevo.",
+    "newObjectStyle": "Nuevo: {{tool}}",
+    "hint": "Haz doble clic en el texto para editarlo. Suprimir elimina el objeto seleccionado; las flechas lo mueven poco a poco.",
+    "imageError": "No se pudo abrir esa imagen.",
+    "editNote": "Editar comentario",
+    "noteTitle": "Nota adhesiva",
+    "noteDescription": "Se guarda como un comentario de PDF que aparece en el panel de comentarios de los lectores de PDF.",
+    "notePlaceholder": "Escribe un comentario…"
+  },
+  "tools": {
+    "organize": {
+      "title": "Organizar páginas",
+      "description": "Reordena, gira y elimina páginas.",
+      "hint": "Arrastra las páginas para reordenarlas. Haz clic para seleccionar varias.",
+      "selectHint": "Haz clic en las páginas para seleccionarlas",
+      "rotateLeft": "Girar a la izquierda",
+      "rotateRight": "Girar a la derecha",
+      "was": "era la {{n}}",
+      "keepOne": "Un PDF necesita al menos una página.",
+      "duplicate": "Duplicar",
+      "insertBlank": "Insertar página en blanco",
+      "insertPdf": "Insertar PDF…",
+      "blankPage": "en blanco"
+    },
+    "toImages": {
+      "title": "PDF a imágenes",
+      "description": "Guarda las páginas de un PDF como imágenes PNG o JPG.",
+      "format": "Formato de imagen",
+      "formats": {
+        "png": "PNG",
+        "pngHint": "Texto y gráficos nítidos. Archivos más grandes.",
+        "jpg": "JPG",
+        "jpgHint": "Archivos más pequeños, ideal para fotos."
+      },
+      "resolution": "Resolución",
+      "dpi": {
+        "72": "72 ppp · Pantalla",
+        "150": "150 ppp · Estándar",
+        "300": "300 ppp · Impresión"
+      },
+      "quality": "Calidad JPG",
+      "summary_one": "{{count}} imagen · unos {{width}} × {{height}} px",
+      "summary_other": "{{count}} imágenes · unos {{width}} × {{height}} px cada una",
+      "memoryWarning": "Son muchos datos de imagen y tu navegador podría quedarse sin memoria. Prueba con menos páginas o una resolución más baja.",
+      "action": "Convertir en imágenes"
+    },
+    "merge": {
+      "title": "Unir PDF",
+      "description": "Combina varios PDF en un solo archivo.",
+      "action": "Unir PDF",
+      "summary": "{{files}} archivos · {{pages}} páginas en total",
+      "needTwo": "Añade al menos dos archivos para unirlos."
+    },
+    "split": {
+      "title": "Dividir PDF",
+      "description": "Separa un PDF en varios archivos.",
+      "modes": {
+        "ranges": "Por rangos de páginas",
+        "rangesHint": "Elige exactamente qué páginas van en cada archivo.",
+        "every": "Cada pocas páginas",
+        "everyHint": "Crea un archivo nuevo cada N páginas.",
+        "single": "Cada página",
+        "singleHint": "Crea un archivo por cada página."
+      },
+      "rangesLabel": "Rangos de páginas",
+      "rangesHint": "Cada coma crea un archivo nuevo, por ejemplo 1-3, 4-6, 7",
+      "everyLabel": "Páginas por archivo",
+      "fileN": "Archivo {{n}}",
+      "andMore_one": "…y {{count}} archivo más",
+      "andMore_other": "…y {{count}} archivos más",
+      "action_one": "Crear {{count}} archivo",
+      "action_other": "Crear {{count}} archivos"
+    },
+    "compress": {
+      "title": "Comprimir PDF",
+      "description": "Haz más pequeño un PDF para enviarlo por correo o subirlo.",
+      "levels": {
+        "light": "Ligera",
+        "lightHint": "Limpieza sin pérdida. El menor cambio de tamaño.",
+        "medium": "Recomendada",
+        "mediumHint": "Reduce las fotos grandes. El texto sigue nítido y seleccionable.",
+        "strong": "Fuerte",
+        "strongHint": "Convierte las páginas en imágenes. El archivo más pequeño.",
+        "custom": "Personalizada",
+        "customHint": "Elige tú mismo el tamaño y la calidad de las imágenes."
+      },
+      "maxSize": "Lado más largo de la imagen",
+      "quality": "Calidad de imagen",
+      "customNote": "Las imágenes más grandes que esto se reducen y se vuelven a guardar con esta calidad. El texto sigue nítido y seleccionable.",
+      "strongWarning": "La compresión fuerte convierte cada página en una imagen. El texto ya no se podrá seleccionar, buscar ni copiar.",
+      "action": "Comprimir",
+      "before": "Antes",
+      "after": "Después",
+      "saved": "Ahorro",
+      "noGain": "Este PDF ya está bien comprimido. Prueba un nivel más fuerte."
+    },
+    "pageNumbers": {
+      "title": "Números de página",
+      "description": "Añade números de página en cualquier idioma.",
+      "position": "Posición",
+      "positions": {
+        "top-left": "Arriba a la izquierda",
+        "top-center": "Arriba al centro",
+        "top-right": "Arriba a la derecha",
+        "bottom-left": "Abajo a la izquierda",
+        "bottom-center": "Abajo al centro",
+        "bottom-right": "Abajo a la derecha"
+      },
+      "template": "Formato",
+      "templateHint": "{n} es el número de página y {total} el último número.",
+      "defaultTemplate": "Página {n} de {total}",
+      "startAt": "Empezar en",
+      "action": "Añadir números de página"
+    },
+    "watermark": {
+      "title": "Marca de agua",
+      "description": "Estampa texto o un logotipo sobre tus páginas.",
+      "textTab": "Texto",
+      "imageTab": "Imagen o logotipo",
+      "text": "Texto de la marca de agua",
+      "textHint": "Pulsa Intro para añadir una línea nueva. Se admiten tailandés, chino, árabe y otros idiomas.",
+      "defaultText": "CONFIDENCIAL",
+      "layout": "Disposición",
+      "center": "Centrada",
+      "tile": "Repetida",
+      "angle": "Ángulo",
+      "action": "Añadir marca de agua",
+      "chooseImage": "Elegir una imagen",
+      "replaceImage": "Reemplazar imagen",
+      "imageHint": "Arrastra la imagen a su sitio y cambia su tamaño. Se añade en el mismo lugar de cada página elegida."
+    },
+    "sign": {
+      "title": "Firmar",
+      "description": "Dibuja, escribe o sube tu firma.",
+      "create": "Tu firma",
+      "draw": "Dibujar",
+      "type": "Escribir",
+      "upload": "Subir",
+      "drawHere": "Dibuja tu firma aquí",
+      "clear": "Borrar",
+      "use": "Colocar en la página",
+      "typePlaceholder": "Escribe tu nombre",
+      "uploadHint": "Un PNG con fondo transparente funciona mejor.",
+      "chooseImage": "Elegir una imagen",
+      "saved": "Guardado en este dispositivo: haz clic para colocarlo de nuevo",
+      "placeAgain": "Colocar en la página",
+      "saveAs": "Guardar como",
+      "categories": {
+        "signature": "Firma",
+        "initials": "Iniciales",
+        "stamp": "Sello"
+      },
+      "rename": "Cambiar nombre",
+      "unnamed": "Sin título",
+      "addStamp": "Añadir una imagen de sello"
+    },
+    "annotate": {
+      "title": "Anotar",
+      "description": "Añade texto, resaltados, formas, dibujos y comentarios.",
+      "restored_one": "Se recuperó {{count}} anotación sin guardar.",
+      "restored_other": "Se recuperaron {{count}} anotaciones sin guardar.",
+      "discard": "Descartar"
+    },
+    "redact": {
+      "title": "Tachar PDF",
+      "description": "Elimina de forma permanente el texto sensible de un PDF y sustitúyelo por barras negras.",
+      "notice": "Al guardar, el texto del PDF seleccionado se elimina de forma permanente y se añaden barras negras. El resto del texto sigue siendo buscable y seleccionable. Se conservan los gráficos de fondo; se eliminan los enlaces sobre el texto tachado. Tu archivo original no cambia.",
+      "instructions": "Selecciona texto en la página y luego elige “Tachar texto seleccionado”. Revisa todas las páginas antes de guardar. Zonas de texto marcadas: {{count}}.",
+      "previous": "Página anterior",
+      "next": "Página siguiente",
+      "undo": "Deshacer la última selección",
+      "clear": "Borrar todo",
+      "save": "Guardar PDF tachado",
+      "textOnly": "Esta selección de texto cruza una imagen, un campo de formulario o un comentario que no se pueden tachar como texto de PDF.",
+      "markSelection": "Tachar texto seleccionado",
+      "loadingText": "Preparando el texto seleccionable…",
+      "noText": "Esta página no tiene texto de PDF seleccionable.",
+      "textError": "No se pudo cargar el texto seleccionable. Vuelve a abrir el PDF e inténtalo de nuevo.",
+      "selectText": "Arrastra sobre el texto para seleccionarlo.",
+      "search": {
+        "title": "Buscar texto para tachar",
+        "placeholderText": "Texto que buscar en todas las páginas",
+        "placeholderRegex": "Patrón que buscar (expresión regular)",
+        "modeText": "Texto",
+        "modeRegex": "Patrón",
+        "find": "Buscar",
+        "presetsLabel": "Búsqueda rápida:",
+        "presets": {
+          "email": "Correos electrónicos",
+          "phone": "Números de teléfono",
+          "thaiId": "Números de identidad tailandeses",
+          "card": "Números de tarjeta"
+        },
+        "searching": "Buscando…",
+        "found_one": "{{count}} coincidencia",
+        "found_other": "{{count}} coincidencias",
+        "noMatches": "No se encontró texto coincidente.",
+        "note": "Revisa las zonas resaltadas de cada página antes de tachar. Los recuadros se estiman a partir del diseño del texto e incluyen un pequeño margen.",
+        "markAll_one": "Tachar {{count}} coincidencia",
+        "markAll_other": "Tachar las {{count}} coincidencias",
+        "clearResults": "Borrar resultados",
+        "failed": "No se pudo buscar en este PDF.",
+        "errors": {
+          "empty": "Escribe algo que buscar.",
+          "invalid": "Ese patrón no es válido."
+        }
+      }
+    },
+    "security": {
+      "title": "Desbloquear y proteger PDF",
+      "description": "Quita la contraseña de un PDF o añade protección con contraseña.",
+      "unlock": "Desbloquear PDF",
+      "protect": "Proteger PDF",
+      "unlockHint": "Introduce la contraseña actual para guardar una copia sin protección con contraseña.",
+      "protectHint": "Define una contraseña que se pedirá para abrir el PDF. Guárdala en un lugar seguro.",
+      "currentPassword": "Contraseña actual",
+      "currentHint": "Déjalo vacío si el PDF se abre sin contraseña.",
+      "newPassword": "Contraseña nueva",
+      "confirmPassword": "Confirma la contraseña nueva",
+      "mismatch": "Las contraseñas no coinciden.",
+      "unlockSuccess": "Tu PDF está listo, sin protección con contraseña.",
+      "protectSuccess": "Tu PDF protegido con contraseña está listo.",
+      "errors": {
+        "password": "La contraseña es incorrecta. Inténtalo de nuevo.",
+        "invalid": "No se pudo abrir este archivo. Puede estar dañado o no ser un PDF.",
+        "failed": "No se pudo cambiar la protección con contraseña. Prueba con la contraseña de propietario si este PDF tiene restricciones de edición.",
+        "emptyPassword": "Introduce una contraseña de hasta 127 bytes UTF-8, sin caracteres nulos."
+      }
+    }
+  },
+  "feedback": {
+    "title": "Comentarios",
+    "description": "¿Qué te gustaría que cambiáramos o mejoráramos?",
+    "label": "Tus comentarios",
+    "send": "Enviar comentarios",
+    "sending": "Enviando…",
+    "sent": "¡Gracias! Tus comentarios se han enviado.",
+    "error": "No se pudieron enviar tus comentarios. Inténtalo de nuevo.",
+    "limited": "Demasiados envíos. Espera un minuto e inténtalo de nuevo.",
+    "close": "Cerrar"
+  },
+  "pricing": {
+    "title": "Un plan. Cero dólares.",
+    "subtitle": "La página de precios podría haber sido un correo. Uno muy corto.",
+    "plan": "Toda la caja de herramientas",
+    "badge": "El único plan",
+    "period": "/ en serio",
+    "finePrint": "Sin suscripción. Sin tarjeta de crédito. Sin trampa.",
+    "features": {
+      "tools": "Todas las herramientas de PDF incluidas",
+      "signup": "Sin cuenta que crear",
+      "privacy": "Tus archivos se quedan en tu dispositivo"
+    },
+    "cta": "Vamos a hacer papeleo",
+    "checkout": "Sáltate el pago. No existe.",
+    "note": "Lo hice para mí. Úsalo con confianza. Si te hace el día un poco más fácil, para mí ya es suficiente.",
+    "story": "Cómo pasó esto"
+  },
+  "changelog": {
+    "title": "Novedades",
+    "subtitle": "Lo nuevo de Paperwork, primero lo más reciente.",
+    "types": {
+      "new": "Nuevo",
+      "improved": "Mejorado"
+    },
+    "entries": {
+      "offline": {
+        "title": "Funciona sin conexión",
+        "items": {
+          "install": "Instala Paperwork en tu móvil o tu ordenador y sigue usando las herramientas sin conexión.",
+          "pricing": "Una página de precios, por si tienes curiosidad. Se lee en un momento.",
+          "previews": "Los enlaces a Paperwork ahora muestran una vista previa como es debido al compartirlos.",
+          "prerender": "Las páginas aparecen al instante y los buscadores pueden leerlas, incluso antes de que la aplicación termine de cargar."
+        }
+      },
+      "protect": {
+        "title": "Tachar, proteger y desbloquear",
+        "items": {
+          "redact": "Tacha el texto sensible de un PDF para que desaparezca para siempre, no solo que quede tapado.",
+          "security": "Añade una contraseña a un PDF, o quita una que ya conozcas.",
+          "feedback": "Envía comentarios directamente desde la aplicación, en inglés o tailandés.",
+          "about": "Una página «Acerca de» con la historia de cómo empezó Paperwork.",
+          "preload": "Las herramientas se abren más rápido. Paperwork las carga en segundo plano mientras navegas."
+        }
+      },
+      "launch": {
+        "title": "Paperwork se lanza",
+        "items": {
+          "tools": "Ocho herramientas de PDF: unir, dividir, comprimir, organizar, números de página, marca de agua, firmar y anotar.",
+          "thai": "Soporte correcto del tailandés al añadir texto a un documento, además de una interfaz en inglés y tailandés.",
+          "private": "Todo se ejecuta en tu navegador. Sin registrarte, y tus archivos nunca salen de tu dispositivo."
+        }
+      }
+    }
+  }
+}
