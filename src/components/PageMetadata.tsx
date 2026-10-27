@@ -3,6 +3,7 @@ import { useLocation } from "react-router"
 import {
   applicationJsonLd,
   NOT_FOUND_PAGE,
+  OPEN_PAGE,
   SITE_URL,
   socialPage,
   socialTags,
@@ -15,7 +16,7 @@ export function PageMetadata() {
     document.title = page.title
     const canonical = document.querySelector('link[rel="canonical"]')
     const structuredData = document.getElementById("application-jsonld")
-    if (page === NOT_FOUND_PAGE) {
+    if (page === NOT_FOUND_PAGE || page === OPEN_PAGE) {
       canonical?.remove()
       structuredData?.remove()
     } else {

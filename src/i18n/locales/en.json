@@ -144,6 +144,12 @@
     "downloadingFont": "Downloading font…",
     "continueIn": "Continue in…"
   },
+  "open": {
+    "title": "Open with Paperwork",
+    "subtitle": "Choose a tool to use with your PDF.",
+    "none": "No PDF was received. Choose a tool from the home page, then pick a file.",
+    "multiple": "You opened {{n}} files. Merge uses all of them; other tools use the first one."
+  },
   "dropzone": {
     "title": "Choose a PDF file",
     "titleMultiple": "Choose PDF files",

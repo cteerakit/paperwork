@@ -22,7 +22,7 @@ import { useTask } from "@/hooks/usePdfFile"
 import { useResult } from "@/hooks/useResult"
 import { useFormat } from "@/hooks/useFormat"
 import { outputName } from "@/lib/download"
-import { handoffToFile, takeHandoff } from "@/lib/handoff"
+import { handoffToFile, takeAllHandoff } from "@/lib/handoff"
 import { errorMessage } from "@/lib/errors"
 import { mergePdfs } from "@/lib/pdf/pages"
 import { PageRangeError, parseRanges } from "@/lib/pdf/ranges"
@@ -65,8 +65,8 @@ export default function Merge() {
 
   // Start from a file passed on from another tool ("Continue in…").
   useEffect(() => {
-    const handoff = takeHandoff()
-    if (handoff) queueMicrotask(() => void add([handoffToFile(handoff)]))
+    const handoff = takeAllHandoff()
+    if (handoff.length) queueMicrotask(() => void add(handoff.map(handoffToFile)))
     // Run once on mount.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

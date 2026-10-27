@@ -30,6 +30,15 @@ export default defineConfig({
         display: "standalone",
         theme_color: "#6366f1",
         background_color: "#f6f5ff",
+        // Installed app: opens PDFs from the OS, and takes part in the share sheet. Both land on /open.
+        file_handlers: [{ action: "/open", accept: { "application/pdf": [".pdf"] } }],
+        share_target: {
+          action: "/open",
+          method: "POST",
+          enctype: "multipart/form-data",
+          params: { files: [{ name: "pdf", accept: ["application/pdf", ".pdf"] }] },
+        },
+        launch_handler: { client_mode: "focus-existing" },
         icons: [
           { src: "/pwa-192.png", sizes: "192x192", type: "image/png" },
           { src: "/pwa-512.png", sizes: "512x512", type: "image/png" },
@@ -40,8 +49,10 @@ export default defineConfig({
         globPatterns: ["**/*.{js,css,html,wasm,woff,woff2,ttf,bcmap,pfb,icc}"],
         maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
         navigateFallbackDenylist: [/^\/api(?:\/|$)/],
-        navigateFallbackAllowlist: SOCIAL_PAGES.map(({ path }) =>
-          new RegExp(`^${path === "/" ? "/" : `${path}/?`}(?:\\?.*)?$`)
+        // Answers the share target's POST to /open (see public/share-target-sw.js).
+        importScripts: ["share-target-sw.js"],
+        navigateFallbackAllowlist: [...SOCIAL_PAGES.map(({ path }) => path), "/open"].map(
+          (path) => new RegExp(`^${path === "/" ? "/" : `${path}/?`}(?:\\?.*)?$`)
         ),
         runtimeCaching: [
           {

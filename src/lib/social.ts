@@ -97,6 +97,13 @@ export const NOT_FOUND_PAGE = {
     "This page doesn’t exist. Browse Paperwork’s free, private PDF tools to find what you need.",
 }
 
+/** Where PDFs opened with or shared to the installed app land. A real page, but not for search. */
+export const OPEN_PAGE = {
+  path: "/open",
+  title: "Open with Paperwork",
+  description: "Choose a tool for the PDF you opened with Paperwork.",
+}
+
 export const WEB_APPLICATION = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
@@ -116,7 +123,7 @@ export const applicationJsonLd = () =>
 
 export function socialPage(pathname: string) {
   return (
-    SOCIAL_PAGES.find(
+    [...SOCIAL_PAGES, OPEN_PAGE].find(
       (page) => page.path === (pathname.replace(/\/+$/, "") || "/")
     ) ?? NOT_FOUND_PAGE
   )
@@ -132,7 +139,10 @@ export function socialTags(
     { name: "description", content: page.description },
     {
       name: "robots",
-      content: page === NOT_FOUND_PAGE ? "noindex, follow" : "index, follow",
+      content:
+        page === NOT_FOUND_PAGE || page === OPEN_PAGE
+          ? "noindex, follow"
+          : "index, follow",
     },
     { property: "og:type", content: "website" },
     { property: "og:site_name", content: "Paperwork" },

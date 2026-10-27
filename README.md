@@ -30,7 +30,16 @@ The production build caches the app, all PDF tools, PDF engines, and standard
 fonts after the first online visit finishes downloading. Chinese, Japanese,
 and Korean editing fonts are cached on first use; use the desired font online
 once before relying on it offline. Feedback requires a connection. PDFs are
-processed locally and are never added to the service worker cache.
+processed locally and are never added to the service worker cache for reuse.
+
+The installed app can open PDFs from the operating system (File Handling, in
+browsers that support it) and receive PDFs shared from other apps (Web Share
+Target). Both land on `/open`, where you choose a tool. Shared files arrive as a
+POST request that `public/share-target-sw.js` (loaded into the generated service
+worker) answers: it parks the files in a cache for the instant it takes the page
+to read and delete them, and the app clears that cache again on startup. Open
+and share only work from a production build, since service workers are disabled
+during `pnpm dev`.
 
 Updates activate after all open app windows close, so editing is not interrupted.
 Service workers are disabled during `pnpm dev`; validate offline behavior with

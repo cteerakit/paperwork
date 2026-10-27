@@ -2,9 +2,11 @@ import { lazy, Suspense } from "react"
 import { Route, Routes } from "react-router"
 import { AppHeader } from "@/components/AppHeader"
 import { AppFooter } from "@/components/AppFooter"
+import { LaunchHandler } from "@/components/LaunchHandler"
 import { About } from "@/pages/About"
 import { Pricing } from "@/pages/Pricing"
 import { NotFound } from "@/pages/NotFound"
+import { Open } from "@/pages/Open"
 import { Home } from "@/tools/Home"
 import { Spinner } from "@/components/Spinner"
 import { toolLoaders } from "@/tools/loaders"
@@ -26,6 +28,7 @@ export function App() {
   return (
     <div className="flex min-h-svh flex-col">
       <PageMetadata />
+      <LaunchHandler />
       <AppHeader />
       <main className="flex-1">
         <Suspense
@@ -50,6 +53,7 @@ export function App() {
             <Route caseSensitive path="sign" element={<Sign />} />
             <Route caseSensitive path="redact" element={<Redact />} />
             <Route caseSensitive path="annotate" element={<Annotate />} />
+            <Route caseSensitive path="open" element={<Open />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

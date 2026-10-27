@@ -3,6 +3,7 @@ import { createServer, type Plugin } from "vite"
 import {
   applicationJsonLd,
   NOT_FOUND_PAGE,
+  OPEN_PAGE,
   SITE_URL,
   SOCIAL_PAGES,
   socialPage,
@@ -20,7 +21,7 @@ function metadata(path: string) {
   const page = socialPage(path)
   return [
     `<title>${escapeHtml(page.title)}</title>`,
-    ...(page === NOT_FOUND_PAGE
+    ...(page === NOT_FOUND_PAGE || page === OPEN_PAGE
       ? []
       : [
           `<link rel="canonical" href="${SITE_URL}${page.path}" />`,
@@ -70,8 +71,9 @@ export function socialMetadata(): Plugin {
           )
           if (typeof renderPage !== "function")
             this.error("Missing static page renderer.")
-          for (const page of [...SOCIAL_PAGES, NOT_FOUND_PAGE]) {
-            const content: unknown = await renderPage(page.path)
+          for (const page of [...SOCIAL_PAGES, OPEN_PAGE, NOT_FOUND_PAGE]) {
+            // The open page depends on files only the browser has, so it ships as an empty shell.
+            const content: unknown = page === OPEN_PAGE ? "" : await renderPage(page.path)
             if (typeof content !== "string")
               this.error("Static page rendering did not produce HTML.")
             const source = template
