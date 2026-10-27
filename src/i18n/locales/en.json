@@ -248,8 +248,13 @@
         "medium": "Recommended",
         "mediumHint": "Shrinks large photos. Text stays sharp and selectable.",
         "strong": "Strong",
-        "strongHint": "Turns pages into images. Smallest file."
+        "strongHint": "Turns pages into images. Smallest file.",
+        "custom": "Custom",
+        "customHint": "Choose the image size and quality yourself."
       },
+      "maxSize": "Largest image side",
+      "quality": "Image quality",
+      "customNote": "Images larger than this are scaled down and re-saved at this quality. Text stays sharp and selectable.",
       "strongWarning": "Strong compression turns every page into a picture. Text can no longer be selected, searched or copied.",
       "action": "Compress",
       "before": "Before",

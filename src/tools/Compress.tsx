@@ -1,6 +1,7 @@
 import { Minimize2, TriangleAlert } from "lucide-react"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
+import { SliderField } from "@/components/fields"
 import { FileBar } from "@/components/FileBar"
 import { FileDropzone } from "@/components/FileDropzone"
 import { ResultActions } from "@/components/ResultActions"
@@ -14,11 +15,12 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { useFormat } from "@/hooks/useFormat"
 import { usePdfFile, useTask } from "@/hooks/usePdfFile"
 import { outputName } from "@/lib/download"
-import { compressPdf, type CompressionLevel } from "@/lib/pdf/compress"
-import { recodeJpeg, renderPageToJpeg } from "@/lib/render/pdfjs"
+import type { CompressionLevel } from "@/lib/pdf/compress"
+import { compressInWorker } from "@/lib/pdf/compressClient"
+import { renderPageToJpeg } from "@/lib/render/pdfjs"
 import { cn } from "@/lib/utils"
 
-const LEVELS: CompressionLevel[] = ["light", "medium", "strong"]
+const LEVELS: CompressionLevel[] = ["light", "medium", "strong", "custom"]
 
 export default function Compress() {
   const { t } = useTranslation()
@@ -26,6 +28,9 @@ export default function Compress() {
   const { pdf, loading, open, reset } = usePdfFile()
   const { busy, run } = useTask()
   const [level, setLevel] = useState<CompressionLevel>("medium")
+  // For the custom level: longest image side in px, and JPEG quality in percent.
+  const [maxSize, setMaxSize] = useState(1600)
+  const [quality, setQuality] = useState(70)
   const [progress, setProgress] = useState<number>()
   const [result, setResult] = useState<{ bytes: Uint8Array; level: CompressionLevel }>()
 
@@ -39,11 +44,15 @@ export default function Compress() {
       setResult(undefined)
       setProgress(0)
       try {
-        const bytes = await compressPdf(pdf!.bytes, level, {
-          recodeJpeg,
-          rasterize: (i) => renderPageToJpeg(pdf!.doc, i, 110, 0.6),
-          onProgress: (done, total) => setProgress(done / total),
-        })
+        const bytes = await compressInWorker(
+          pdf!.bytes,
+          level,
+          level === "custom" ? { maxImageSize: maxSize, jpegQuality: quality / 100 } : {},
+          {
+            rasterize: (i) => renderPageToJpeg(pdf!.doc, i, 110, 0.6),
+            onProgress: (done, total) => setProgress(done / total),
+          }
+        )
         setResult({ bytes, level })
       } finally {
         setProgress(undefined)
@@ -64,7 +73,7 @@ export default function Compress() {
         )
       ) : (
         <div className="mx-auto grid max-w-2xl gap-5">
-          <FileBar pdf={pdf} onClose={close} />
+          <FileBar pdf={pdf} onClose={busy ? () => {} : close} />
 
           <RadioGroup
             value={level}
@@ -72,7 +81,7 @@ export default function Compress() {
               setLevel(v as CompressionLevel)
               setResult(undefined)
             }}
-            className="grid gap-3 sm:grid-cols-3"
+            className="grid gap-3 sm:grid-cols-2"
           >
             {LEVELS.map((l) => (
               <Label
@@ -96,6 +105,36 @@ export default function Compress() {
               <TriangleAlert />
               <AlertDescription>{t("tools.compress.strongWarning")}</AlertDescription>
             </Alert>
+          )}
+
+          {level === "custom" && (
+            <div className="grid gap-4 rounded-xl border bg-card p-4">
+              <SliderField
+                label={t("tools.compress.maxSize")}
+                value={maxSize}
+                min={400}
+                max={4000}
+                step={100}
+                onChange={(v) => {
+                  setMaxSize(v)
+                  setResult(undefined)
+                }}
+                format={(v) => `${v} px`}
+              />
+              <SliderField
+                label={t("tools.compress.quality")}
+                value={quality}
+                min={20}
+                max={95}
+                step={5}
+                onChange={(v) => {
+                  setQuality(v)
+                  setResult(undefined)
+                }}
+                format={(v) => `${v}%`}
+              />
+              <p className="text-xs text-muted-foreground">{t("tools.compress.customNote")}</p>
+            </div>
           )}
 
           {progress !== undefined && <Progress value={progress * 100} />}

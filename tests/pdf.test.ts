@@ -296,6 +296,22 @@ describe("compression", () => {
     expect((await PDFDocument.load(output)).getPageCount()).toBe(1)
   })
 
+  it("custom level follows the chosen image size and quality", async () => {
+    const input = await makeImagePdf()
+    const sizes: [number, number][] = []
+    const recoder: JpegRecoder = async (jpeg, maxSize, quality) => {
+      sizes.push([maxSize, quality])
+      return nodeRecoder(jpeg, maxSize, quality)
+    }
+    const small = await compressPdf(input, "custom", { recodeJpeg: recoder, maxImageSize: 400, jpegQuality: 0.3 })
+    const medium = await compressPdf(input, "medium", { recodeJpeg: recoder })
+    expect(sizes).toEqual([
+      [400, 0.3],
+      [1600, 0.7],
+    ])
+    expect(small.length).toBeLessThan(medium.length)
+  })
+
   it("keeps every page and its text at light level", async () => {
     const output = await compressPdf(await makePdf(3), "light")
     expect(await pdfText(output)).toEqual(["Page 1", "Page 2", "Page 3"])

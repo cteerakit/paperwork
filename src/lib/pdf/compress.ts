@@ -2,7 +2,8 @@ import { PDFArray, PDFDocument, PDFName, PDFNumber, PDFRawStream, type PDFDict }
 import { dataUrlToBytes } from "./draw"
 import { loadPdf, savePdf, type PdfBytes } from "./load"
 
-export type CompressionLevel = "light" | "medium" | "strong"
+/** "custom" is "medium" with your own image size and quality. */
+export type CompressionLevel = "light" | "medium" | "strong" | "custom"
 
 /** Re-encodes a JPEG, scaled to fit `maxSize` px. Returns null when it can't. */
 export type JpegRecoder = (
@@ -18,6 +19,10 @@ export interface CompressDeps {
   recodeJpeg?: JpegRecoder
   rasterize?: PageRasterizer
   onProgress?: (done: number, total: number) => void
+  /** Longest image side in px, for "medium" and "custom". */
+  maxImageSize?: number
+  /** JPEG quality from 0 to 1, for "medium" and "custom". */
+  jpegQuality?: number
 }
 
 export const MEDIUM_MAX_IMAGE_SIZE = 1600
@@ -36,7 +41,7 @@ export async function compressPdf(bytes: PdfBytes, level: CompressionLevel, deps
   }
 
   compressRawStreams(doc)
-  if (level === "medium" && deps.recodeJpeg) await recodeImages(doc, deps)
+  if ((level === "medium" || level === "custom") && deps.recodeJpeg) await recodeImages(doc, deps)
   return savePdf(doc)
 }
 
@@ -75,7 +80,11 @@ async function recodeImages(doc: PDFDocument, deps: CompressDeps) {
 
   let done = 0
   for (const [ref, stream] of images) {
-    const result = await deps.recodeJpeg!(stream.contents, MEDIUM_MAX_IMAGE_SIZE, MEDIUM_JPEG_QUALITY)
+    const result = await deps.recodeJpeg!(
+      stream.contents,
+      deps.maxImageSize ?? MEDIUM_MAX_IMAGE_SIZE,
+      deps.jpegQuality ?? MEDIUM_JPEG_QUALITY
+    )
     deps.onProgress?.(++done, images.length)
     // Only swap when it's a real saving; re-encoding an already-small JPEG can make it bigger.
     if (!result || result.bytes.length > stream.contents.length * 0.9) continue
