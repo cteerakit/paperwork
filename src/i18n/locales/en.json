@@ -1,0 +1,222 @@
+{
+  "app": {
+    "name": "Paperwork"
+  },
+  "header": {
+    "language": "Language",
+    "theme": "Theme",
+    "themes": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    }
+  },
+  "home": {
+    "title": "Everyday PDF tools, right in your browser",
+    "subtitle": "Organize, merge, split, compress, sign and annotate PDFs. Works with Thai and other languages, with no sign-up."
+  },
+  "common": {
+    "privacy": "Your files never leave your device",
+    "allTools": "All tools",
+    "save": "Save",
+    "download": "Download",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "remove": "Remove",
+    "reset": "Reset",
+    "done": "Done! Your file has been downloaded.",
+    "loading": "Opening…",
+    "closeFile": "Close file",
+    "pageCount_one": "{{count}} page",
+    "pageCount_other": "{{count}} pages",
+    "pages": "Pages",
+    "allPages": "All pages",
+    "pagesList": "Pages {{pages}}",
+    "rangeHint": "Leave empty for all pages, or enter e.g. 1-3, 5, 8-",
+    "selectAll": "Select all",
+    "selectNone": "Select none",
+    "selectPage": "Select page {{n}}",
+    "selectedCount_one": "{{count}} page selected",
+    "selectedCount_other": "{{count}} pages selected",
+    "dragToReorder": "Drag to reorder",
+    "color": "Color",
+    "fontSize": "Font size",
+    "previewOfPage": "Preview of page {{n}}",
+    "missingChars": "Some characters can't be drawn and were replaced with “?”: {{chars}}",
+    "downloadingFont": "Downloading font…"
+  },
+  "dropzone": {
+    "title": "Choose a PDF file",
+    "titleMultiple": "Choose PDF files",
+    "orDrop": "or drop it here",
+    "addMore": "Add more files",
+    "notPdf": "Only PDF files can be used here."
+  },
+  "errors": {
+    "encrypted": "This PDF is password-protected. Remove the password and try again.",
+    "invalid": "This file couldn't be opened. It may be damaged or not a PDF.",
+    "generic": "Something went wrong. Please try again.",
+    "range": {
+      "invalid": "“{{part}}” isn't a valid page or range.",
+      "outOfRange_one": "Page {{page}} doesn't exist. This document has {{count}} page.",
+      "outOfRange_other": "Page {{page}} doesn't exist. This document has {{count}} pages.",
+      "empty": "Enter at least one page.",
+      "chunkSize": "Enter a whole number of at least 1."
+    }
+  },
+  "editor": {
+    "tools": {
+      "select": "Select",
+      "text": "Text",
+      "image": "Image",
+      "rect": "Rectangle",
+      "ellipse": "Ellipse",
+      "line": "Line",
+      "arrow": "Arrow",
+      "pen": "Pen",
+      "highlight": "Highlight",
+      "note": "Sticky note"
+    },
+    "props": {
+      "opacity": "Opacity",
+      "bold": "Bold",
+      "stroke": "Outline",
+      "strokeWidth": "Line width",
+      "fill": "Fill",
+      "align": {
+        "left": "Align left",
+        "center": "Align center",
+        "right": "Align right"
+      }
+    },
+    "undo": "Undo",
+    "redo": "Redo",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "fitPage": "Fit page",
+    "pages": "Pages",
+    "nothingSelected": "Select an object to change it, or pick a tool to add something new.",
+    "newObjectStyle": "New {{tool}}",
+    "hint": "Double-click text to edit it. Delete removes the selected object; arrow keys nudge it.",
+    "imageError": "That image couldn't be opened.",
+    "editNote": "Edit comment",
+    "noteTitle": "Sticky note",
+    "noteDescription": "Saved as a PDF comment that appears in the comments panel of PDF viewers.",
+    "notePlaceholder": "Write a comment…"
+  },
+  "tools": {
+    "organize": {
+      "title": "Organize pages",
+      "description": "Reorder, rotate and delete pages.",
+      "hint": "Drag pages to reorder them. Click to select several pages.",
+      "selectHint": "Click pages to select them",
+      "rotateLeft": "Rotate left",
+      "rotateRight": "Rotate right",
+      "was": "was {{n}}",
+      "keepOne": "A PDF needs at least one page."
+    },
+    "merge": {
+      "title": "Merge PDFs",
+      "description": "Combine several PDFs into one file.",
+      "action": "Merge PDFs",
+      "summary": "{{files}} files · {{pages}} pages in total",
+      "needTwo": "Add at least two files to merge."
+    },
+    "split": {
+      "title": "Split PDF",
+      "description": "Divide a PDF into separate files.",
+      "modes": {
+        "ranges": "By page ranges",
+        "rangesHint": "Choose exactly which pages go into each file.",
+        "every": "Every few pages",
+        "everyHint": "Make a new file every N pages.",
+        "single": "Every page",
+        "singleHint": "Make one file for each page."
+      },
+      "rangesLabel": "Page ranges",
+      "rangesHint": "Each comma makes a new file, e.g. 1-3, 4-6, 7",
+      "everyLabel": "Pages per file",
+      "fileN": "File {{n}}",
+      "andMore_one": "…and {{count}} more file",
+      "andMore_other": "…and {{count}} more files",
+      "action_one": "Create {{count}} file",
+      "action_other": "Create {{count}} files"
+    },
+    "compress": {
+      "title": "Compress PDF",
+      "description": "Make a PDF smaller for email and upload.",
+      "levels": {
+        "light": "Light",
+        "lightHint": "Lossless clean-up. Smallest change in size.",
+        "medium": "Recommended",
+        "mediumHint": "Shrinks large photos. Text stays sharp and selectable.",
+        "strong": "Strong",
+        "strongHint": "Turns pages into images. Smallest file."
+      },
+      "strongWarning": "Strong compression turns every page into a picture. Text can no longer be selected, searched or copied.",
+      "action": "Compress",
+      "before": "Before",
+      "after": "After",
+      "saved": "Saved",
+      "noGain": "This PDF is already well compressed. Try a stronger level."
+    },
+    "pageNumbers": {
+      "title": "Page numbers",
+      "description": "Add page numbers in any language.",
+      "position": "Position",
+      "positions": {
+        "top-left": "Top left",
+        "top-center": "Top center",
+        "top-right": "Top right",
+        "bottom-left": "Bottom left",
+        "bottom-center": "Bottom center",
+        "bottom-right": "Bottom right"
+      },
+      "template": "Format",
+      "templateHint": "{n} is the page number, {total} the last number.",
+      "defaultTemplate": "Page {n} of {total}",
+      "startAt": "Start at",
+      "action": "Add page numbers"
+    },
+    "watermark": {
+      "title": "Watermark",
+      "description": "Stamp text or a logo across your pages.",
+      "textTab": "Text",
+      "imageTab": "Image or logo",
+      "text": "Watermark text",
+      "textHint": "Press Enter for a new line. Thai, Chinese, Arabic and other languages are supported.",
+      "defaultText": "CONFIDENTIAL",
+      "layout": "Layout",
+      "center": "Center",
+      "tile": "Repeat",
+      "angle": "Angle",
+      "action": "Add watermark",
+      "chooseImage": "Choose an image",
+      "replaceImage": "Replace image",
+      "imageHint": "Drag the image into place and resize it. It's added at the same spot on every chosen page."
+    },
+    "sign": {
+      "title": "Sign",
+      "description": "Draw, type or upload your signature.",
+      "create": "Your signature",
+      "draw": "Draw",
+      "type": "Type",
+      "upload": "Upload",
+      "drawHere": "Draw your signature here",
+      "clear": "Clear",
+      "use": "Place on page",
+      "typePlaceholder": "Type your name",
+      "uploadHint": "A PNG with a transparent background works best.",
+      "chooseImage": "Choose an image",
+      "saved": "Saved on this device — click to place again",
+      "placeAgain": "Place on page"
+    },
+    "annotate": {
+      "title": "Annotate",
+      "description": "Add text, highlights, shapes, drawings and comments.",
+      "restored_one": "Restored {{count}} unsaved annotation.",
+      "restored_other": "Restored {{count}} unsaved annotations.",
+      "discard": "Discard"
+    }
+  }
+}

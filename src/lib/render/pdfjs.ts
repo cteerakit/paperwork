@@ -1,0 +1,98 @@
+/** pdf.js setup and page rendering for thumbnails, previews and the editor. */
+import { getDocument, GlobalWorkerOptions, type PDFDocumentProxy } from "pdfjs-dist"
+import workerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url"
+import { PdfError } from "../pdf/load"
+
+GlobalWorkerOptions.workerSrc = workerUrl
+
+const assets = `${import.meta.env.BASE_URL}pdfjs/`
+
+export type PdfDoc = PDFDocumentProxy
+
+export interface PageSize {
+  /** Visual size in points, after the page's rotation. */
+  width: number
+  height: number
+}
+
+export interface LoadedPdf {
+  id: string
+  name: string
+  bytes: Uint8Array
+  doc: PdfDoc
+  pageCount: number
+  pageSizes: PageSize[]
+}
+
+/** Opens a PDF for display. Throws {@link PdfError} for password-protected or broken files. */
+export async function openPdf(file: File): Promise<LoadedPdf> {
+  const bytes = new Uint8Array(await file.arrayBuffer())
+  let doc: PdfDoc
+  try {
+    doc = await getDocument({
+      // pdf.js takes ownership of (detaches) the buffer it's given, so pass a copy.
+      data: bytes.slice(),
+      cMapUrl: `${assets}cmaps/`,
+      standardFontDataUrl: `${assets}standard_fonts/`,
+      iccUrl: `${assets}iccs/`,
+      wasmUrl: `${assets}wasm/`,
+    }).promise
+  } catch (error) {
+    if (error instanceof Error && error.name === "PasswordException") throw new PdfError("encrypted", error)
+    throw new PdfError("invalid", error)
+  }
+
+  const pageSizes: PageSize[] = []
+  for (let i = 1; i <= doc.numPages; i++) {
+    const viewport = (await doc.getPage(i)).getViewport({ scale: 1 })
+    pageSizes.push({ width: viewport.width, height: viewport.height })
+  }
+  return { id: crypto.randomUUID(), name: file.name, bytes, doc, pageCount: doc.numPages, pageSizes }
+}
+
+/** Releases a document's worker resources. */
+export function closePdf(pdf: LoadedPdf | undefined) {
+  void pdf?.doc.loadingTask.destroy()
+}
+
+/**
+ * Renders a page (0-based) onto a new canvas. `scale` is canvas pixels per
+ * point; device pixel ratio should already be included by the caller.
+ */
+export async function renderPage(doc: PdfDoc, pageIndex: number, scale: number, signal?: AbortSignal) {
+  const page = await doc.getPage(pageIndex + 1)
+  const viewport = page.getViewport({ scale })
+  const canvas = document.createElement("canvas")
+  canvas.width = Math.max(1, Math.floor(viewport.width))
+  canvas.height = Math.max(1, Math.floor(viewport.height))
+  const task = page.render({ canvas, viewport, background: "#ffffff" })
+  signal?.addEventListener("abort", () => task.cancel())
+  await task.promise
+  return canvas
+}
+
+/** Renders a page to a JPEG data URL, for strong compression. */
+export async function renderPageToJpeg(doc: PdfDoc, pageIndex: number, dpi: number, quality: number) {
+  const canvas = await renderPage(doc, pageIndex, dpi / 72)
+  const size = (await doc.getPage(pageIndex + 1)).getViewport({ scale: 1 })
+  const jpeg = canvas.toDataURL("image/jpeg", quality)
+  canvas.width = canvas.height = 0
+  return { jpeg, width: size.width, height: size.height }
+}
+
+/** Re-encodes a JPEG in the browser, scaled down to fit `maxSize` pixels. */
+export async function recodeJpeg(jpeg: Uint8Array, maxSize: number, quality: number) {
+  try {
+    const bitmap = await createImageBitmap(new Blob([jpeg as BlobPart], { type: "image/jpeg" }))
+    const scale = Math.min(1, maxSize / Math.max(bitmap.width, bitmap.height))
+    const width = Math.max(1, Math.round(bitmap.width * scale))
+    const height = Math.max(1, Math.round(bitmap.height * scale))
+    const canvas = new OffscreenCanvas(width, height)
+    canvas.getContext("2d")!.drawImage(bitmap, 0, 0, width, height)
+    bitmap.close()
+    const blob = await canvas.convertToBlob({ type: "image/jpeg", quality })
+    return { bytes: new Uint8Array(await blob.arrayBuffer()), width, height }
+  } catch {
+    return null
+  }
+}

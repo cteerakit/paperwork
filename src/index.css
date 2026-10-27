@@ -2,12 +2,195 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/inter";
+@import "@fontsource-variable/noto-sans-thai";
 
 @custom-variant dark (&:is(.dark *));
 
+/* Fonts used to draw text into PDFs, so the editor shows exactly what gets saved.
+   Later faces win for their unicode-range; CJK files only download when used. */
+@font-face {
+  font-family: "Paperwork Sans";
+  src: url("/fonts/NotoSans-Regular.ttf");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Paperwork Sans";
+  src: url("/fonts/NotoSans-Bold.ttf");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Paperwork Sans";
+  src: url("/fonts/NotoSansThai-Regular.ttf");
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0E00-0E7F;
+}
+@font-face {
+  font-family: "Paperwork Sans";
+  src: url("/fonts/NotoSansThai-Bold.ttf");
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+0E00-0E7F;
+}
+@font-face {
+  font-family: "Paperwork Sans";
+  src: url("/fonts/NotoSansLao-Regular.ttf");
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0E80-0EFF;
+}
+@font-face {
+  font-family: "Paperwork Sans";
+  src: url("/fonts/NotoSansLao-Bold.ttf");
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+0E80-0EFF;
+}
+@font-face {
+  font-family: "Paperwork Sans";
+  src: url("/fonts/NotoSansKhmer-Regular.ttf");
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+1780-17FF, U+19E0-19FF;
+}
+@font-face {
+  font-family: "Paperwork Sans";
+  src: url("/fonts/NotoSansKhmer-Bold.ttf");
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+1780-17FF, U+19E0-19FF;
+}
+@font-face {
+  font-family: "Paperwork Sans";
+  src: url("/fonts/NotoSansArabic-Regular.ttf");
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+@font-face {
+  font-family: "Paperwork Sans";
+  src: url("/fonts/NotoSansArabic-Bold.ttf");
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+@font-face {
+  font-family: "Paperwork Sans";
+  src: url("/fonts/NotoSansHebrew-Regular.ttf");
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0590-05FF, U+FB1D-FB4F;
+}
+@font-face {
+  font-family: "Paperwork Sans";
+  src: url("/fonts/NotoSansHebrew-Bold.ttf");
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+0590-05FF, U+FB1D-FB4F;
+}
+@font-face {
+  font-family: "Paperwork Sans";
+  src: url("/fonts/NotoSansDevanagari-Regular.ttf");
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0900-097F, U+A8E0-A8FF;
+}
+@font-face {
+  font-family: "Paperwork Sans";
+  src: url("/fonts/NotoSansDevanagari-Bold.ttf");
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+0900-097F, U+A8E0-A8FF;
+}
+@font-face {
+  font-family: "Paperwork Sans";
+  src: url("/fonts/NotoSansBengali-Regular.ttf");
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0980-09FF;
+}
+@font-face {
+  font-family: "Paperwork Sans";
+  src: url("/fonts/NotoSansBengali-Bold.ttf");
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+0980-09FF;
+}
+@font-face {
+  font-family: "Paperwork Sans";
+  src: url("/fonts/NotoSansTamil-Regular.ttf");
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0B80-0BFF;
+}
+@font-face {
+  font-family: "Paperwork Sans";
+  src: url("/fonts/NotoSansTamil-Bold.ttf");
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+0B80-0BFF;
+}
+@font-face {
+  font-family: "Paperwork Sans";
+  src: url("/fonts/NotoSansSC-Regular.otf");
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+2E80-2FDF, U+3000-303F, U+3400-4DBF, U+4E00-9FFF, U+F900-FAFF, U+FF00-FFEF;
+}
+@font-face {
+  font-family: "Paperwork Sans";
+  src: url("/fonts/NotoSansSC-Bold.otf");
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+2E80-2FDF, U+3000-303F, U+3400-4DBF, U+4E00-9FFF, U+F900-FAFF, U+FF00-FFEF;
+}
+@font-face {
+  font-family: "Paperwork Sans";
+  src: url("/fonts/NotoSansJP-Regular.otf");
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+3040-30FF, U+31F0-31FF;
+}
+@font-face {
+  font-family: "Paperwork Sans";
+  src: url("/fonts/NotoSansJP-Bold.otf");
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+3040-30FF, U+31F0-31FF;
+}
+@font-face {
+  font-family: "Paperwork Sans";
+  src: url("/fonts/NotoSansKR-Regular.otf");
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+1100-11FF, U+3130-318F, U+AC00-D7AF;
+}
+@font-face {
+  font-family: "Paperwork Sans";
+  src: url("/fonts/NotoSansKR-Bold.otf");
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+1100-11FF, U+3130-318F, U+AC00-D7AF;
+}
+@font-face {
+  font-family: "Paperwork Signature";
+  src: url("/fonts/Charm-Regular.ttf");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Paperwork Signature";
+  src: url("/fonts/Charm-Bold.ttf");
+  font-weight: 700;
+  font-display: swap;
+}
+
+
 @theme inline {
     --font-heading: var(--font-sans);
-    --font-sans: 'Inter Variable', sans-serif;
+    --font-sans: 'Inter Variable', 'Noto Sans Thai Variable', sans-serif;
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -130,4 +313,37 @@
   html {
     @apply font-sans;
     }
+  /* Thai stacks marks above and below letters, so it needs more room between lines. */
+  :lang(th) body {
+    line-height: 1.65;
+    }
+}
+@theme inline {
+    --font-pdf: "Paperwork Sans", sans-serif;
+    --font-signature: "Paperwork Signature", "Paperwork Sans", cursive;
+}
+
+/* Keep controls comfortable on phones and devices operated by touch. */
+@media (max-width: 639px), (pointer: coarse) {
+  [data-slot="button"],
+  [data-slot="input"],
+  [data-slot="select-trigger"],
+  [data-slot="tabs-trigger"],
+  [data-slot="toggle"] {
+    min-height: 44px;
+  }
+
+  [data-slot="tabs-list"] {
+    min-height: 50px;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  [data-slot="button"][data-size^="icon"] {
+    min-width: 44px;
+  }
+
+  input, textarea, select, [data-slot="select-trigger"] {
+    font-size: 16px;
+  }
 }

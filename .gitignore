@@ -22,3 +22,20 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Generated output
+tmp
+
+# Large CJK fonts are downloaded by `pnpm fonts` (scripts/fetch-fonts.mjs)
+public/fonts/NotoSansSC-*
+public/fonts/NotoSansTC-*
+public/fonts/NotoSansJP-*
+public/fonts/NotoSansKR-*
+public/pdfjs
+
+# Cloudflare build output and local credentials
+.cloudflare
+.wrangler
+.env
+.env.*
+.dev.vars*
