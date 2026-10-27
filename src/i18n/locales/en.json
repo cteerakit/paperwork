@@ -311,7 +311,16 @@
       "uploadHint": "A PNG with a transparent background works best.",
       "chooseImage": "Choose an image",
       "saved": "Saved on this device — click to place again",
-      "placeAgain": "Place on page"
+      "placeAgain": "Place on page",
+      "saveAs": "Save as",
+      "categories": {
+        "signature": "Signature",
+        "initials": "Initials",
+        "stamp": "Stamp"
+      },
+      "rename": "Rename",
+      "unnamed": "Untitled",
+      "addStamp": "Add a stamp image"
     },
     "annotate": {
       "title": "Annotate",

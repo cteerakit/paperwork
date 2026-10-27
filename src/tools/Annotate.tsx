@@ -2,7 +2,9 @@ import { Download } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
+import { SignatureLibrary } from "@/components/editor/SignatureLibrary"
 import { useAnnotations } from "@/components/editor/useAnnotations"
+import { useSignatureLibrary } from "@/components/editor/useSignatureLibrary"
 import { Workspace } from "@/components/editor/Workspace"
 import type { ToolId } from "@/components/editor/types"
 import { FileBar } from "@/components/FileBar"
@@ -45,6 +47,7 @@ function Editor({ pdf, onClose }: { pdf: LoadedPdf; onClose: () => void }) {
   const api = useAnnotations()
   const { busy, run, reportMissing } = useTask()
   const { result: output, deliver } = useResult()
+  const library = useSignatureLibrary()
   const [key, setKey] = useState<string>()
   const restored = useRef(false)
 
@@ -103,6 +106,11 @@ function Editor({ pdf, onClose }: { pdf: LoadedPdf; onClose: () => void }) {
         api={api}
         tools={TOOLS}
         lang={i18n.resolvedLanguage}
+        sidebar={(ws) => (
+          <div className="border-b pb-4 empty:hidden">
+            <SignatureLibrary workspace={ws} library={library} canAddStamp />
+          </div>
+        )}
         actions={
           <Button size="sm" onClick={save} disabled={busy || api.objects.length === 0}>
             {busy ? <Spinner className="size-4 text-current" /> : <Download />}
