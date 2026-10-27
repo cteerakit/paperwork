@@ -466,6 +466,21 @@
       "improved": "Mejorado"
     },
     "entries": {
+      "workflows": {
+        "title": "Más formas de trabajar con PDF",
+        "items": {
+          "languages": "Usa Paperwork en japonés, chino simplificado, vietnamita y español, además de inglés y tailandés.",
+          "images": "Exporta páginas PDF como imágenes PNG o JPG y elige la resolución y el intervalo de páginas.",
+          "files": "Abre PDF desde tu dispositivo o compártelos con la aplicación instalada en navegadores compatibles y elige una herramienta.",
+          "continue": "Envía el PDF terminado directamente a otra herramienta.",
+          "signatures": "Las firmas, iniciales y sellos guardados permanecen en tu dispositivo y están disponibles en Firmar y Anotar.",
+          "redact": "Busca y censura todas las coincidencias de texto, patrones o formatos de números habituales.",
+          "compress": "La compresión se ejecuta en segundo plano, con ajustes personalizados de tamaño de imagen y calidad JPEG.",
+          "organize": "Inserta páginas en blanco u otro PDF y duplica páginas en Organizar.",
+          "merge": "Los PDF combinados conservan sus marcadores y metadatos.",
+          "changelog": "Consulta las nuevas funciones y mejoras en la página pública de novedades."
+        }
+      },
       "offline": {
         "title": "Funciona sin conexión",
         "items": {

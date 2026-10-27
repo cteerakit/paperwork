@@ -12,6 +12,22 @@ export interface ChangelogEntry {
 /** Newest first. Add new releases at the top, with copy in every locale. */
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: "workflows",
+    date: "2026-10-28",
+    items: [
+      { key: "languages", type: "new" },
+      { key: "images", type: "new" },
+      { key: "files", type: "new" },
+      { key: "continue", type: "new" },
+      { key: "signatures", type: "improved" },
+      { key: "redact", type: "improved" },
+      { key: "compress", type: "improved" },
+      { key: "organize", type: "improved" },
+      { key: "merge", type: "improved" },
+      { key: "changelog", type: "new" },
+    ],
+  },
+  {
     id: "offline",
     date: "2026-10-28",
     items: [

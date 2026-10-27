@@ -466,6 +466,21 @@
       "improved": "Improved"
     },
     "entries": {
+      "workflows": {
+        "title": "More ways to work with PDFs",
+        "items": {
+          "languages": "Use Paperwork in Japanese, Simplified Chinese, Vietnamese and Spanish, alongside English and Thai.",
+          "images": "Export PDF pages as PNG or JPG images, with a choice of resolution and page range.",
+          "files": "Open PDFs from your device or share them to the installed app in supported browsers, then choose a tool.",
+          "continue": "Send a finished PDF straight to another tool with Continue in….",
+          "signatures": "Saved signatures, initials and stamps stay on your device and are available in both Sign and Annotate.",
+          "redact": "Find and redact every match of text, a pattern or a common number format.",
+          "compress": "Compression runs in the background, with custom image size and JPEG quality settings.",
+          "organize": "Insert blank pages or another PDF, and duplicate pages in Organize.",
+          "merge": "Merged PDFs keep their bookmarks and metadata.",
+          "changelog": "Follow new features and improvements on the public changelog page."
+        }
+      },
       "offline": {
         "title": "Works offline",
         "items": {

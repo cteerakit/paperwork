@@ -457,6 +457,21 @@
       "improved": "Cải thiện"
     },
     "entries": {
+      "workflows": {
+        "title": "Thêm cách làm việc với PDF",
+        "items": {
+          "languages": "Paperwork hỗ trợ tiếng Nhật, tiếng Trung giản thể, tiếng Việt và tiếng Tây Ban Nha, bên cạnh tiếng Anh và tiếng Thái.",
+          "images": "Xuất trang PDF thành ảnh PNG hoặc JPG, với tùy chọn độ phân giải và phạm vi trang.",
+          "files": "Mở PDF từ thiết bị hoặc chia sẻ vào ứng dụng đã cài trên trình duyệt hỗ trợ, rồi chọn công cụ.",
+          "continue": "Chuyển PDF đã xử lý thẳng sang công cụ tiếp theo.",
+          "signatures": "Chữ ký, chữ viết tắt và con dấu đã lưu được giữ trên thiết bị và dùng được trong cả công cụ ký và chú thích.",
+          "redact": "Tìm và bôi xóa mọi kết quả khớp với văn bản, mẫu hoặc định dạng số thông dụng.",
+          "compress": "Nén chạy trong nền, cho phép tùy chỉnh kích thước ảnh và chất lượng JPEG.",
+          "organize": "Chèn trang trắng hoặc PDF khác và nhân bản trang trong công cụ sắp xếp.",
+          "merge": "PDF sau khi gộp giữ lại dấu trang và siêu dữ liệu.",
+          "changelog": "Theo dõi tính năng mới và cải tiến trên trang nhật ký thay đổi công khai."
+        }
+      },
       "offline": {
         "title": "Dùng được khi không có mạng",
         "items": {
