@@ -3,9 +3,11 @@ import { Route, Routes } from "react-router"
 import { AppHeader } from "@/components/AppHeader"
 import { AppFooter } from "@/components/AppFooter"
 import { About } from "@/pages/About"
+import { Pricing } from "@/pages/Pricing"
 import { Home } from "@/tools/Home"
 import { Spinner } from "@/components/Spinner"
 import { toolLoaders } from "@/tools/loaders"
+import { PageMetadata } from "@/components/PageMetadata"
 
 const Security = lazy(toolLoaders.security)
 const Organize = lazy(toolLoaders.organize)
@@ -21,6 +23,7 @@ const Annotate = lazy(toolLoaders.annotate)
 export function App() {
   return (
     <div className="flex min-h-svh flex-col">
+      <PageMetadata />
       <AppHeader />
       <main className="flex-1">
         <Suspense
@@ -33,6 +36,7 @@ export function App() {
           <Routes>
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
+            <Route path="pricing" element={<Pricing />} />
             <Route path="unlock-protect" element={<Security />} />
             <Route path="organize" element={<Organize />} />
             <Route path="merge" element={<Merge />} />

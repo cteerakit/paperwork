@@ -28,6 +28,9 @@ export function AppFooter() {
           <Link to="/about" className={linkClassName}>
             {t("footer.about")}
           </Link>
+          <Link to="/pricing" className={linkClassName}>
+            {t("footer.pricing")}
+          </Link>
           <a
             href="https://www.facebook.com/cteerakit"
             aria-label="Facebook"

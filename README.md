@@ -34,6 +34,23 @@ pnpm deploy
 
 Production URL: https://paperwork.c-teerakit.workers.dev
 
+## Social sharing and search metadata
+
+`src/lib/social.ts` defines the production URL, page titles, descriptions, and
+social tags. The Vite plugin in `scripts/social-metadata.ts` writes metadata
+directly into HTML for the home page, About page, and each PDF tool, so link
+crawlers do not need JavaScript. It also generates `sitemap.xml` and `robots.txt`.
+Client navigation updates the same metadata through `PageMetadata`.
+
+The shared 1200 × 630 preview image is `public/og.png`. To regenerate it after
+changing the artwork in `scripts/generate-social-image.mjs`, run:
+
+```sh
+node scripts/generate-social-image.mjs
+```
+
+If the production domain changes, update `SITE_URL` before building.
+
 ## Feedback
 
 The header's Feedback dialog sends messages through `POST /api/feedback` to

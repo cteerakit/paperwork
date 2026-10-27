@@ -3,10 +3,11 @@ import tailwindcss from "@tailwindcss/vite"
 import react from "@vitejs/plugin-react"
 import { defineConfig } from "vitest/config"
 import { cloudflare } from "@cloudflare/vite-plugin"
+import { socialMetadata } from "./scripts/social-metadata.ts"
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss(), cloudflare()],
+  plugins: [react(), tailwindcss(), cloudflare(), socialMetadata()],
   resolve: {
     alias: {
       "@": resolve(import.meta.dirname, "./src"),

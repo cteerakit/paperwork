@@ -22,6 +22,9 @@ export function AppHeader() {
           {t("app.name")}
         </Link>
         <div className="ml-auto flex items-center gap-1">
+          <Link to="/pricing" className="rounded-sm px-2 py-1 text-sm text-muted-foreground hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring">
+            {t("footer.pricing")}
+          </Link>
           <FeedbackDialog />
           <LanguageSwitcher />
           <ThemeToggle />
