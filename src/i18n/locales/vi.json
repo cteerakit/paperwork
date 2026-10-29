@@ -16,6 +16,12 @@
         "step3": "Tải ảnh về, hoặc tệp ZIP nếu bạn xuất nhiều trang.",
         "limitation": "Mỗi trang trở thành một bức ảnh phẳng nên không thể chọn văn bản trong ảnh. Những trang rất lớn sẽ được thu nhỏ để vừa với giới hạn của trình duyệt."
       },
+      "fromImages": {
+        "step1": "Chọn những hình ảnh muốn đưa vào PDF, chẳng hạn ảnh chụp hoặc bản quét.",
+        "step2": "Kéo để sắp xếp thứ tự, rồi chọn khổ trang và lề.",
+        "step3": "Tạo PDF và tải xuống, hoặc tiếp tục trong công cụ khác.",
+        "limitation": "Mỗi hình ảnh trở thành một trang, và không thể chọn hay tìm kiếm chữ trong ảnh. Các định dạng trình duyệt không mở được, như HEIC ngoài Safari, cần được chuyển đổi trước."
+      },
       "merge": {
         "step1": "Chọn các tệp PDF bạn muốn ghép lại.",
         "step2": "Kéo các tệp theo thứ tự bạn muốn trong tài liệu cuối cùng.",
@@ -53,9 +59,9 @@
         "limitation": "Hãy giữ lại ít nhất một trang trong tài liệu. Việc bỏ một trang khỏi kết quả không thay đổi tệp gốc của bạn."
       },
       "security": {
-        "step1": "Chọn mở khóa hoặc bảo vệ, rồi chọn tệp PDF của bạn.",
+        "step1": "Chọn mở khóa, bảo vệ hoặc xóa thông tin ẩn, rồi chọn tệp PDF của bạn.",
         "step2": "Nhập mật khẩu hiện tại khi cần. Để bảo vệ tệp, hãy nhập và xác nhận mật khẩu mới.",
-        "step3": "Xử lý tài liệu và tải về tệp PDF đã mở khóa hoặc đã được bảo vệ.",
+        "step3": "Xử lý tài liệu và tải về tệp PDF kết quả.",
         "limitation": "Việc mở khóa cần mật khẩu nếu tài liệu yêu cầu; công cụ này không khôi phục được mật khẩu đã quên. Hãy cất mật khẩu mới ở nơi an toàn."
       },
       "redact": {
@@ -83,7 +89,8 @@
     "navigation": "Chân trang",
     "about": "Về Paperwork",
     "pricing": "Giá",
-    "changelog": "Nhật ký thay đổi"
+    "changelog": "Nhật ký thay đổi",
+    "privacy": "Quyền riêng tư"
   },
   "about": {
     "title": "Mọi chuyện bắt đầu từ một tấm căn cước.",
@@ -151,9 +158,11 @@
   "dropzone": {
     "title": "Chọn tệp PDF",
     "titleMultiple": "Chọn các tệp PDF",
+    "titleImages": "Chọn hình ảnh",
     "orDrop": "hoặc thả tệp vào đây",
     "addMore": "Thêm tệp",
-    "notPdf": "Chỉ có thể dùng tệp PDF ở đây."
+    "notPdf": "Chỉ có thể dùng tệp PDF ở đây.",
+    "notImage": "Chỉ có thể dùng tệp hình ảnh ở đây."
   },
   "errors": {
     "encrypted": "Tệp PDF này được bảo vệ bằng mật khẩu. Hãy gỡ mật khẩu rồi thử lại.",
@@ -241,6 +250,27 @@
       "summary_other": "{{count}} ảnh · mỗi ảnh khoảng {{width}} × {{height}} px",
       "memoryWarning": "Lượng dữ liệu ảnh này rất lớn và trình duyệt có thể hết bộ nhớ. Hãy thử ít trang hơn hoặc độ phân giải thấp hơn.",
       "action": "Chuyển thành ảnh"
+    },
+    "fromImages": {
+      "title": "Hình ảnh sang PDF",
+      "description": "Gộp ảnh chụp và bản quét thành một tệp PDF.",
+      "pageSize": "Khổ trang",
+      "pageSizes": {
+        "a4": "A4",
+        "a4Hint": "Mỗi hình ảnh được thu vừa trang A4, xoay theo hướng của ảnh.",
+        "letter": "Letter",
+        "letterHint": "Mỗi hình ảnh được thu vừa trang Letter, xoay theo hướng của ảnh.",
+        "fit": "Bằng hình ảnh",
+        "fitHint": "Mỗi trang có kích thước bằng hình ảnh của nó."
+      },
+      "margin": "Lề",
+      "margins": {
+        "none": "Không",
+        "small": "Nhỏ",
+        "large": "Lớn"
+      },
+      "unreadable": "Trình duyệt của bạn không mở được hình ảnh này.",
+      "action": "Tạo PDF"
     },
     "merge": {
       "title": "Ghép PDF",
@@ -360,6 +390,8 @@
       "title": "Che thông tin PDF",
       "description": "Xóa vĩnh viễn văn bản nhạy cảm trong PDF và thay bằng các thanh đen.",
       "notice": "Khi lưu, văn bản PDF đã chọn sẽ bị xóa vĩnh viễn và thay bằng thanh đen. Phần văn bản còn lại vẫn tìm kiếm và chọn được. Hình nền được giữ nguyên; các liên kết nằm trên văn bản bị che sẽ bị gỡ. Tệp gốc của bạn không thay đổi.",
+      "removeHiddenInfo": "Xóa thông tin ẩn",
+      "removeHiddenInfoHint": "Đồng thời xóa thuộc tính tài liệu, siêu dữ liệu XMP, dấu trang, thẻ, tập lệnh và tệp đính kèm, vì chúng có thể lặp lại văn bản bạn che.",
       "instructions": "Chọn văn bản trên trang, rồi chọn “Che văn bản đã chọn”. Hãy xem lại mọi trang trước khi lưu. Số vùng văn bản đã đánh dấu: {{count}}.",
       "previous": "Trang trước",
       "next": "Trang sau",
@@ -401,18 +433,22 @@
     },
     "security": {
       "title": "Mở khóa và bảo vệ PDF",
-      "description": "Gỡ mật khẩu PDF hoặc thêm bảo vệ bằng mật khẩu.",
+      "description": "Gỡ mật khẩu PDF, thêm bảo vệ bằng mật khẩu hoặc xóa thông tin ẩn.",
       "unlock": "Mở khóa PDF",
       "protect": "Bảo vệ PDF",
+      "clean": "Xóa thông tin ẩn",
       "unlockHint": "Nhập mật khẩu hiện tại để lưu một bản sao không có mật khẩu.",
       "protectHint": "Đặt mật khẩu sẽ được yêu cầu khi mở PDF. Hãy cất nó ở nơi an toàn.",
+      "cleanHint": "Lưu bản sao không có thuộc tính tài liệu, siêu dữ liệu XMP, dấu trang, thẻ, tập lệnh hoặc tệp đính kèm. Nội dung trang, liên kết và trường biểu mẫu được giữ lại. Nếu PDF có mật khẩu, hãy nhập mật khẩu; bản sao sẽ không được bảo vệ bằng mật khẩu.",
       "currentPassword": "Mật khẩu hiện tại",
       "currentHint": "Để trống nếu PDF mở được mà không cần mật khẩu.",
       "newPassword": "Mật khẩu mới",
       "confirmPassword": "Xác nhận mật khẩu mới",
       "mismatch": "Mật khẩu không khớp.",
+      "weakPassword": "Mật khẩu ngắn rất dễ đoán. Hãy dùng ít nhất {{count}} ký tự.",
       "unlockSuccess": "PDF của bạn đã sẵn sàng, không còn mật khẩu.",
       "protectSuccess": "PDF được bảo vệ bằng mật khẩu của bạn đã sẵn sàng.",
+      "cleanSuccess": "Tệp PDF không còn thông tin ẩn của bạn đã sẵn sàng.",
       "errors": {
         "password": "Mật khẩu không đúng. Vui lòng thử lại.",
         "invalid": "Không thể mở tệp này. Tệp có thể bị hỏng hoặc không phải PDF.",
@@ -424,6 +460,7 @@
   "feedback": {
     "title": "Phản hồi",
     "description": "Bạn muốn chúng tôi thay đổi hoặc cải thiện điều gì?",
+    "privacy": "Tin nhắn của bạn được gửi đến nhà phát triển qua Discord. Vui lòng không ghi thông tin cá nhân.",
     "label": "Phản hồi của bạn",
     "send": "Gửi phản hồi",
     "sending": "Đang gửi…",
@@ -457,6 +494,22 @@
       "improved": "Cải thiện"
     },
     "entries": {
+      "privacy": {
+        "title": "Quyền riêng tư và bảo mật",
+        "items": {
+          "privacy": "Trang quyền riêng tư giải thích những gì Paperwork lưu trên thiết bị của bạn, kèm nút để xóa.",
+          "clean": "Xóa thông tin ẩn như thuộc tính, siêu dữ liệu, dấu trang và tệp đính kèm trong Mở khóa và bảo vệ.",
+          "redact": "Khi che thông tin, các thông tin ẩn có thể lặp lại văn bản đã che cũng được xóa.",
+          "autosave": "Chú thích tự động lưu sẽ bị xóa sau 7 ngày.",
+          "security": "Chính sách bảo mật chặt chẽ hơn ngăn ứng dụng gửi dữ liệu của bạn đến trang web khác."
+        }
+      },
+      "imagesToPdf": {
+        "title": "Hình ảnh sang PDF",
+        "items": {
+          "imagesToPdf": "Chuyển ảnh chụp và bản quét thành PDF, mỗi ảnh một trang, trên khổ A4, Letter hoặc trang có kích thước bằng ảnh."
+        }
+      },
       "workflows": {
         "title": "Thêm cách làm việc với PDF",
         "items": {
@@ -500,5 +553,32 @@
         }
       }
     }
+  },
+  "privacy": {
+    "title": "Tệp của bạn ở lại trên thiết bị của bạn",
+    "intro": "Paperwork không có tài khoản, công cụ phân tích hay quảng cáo. Dưới đây là cách dữ liệu của bạn được xử lý.",
+    "files": {
+      "title": "Tệp PDF và hình ảnh",
+      "body": "Mọi công cụ đều chạy trong trình duyệt của bạn. Tệp không bao giờ được tải lên, và chính sách bảo mật của trang web ngăn ứng dụng gửi dữ liệu đến bất kỳ đâu ngoài Paperwork."
+    },
+    "stored": {
+      "title": "Những gì được lưu trên thiết bị này",
+      "body": "Chữ ký, chữ viết tắt và con dấu bạn chọn lưu, chú thích đang làm dở (xóa sau 7 ngày), cùng giao diện và ngôn ngữ. Chúng chỉ được lưu trong trình duyệt này."
+    },
+    "feedback": {
+      "title": "Góp ý",
+      "body": "Nếu bạn gửi góp ý, tin nhắn sẽ được chuyển đến nhà phát triển qua Discord. Đừng ghi thông tin cá nhân. Địa chỉ IP của bạn được dùng tạm thời để giới hạn số tin nhắn có thể gửi."
+    },
+    "hosting": {
+      "title": "Lưu trữ",
+      "body": "Paperwork được lưu trữ trên Cloudflare, nơi xử lý thông tin yêu cầu thông thường như địa chỉ IP để phân phối trang web và chống lạm dụng."
+    },
+    "clear": {
+      "title": "Xóa dữ liệu cục bộ",
+      "body": "Xóa chữ ký đã lưu, chú thích tự động lưu và cài đặt khỏi trình duyệt này. Không thể hoàn tác.",
+      "action": "Xóa dữ liệu cục bộ",
+      "done": "Đã xóa dữ liệu cục bộ."
+    },
+    "clearConfirm": "Xóa mọi thứ Paperwork đã lưu trong trình duyệt này?"
   }
 }

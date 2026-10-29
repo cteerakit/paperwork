@@ -6,7 +6,8 @@ import { RedactionError } from "./redactionError"
 export async function exportRedactedPdf(
   bytes: Uint8Array,
   areas: Redaction[],
-  onProgress: (done: number) => void
+  onProgress: (done: number) => void,
+  removeHiddenInfo = true
 ) {
   const worker = new Worker(new URL("./redact.worker.ts", import.meta.url), {
     type: "module",
@@ -32,7 +33,11 @@ export async function exportRedactedPdf(
         reject(new Error("Could not run PDF redaction engine."))
       worker.onmessageerror = () =>
         reject(new Error("Could not read redacted PDF."))
-      worker.postMessage({ bytes, areas } satisfies RedactRequest)
+      worker.postMessage({
+        bytes,
+        areas,
+        removeHiddenInfo,
+      } satisfies RedactRequest)
     })
   } finally {
     worker.terminate()

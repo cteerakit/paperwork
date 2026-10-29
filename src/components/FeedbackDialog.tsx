@@ -64,6 +64,11 @@ export function FeedbackDialog() {
             <DialogTitle>{t("feedback.title")}</DialogTitle>
             <DialogDescription>{t("feedback.description")}</DialogDescription>
           </DialogHeader>
+          {status !== "sent" && (
+            <p className="text-xs text-muted-foreground">
+              {t("feedback.privacy")}
+            </p>
+          )}
           {status === "sent" ? (
             <p role="status">{t("feedback.sent")}</p>
           ) : (

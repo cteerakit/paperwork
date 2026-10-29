@@ -15,6 +15,7 @@ import { About } from "@/pages/About"
 import { Changelog } from "@/pages/Changelog"
 import { NotFound } from "@/pages/NotFound"
 import { Pricing } from "@/pages/Pricing"
+import { Privacy } from "@/pages/Privacy"
 import { Home } from "@/tools/Home"
 import { TOOLS } from "@/tools/registry"
 
@@ -43,6 +44,8 @@ export async function renderPage(path: string, language: LanguageCode = "en") {
       <Pricing />
     ) : path === "/changelog" ? (
       <Changelog />
+    ) : path === "/privacy" ? (
+      <Privacy />
     ) : tool ? (
       <ToolLayout tool={tool.id}>
         <p className="rounded-xl border bg-card p-8 text-center text-muted-foreground">

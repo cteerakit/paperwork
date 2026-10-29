@@ -5,6 +5,7 @@ import { AppFooter } from "@/components/AppFooter"
 import { LaunchHandler } from "@/components/LaunchHandler"
 import { About } from "@/pages/About"
 import { Pricing } from "@/pages/Pricing"
+import { Privacy } from "@/pages/Privacy"
 import { Changelog } from "@/pages/Changelog"
 import { NotFound } from "@/pages/NotFound"
 import { Open } from "@/pages/Open"
@@ -19,6 +20,7 @@ const Merge = lazy(toolLoaders.merge)
 const Split = lazy(toolLoaders.split)
 const Compress = lazy(toolLoaders.compress)
 const ToImages = lazy(toolLoaders.toImages)
+const FromImages = lazy(toolLoaders.fromImages)
 const PageNumbers = lazy(toolLoaders.pageNumbers)
 const Watermark = lazy(toolLoaders.watermark)
 const Sign = lazy(toolLoaders.sign)
@@ -44,12 +46,14 @@ export function App() {
             <Route caseSensitive path="about" element={<About />} />
             <Route caseSensitive path="pricing" element={<Pricing />} />
             <Route caseSensitive path="changelog" element={<Changelog />} />
+            <Route caseSensitive path="privacy" element={<Privacy />} />
             <Route caseSensitive path="unlock-protect" element={<Security />} />
             <Route caseSensitive path="organize" element={<Organize />} />
             <Route caseSensitive path="merge" element={<Merge />} />
             <Route caseSensitive path="split" element={<Split />} />
             <Route caseSensitive path="compress" element={<Compress />} />
             <Route caseSensitive path="pdf-to-images" element={<ToImages />} />
+            <Route caseSensitive path="images-to-pdf" element={<FromImages />} />
             <Route caseSensitive path="page-numbers" element={<PageNumbers />} />
             <Route caseSensitive path="watermark" element={<Watermark />} />
             <Route caseSensitive path="sign" element={<Sign />} />

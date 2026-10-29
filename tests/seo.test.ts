@@ -59,6 +59,7 @@ describe("public page content", () => {
         "/about",
         "/pricing",
         "/changelog",
+        "/privacy",
         ...TOOLS.map(({ path }) => path),
       ].sort()
     )

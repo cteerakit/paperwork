@@ -19,7 +19,7 @@ import type { Annotation } from "@/lib/annotate/model"
 import { outputName } from "@/lib/download"
 import { applyAnnotations } from "@/lib/pdf/annotate"
 import type { LoadedPdf } from "@/lib/render/pdfjs"
-import { fileKey, storage } from "@/lib/storage"
+import { fileKey, sessions } from "@/lib/storage"
 
 const TOOLS: ToolId[] = ["select", "text", "highlight", "pen", "rect", "ellipse", "line", "arrow", "image", "note"]
 
@@ -56,7 +56,7 @@ function Editor({ pdf, onClose }: { pdf: LoadedPdf; onClose: () => void }) {
     let cancelled = false
     void fileKey(pdf.bytes).then(async (hash) => {
       const k = `annotate:${hash}`
-      const saved = await storage.get<Annotation[]>(k)
+      const saved = await sessions.get<Annotation[]>(k)
       if (cancelled) return
       if (saved?.length) {
         api.reset(saved)
@@ -65,7 +65,7 @@ function Editor({ pdf, onClose }: { pdf: LoadedPdf; onClose: () => void }) {
             label: t("tools.annotate.discard"),
             onClick: () => {
               api.reset([])
-              void storage.delete(k)
+              void sessions.delete(k)
             },
           },
         })
@@ -83,8 +83,8 @@ function Editor({ pdf, onClose }: { pdf: LoadedPdf; onClose: () => void }) {
   useEffect(() => {
     if (!key || !restored.current) return
     const timer = setTimeout(() => {
-      if (api.objects.length) void storage.set(key, api.objects)
-      else void storage.delete(key)
+      if (api.objects.length) void sessions.set(key, api.objects)
+      else void sessions.delete(key)
     }, 600)
     return () => clearTimeout(timer)
   }, [api.objects, key])

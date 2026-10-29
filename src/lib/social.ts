@@ -29,6 +29,12 @@ export const SOCIAL_PAGES = [
       "See what’s new in Paperwork: new PDF tools, offline support and other improvements, newest first.",
   },
   {
+    path: "/privacy",
+    title: "Privacy — Paperwork",
+    description:
+      "How Paperwork handles your data: PDFs are processed in your browser and never uploaded. See what's saved on your device and clear it.",
+  },
+  {
     path: "/merge",
     title: "Merge PDFs — Paperwork",
     description:
@@ -93,6 +99,12 @@ export const SOCIAL_PAGES = [
     title: "PDF to images — Paperwork",
     description:
       "Save PDF pages as PNG or JPG images right in your browser. Free, no sign-up, and your files never leave your device.",
+  },
+  {
+    path: "/images-to-pdf",
+    title: "Images to PDF — Paperwork",
+    description:
+      "Turn photos and scans into one PDF right in your browser. Free, no sign-up, and your images never leave your device.",
   },
 ]
 

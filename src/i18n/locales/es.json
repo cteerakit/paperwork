@@ -16,6 +16,12 @@
         "step3": "Descarga la imagen, o un archivo ZIP si exportas varias páginas.",
         "limitation": "Cada página se convierte en una imagen plana, así que el texto de las imágenes no se puede seleccionar. Las páginas muy grandes se reducen para ajustarse a los límites de tu navegador."
       },
+      "fromImages": {
+        "step1": "Elige las imágenes que quieres en tu PDF, como fotos o escaneos.",
+        "step2": "Arrástralas para ordenarlas y elige un tamaño de página y un margen.",
+        "step3": "Crea el PDF y descárgalo, o continúa en otra herramienta.",
+        "limitation": "Cada imagen se convierte en una página, y el texto de las imágenes no se puede seleccionar ni buscar. Los formatos que tu navegador no puede abrir, como HEIC fuera de Safari, deben convertirse primero."
+      },
       "merge": {
         "step1": "Elige los archivos PDF que quieres combinar.",
         "step2": "Arrastra los archivos al orden que quieres en el documento final.",
@@ -53,9 +59,9 @@
         "limitation": "Deja al menos una página en el documento. Quitar una página del resultado no cambia tu archivo original."
       },
       "security": {
-        "step1": "Elige desbloquear o proteger y selecciona tu PDF.",
+        "step1": "Elige desbloquear, proteger o quitar información oculta y selecciona tu PDF.",
         "step2": "Introduce la contraseña actual cuando haga falta. Para proteger un archivo, introduce y confirma una contraseña nueva.",
-        "step3": "Procesa el documento y descarga el PDF desbloqueado o protegido.",
+        "step3": "Procesa el documento y descarga el PDF resultante.",
         "limitation": "Para desbloquear hace falta la contraseña si el documento la requiere; esta herramienta no recupera contraseñas olvidadas. Guarda cualquier contraseña nueva en un lugar seguro."
       },
       "redact": {
@@ -83,7 +89,8 @@
     "navigation": "Pie de página",
     "about": "Acerca de Paperwork",
     "pricing": "Precios",
-    "changelog": "Novedades"
+    "changelog": "Novedades",
+    "privacy": "Privacidad"
   },
   "about": {
     "title": "Todo empezó con un documento de identidad.",
@@ -153,9 +160,11 @@
   "dropzone": {
     "title": "Elige un archivo PDF",
     "titleMultiple": "Elige archivos PDF",
+    "titleImages": "Elige imágenes",
     "orDrop": "o suéltalo aquí",
     "addMore": "Añadir más archivos",
-    "notPdf": "Aquí solo se pueden usar archivos PDF."
+    "notPdf": "Aquí solo se pueden usar archivos PDF.",
+    "notImage": "Aquí solo se pueden usar archivos de imagen."
   },
   "errors": {
     "encrypted": "Este PDF está protegido con contraseña. Quita la contraseña e inténtalo de nuevo.",
@@ -245,6 +254,27 @@
       "summary_other": "{{count}} imágenes · unos {{width}} × {{height}} px cada una",
       "memoryWarning": "Son muchos datos de imagen y tu navegador podría quedarse sin memoria. Prueba con menos páginas o una resolución más baja.",
       "action": "Convertir en imágenes"
+    },
+    "fromImages": {
+      "title": "Imágenes a PDF",
+      "description": "Convierte fotos y escaneos en un solo PDF.",
+      "pageSize": "Tamaño de página",
+      "pageSizes": {
+        "a4": "A4",
+        "a4Hint": "Cada imagen se ajusta a una página A4, girada según la imagen.",
+        "letter": "Carta",
+        "letterHint": "Cada imagen se ajusta a una página Carta, girada según la imagen.",
+        "fit": "Igual que la imagen",
+        "fitHint": "Cada página tiene el tamaño de su imagen."
+      },
+      "margin": "Margen",
+      "margins": {
+        "none": "Ninguno",
+        "small": "Pequeño",
+        "large": "Grande"
+      },
+      "unreadable": "Tu navegador no puede abrir esta imagen.",
+      "action": "Crear PDF"
     },
     "merge": {
       "title": "Unir PDF",
@@ -367,6 +397,8 @@
       "title": "Tachar PDF",
       "description": "Elimina de forma permanente el texto sensible de un PDF y sustitúyelo por barras negras.",
       "notice": "Al guardar, el texto del PDF seleccionado se elimina de forma permanente y se añaden barras negras. El resto del texto sigue siendo buscable y seleccionable. Se conservan los gráficos de fondo; se eliminan los enlaces sobre el texto tachado. Tu archivo original no cambia.",
+      "removeHiddenInfo": "Quitar información oculta",
+      "removeHiddenInfoHint": "Quita también las propiedades del documento, los metadatos XMP, los marcadores, las etiquetas, los scripts y los archivos adjuntos, que pueden repetir el texto tachado.",
       "instructions": "Selecciona texto en la página y luego elige “Tachar texto seleccionado”. Revisa todas las páginas antes de guardar. Zonas de texto marcadas: {{count}}.",
       "previous": "Página anterior",
       "next": "Página siguiente",
@@ -410,18 +442,22 @@
     },
     "security": {
       "title": "Desbloquear y proteger PDF",
-      "description": "Quita la contraseña de un PDF o añade protección con contraseña.",
+      "description": "Quita la contraseña de un PDF, añade protección con contraseña o quita la información oculta.",
       "unlock": "Desbloquear PDF",
       "protect": "Proteger PDF",
+      "clean": "Quitar info oculta",
       "unlockHint": "Introduce la contraseña actual para guardar una copia sin protección con contraseña.",
       "protectHint": "Define una contraseña que se pedirá para abrir el PDF. Guárdala en un lugar seguro.",
+      "cleanHint": "Guarda una copia sin propiedades del documento, metadatos XMP, marcadores, etiquetas, scripts ni archivos adjuntos. Se conservan el contenido de las páginas, los enlaces y los campos de formulario. Si el PDF tiene contraseña, escríbela; la copia no tendrá contraseña.",
       "currentPassword": "Contraseña actual",
       "currentHint": "Déjalo vacío si el PDF se abre sin contraseña.",
       "newPassword": "Contraseña nueva",
       "confirmPassword": "Confirma la contraseña nueva",
       "mismatch": "Las contraseñas no coinciden.",
+      "weakPassword": "Las contraseñas cortas son fáciles de adivinar. Usa al menos {{count}} caracteres.",
       "unlockSuccess": "Tu PDF está listo, sin protección con contraseña.",
       "protectSuccess": "Tu PDF protegido con contraseña está listo.",
+      "cleanSuccess": "Tu PDF sin información oculta está listo.",
       "errors": {
         "password": "La contraseña es incorrecta. Inténtalo de nuevo.",
         "invalid": "No se pudo abrir este archivo. Puede estar dañado o no ser un PDF.",
@@ -433,6 +469,7 @@
   "feedback": {
     "title": "Comentarios",
     "description": "¿Qué te gustaría que cambiáramos o mejoráramos?",
+    "privacy": "Tu mensaje se envía al desarrollador a través de Discord. No incluyas información personal.",
     "label": "Tus comentarios",
     "send": "Enviar comentarios",
     "sending": "Enviando…",
@@ -466,6 +503,22 @@
       "improved": "Mejorado"
     },
     "entries": {
+      "privacy": {
+        "title": "Privacidad y seguridad",
+        "items": {
+          "privacy": "Una página de privacidad explica qué guarda Paperwork en tu dispositivo, con un botón para borrarlo.",
+          "clean": "Quita información oculta, como propiedades, metadatos, marcadores y adjuntos, en Desbloquear y proteger.",
+          "redact": "Al tachar también se quita la información oculta que puede repetir el texto tachado.",
+          "autosave": "Las anotaciones guardadas automáticamente se eliminan a los 7 días.",
+          "security": "Una política de seguridad más estricta impide que la aplicación envíe tus datos a otros sitios."
+        }
+      },
+      "imagesToPdf": {
+        "title": "Imágenes a PDF",
+        "items": {
+          "imagesToPdf": "Convierte fotos y escaneos en un PDF, una página por imagen, en A4, Carta o páginas del tamaño de cada imagen."
+        }
+      },
       "workflows": {
         "title": "Más formas de trabajar con PDF",
         "items": {
@@ -509,5 +562,32 @@
         }
       }
     }
+  },
+  "privacy": {
+    "title": "Tus archivos se quedan en tu dispositivo",
+    "intro": "Paperwork no tiene cuentas, analíticas ni anuncios. Esto es lo que pasa con tus datos.",
+    "files": {
+      "title": "Tus PDF e imágenes",
+      "body": "Todas las herramientas funcionan en tu navegador. Tus archivos nunca se suben, y la política de seguridad del sitio impide que la aplicación envíe datos a cualquier lugar que no sea Paperwork."
+    },
+    "stored": {
+      "title": "Qué se guarda en este dispositivo",
+      "body": "Las firmas, iniciales y sellos que decidas guardar, las anotaciones en curso (se eliminan a los 7 días) y tu tema e idioma. Solo se guardan en este navegador."
+    },
+    "feedback": {
+      "title": "Comentarios",
+      "body": "Si envías comentarios, tu mensaje se reenvía al desarrollador a través de Discord. No incluyas información personal. Tu dirección IP se usa brevemente para limitar cuántos mensajes se pueden enviar."
+    },
+    "hosting": {
+      "title": "Alojamiento",
+      "body": "Paperwork está alojado en Cloudflare, que procesa información habitual de las solicitudes, como tu dirección IP, para servir el sitio y protegerlo de abusos."
+    },
+    "clear": {
+      "title": "Borrar datos locales",
+      "body": "Elimina de este navegador las firmas guardadas, las anotaciones guardadas automáticamente y los ajustes. No se puede deshacer.",
+      "action": "Borrar datos locales",
+      "done": "Datos locales borrados."
+    },
+    "clearConfirm": "¿Eliminar todo lo que Paperwork ha guardado en este navegador?"
   }
 }

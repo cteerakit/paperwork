@@ -16,6 +16,12 @@
         "step3": "Download the image, or a ZIP file when you export several pages.",
         "limitation": "Each page becomes a flat picture, so text in the images can’t be selected. Very large pages are scaled down to fit your browser’s limits."
       },
+      "fromImages": {
+        "step1": "Choose the images you want in your PDF, such as photos or scans.",
+        "step2": "Drag them into order, then pick a page size and margin.",
+        "step3": "Create the PDF and download it, or continue in another tool.",
+        "limitation": "Each image becomes one page, and text in the images can’t be selected or searched. Formats your browser can’t open, such as HEIC outside Safari, need converting first."
+      },
       "merge": {
         "step1": "Choose the PDF files you want to combine.",
         "step2": "Drag the files into the order you want in the final document.",
@@ -53,9 +59,9 @@
         "limitation": "Keep at least one page in the document. Removing a page from the output doesn’t change your original file."
       },
       "security": {
-        "step1": "Choose unlock or protect, then select your PDF.",
+        "step1": "Choose unlock, protect or remove hidden information, then select your PDF.",
         "step2": "Enter the current password when required. To protect a file, enter and confirm a new password.",
-        "step3": "Process the document and download the unlocked or protected PDF.",
+        "step3": "Process the document and download the resulting PDF.",
         "limitation": "Unlocking requires the password when the document needs one; this tool doesn’t recover forgotten passwords. Keep any new password somewhere safe."
       },
       "redact": {
@@ -83,7 +89,8 @@
     "navigation": "Footer",
     "about": "About Paperwork",
     "pricing": "Pricing",
-    "changelog": "Changelog"
+    "changelog": "Changelog",
+    "privacy": "Privacy"
   },
   "about": {
     "title": "It started with an ID card.",
@@ -153,9 +160,11 @@
   "dropzone": {
     "title": "Choose a PDF file",
     "titleMultiple": "Choose PDF files",
+    "titleImages": "Choose images",
     "orDrop": "or drop it here",
     "addMore": "Add more files",
-    "notPdf": "Only PDF files can be used here."
+    "notPdf": "Only PDF files can be used here.",
+    "notImage": "Only image files can be used here."
   },
   "errors": {
     "encrypted": "This PDF is password-protected. Remove the password and try again.",
@@ -245,6 +254,27 @@
       "summary_other": "{{count}} images · about {{width}} × {{height}} px each",
       "memoryWarning": "This is a lot of image data and your browser may run out of memory. Try fewer pages or a lower resolution.",
       "action": "Convert to images"
+    },
+    "fromImages": {
+      "title": "Images to PDF",
+      "description": "Turn photos and scans into one PDF.",
+      "pageSize": "Page size",
+      "pageSizes": {
+        "a4": "A4",
+        "a4Hint": "Each image is fitted onto an A4 page, turned to match it.",
+        "letter": "Letter",
+        "letterHint": "Each image is fitted onto a Letter page, turned to match it.",
+        "fit": "Same as image",
+        "fitHint": "Each page is the size of its image."
+      },
+      "margin": "Margin",
+      "margins": {
+        "none": "None",
+        "small": "Small",
+        "large": "Large"
+      },
+      "unreadable": "This image can’t be opened in your browser.",
+      "action": "Create PDF"
     },
     "merge": {
       "title": "Merge PDFs",
@@ -367,6 +397,8 @@
       "title": "Redact PDF",
       "description": "Permanently remove sensitive PDF text and replace it with black bars.",
       "notice": "Saving permanently removes selected PDF text and adds black bars. Other text stays searchable and selectable. Background artwork is preserved; links over redacted text are removed. Your original file stays unchanged.",
+      "removeHiddenInfo": "Remove hidden information",
+      "removeHiddenInfoHint": "Also remove document properties, XMP metadata, bookmarks, tags, scripts and attached files, which can repeat the text you redact.",
       "instructions": "Select text on the page, then choose “Redact selected text”. Review every page before saving. Marked text areas: {{count}}.",
       "previous": "Previous page",
       "next": "Next page",
@@ -410,18 +442,22 @@
     },
     "security": {
       "title": "Unlock and protect PDF",
-      "description": "Remove a PDF password or add password protection.",
+      "description": "Remove a PDF password, add password protection, or remove hidden information.",
       "unlock": "Unlock PDF",
       "protect": "Protect PDF",
+      "clean": "Remove hidden info",
       "unlockHint": "Enter the current password to save a copy without password protection.",
       "protectHint": "Set a password that will be required to open the PDF. Keep it somewhere safe.",
+      "cleanHint": "Save a copy without document properties, XMP metadata, bookmarks, tags, scripts or attached files. Page content, links and form fields are kept. If the PDF has a password, enter it; the copy won't be password-protected.",
       "currentPassword": "Current password",
       "currentHint": "Leave empty if the PDF opens without a password.",
       "newPassword": "New password",
       "confirmPassword": "Confirm new password",
       "mismatch": "Passwords do not match.",
+      "weakPassword": "Short passwords are easy to guess. Use at least {{count}} characters.",
       "unlockSuccess": "Your PDF is ready without password protection.",
       "protectSuccess": "Your password-protected PDF is ready.",
+      "cleanSuccess": "Your PDF is ready without hidden information.",
       "errors": {
         "password": "The password is incorrect. Please try again.",
         "invalid": "This file could not be opened. It may be damaged or not a PDF.",
@@ -433,6 +469,7 @@
   "feedback": {
     "title": "Feedback",
     "description": "What would you like us to change or improve?",
+    "privacy": "Your message is sent to the developer through Discord. Please don't include personal information.",
     "label": "Your feedback",
     "send": "Send feedback",
     "sending": "Sending…",
@@ -466,6 +503,22 @@
       "improved": "Improved"
     },
     "entries": {
+      "privacy": {
+        "title": "Privacy and security",
+        "items": {
+          "privacy": "A privacy page explains what Paperwork keeps on your device, with a button to clear it.",
+          "clean": "Remove hidden information, such as properties, metadata, bookmarks and attachments, in Unlock and protect.",
+          "redact": "Redaction also removes hidden information that can repeat the redacted text.",
+          "autosave": "Autosaved annotations are deleted after 7 days.",
+          "security": "A stricter security policy stops the app from sending your data to other sites."
+        }
+      },
+      "imagesToPdf": {
+        "title": "Images to PDF",
+        "items": {
+          "imagesToPdf": "Turn photos and scans into a PDF, one page per image, on A4, Letter or pages the size of each image."
+        }
+      },
       "workflows": {
         "title": "More ways to work with PDFs",
         "items": {
@@ -509,5 +562,32 @@
         }
       }
     }
+  },
+  "privacy": {
+    "title": "Your files stay on your device",
+    "intro": "Paperwork has no accounts, analytics or ads. Here's what happens to your data.",
+    "files": {
+      "title": "Your PDFs and images",
+      "body": "Every tool runs inside your browser. Your files are never uploaded, and the site's security policy stops the app from sending data anywhere except Paperwork itself."
+    },
+    "stored": {
+      "title": "What's saved on this device",
+      "body": "Signatures, initials and stamps you choose to keep, annotations you're working on (deleted after 7 days), and your theme and language. They're stored only in this browser."
+    },
+    "feedback": {
+      "title": "Feedback",
+      "body": "If you send feedback, your message is forwarded to the developer through Discord. Don't include personal information. Your IP address is used briefly to limit how many messages can be sent."
+    },
+    "hosting": {
+      "title": "Hosting",
+      "body": "Paperwork is hosted on Cloudflare, which handles standard request information such as your IP address to deliver the site and protect it from abuse."
+    },
+    "clear": {
+      "title": "Clear local data",
+      "body": "Delete saved signatures, autosaved annotations and settings from this browser. This can't be undone.",
+      "action": "Clear local data",
+      "done": "Local data cleared."
+    },
+    "clearConfirm": "Delete everything Paperwork has saved in this browser?"
   }
 }

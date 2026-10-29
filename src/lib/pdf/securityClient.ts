@@ -36,3 +36,16 @@ export async function exportSecurePdf(
   if (response.kind !== "complete") throw new SecurityError("failed")
   return response.bytes
 }
+
+export async function exportCleanPdf(
+  bytes: Uint8Array,
+  currentPassword: string
+) {
+  const response = await requestSecurity({
+    kind: "clean",
+    bytes,
+    currentPassword,
+  })
+  if (response.kind !== "complete") throw new SecurityError("failed")
+  return response.bytes
+}

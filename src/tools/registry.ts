@@ -1,6 +1,7 @@
 import {
   LockKeyhole,
   Combine,
+  FileImage,
   ScanLine,
   Highlighter,
   Images,
@@ -23,11 +24,14 @@ export interface ToolInfo {
     | "split"
     | "compress"
     | "toImages"
+    | "fromImages"
     | "pageNumbers"
     | "watermark"
     | "sign"
     | "annotate"
   path: string
+  /** Starts from images instead of a PDF, so it can't take PDFs passed on from elsewhere. */
+  fromImages?: boolean
   icon: LucideIcon
   /** Tailwind classes for the icon tile. */
   accent: string
@@ -57,6 +61,13 @@ export const TOOLS: ToolInfo[] = [
     path: "/pdf-to-images",
     icon: Images,
     accent: "bg-cyan-500/15 text-cyan-600 dark:text-cyan-400",
+  },
+  {
+    id: "fromImages",
+    path: "/images-to-pdf",
+    fromImages: true,
+    icon: FileImage,
+    accent: "bg-lime-500/15 text-lime-700 dark:text-lime-400",
   },
   {
     id: "sign",

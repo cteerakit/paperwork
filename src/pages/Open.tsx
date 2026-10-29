@@ -54,7 +54,7 @@ export function Open() {
       )}
 
       <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {TOOLS.map(({ id, path, icon: Icon, accent }) => (
+        {TOOLS.filter(({ fromImages }) => !fromImages).map(({ id, path, icon: Icon, accent }) => (
           <button
             key={id}
             type="button"

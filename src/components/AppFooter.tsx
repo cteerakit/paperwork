@@ -34,6 +34,9 @@ export function AppFooter() {
           <Link to="/changelog" className={linkClassName}>
             {t("footer.changelog")}
           </Link>
+          <Link to="/privacy" className={linkClassName}>
+            {t("footer.privacy")}
+          </Link>
           <a
             href="https://www.facebook.com/cteerakit"
             aria-label="Facebook"

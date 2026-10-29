@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { LockKeyhole, Unlock, X } from "lucide-react"
+import { Eraser, LockKeyhole, Unlock, X } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { FileDropzone } from "@/components/FileDropzone"
 import { ResultActions } from "@/components/ResultActions"
@@ -12,11 +12,20 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { outputName } from "@/lib/download"
 import { handoffToFile, takeHandoff } from "@/lib/handoff"
 import { SecurityError } from "@/lib/pdf/security"
-import { detectPdfProtection, exportSecurePdf } from "@/lib/pdf/securityClient"
+import {
+  detectPdfProtection,
+  exportCleanPdf,
+  exportSecurePdf,
+} from "@/lib/pdf/securityClient"
+
+const MODES = ["unlock", "protect", "clean"] as const
+type Mode = (typeof MODES)[number]
+/** Shorter passwords are accepted, but are much easier to guess. */
+const RECOMMENDED_PASSWORD_LENGTH = 8
 
 export default function Security() {
   const { t } = useTranslation()
-  const [mode, setMode] = useState<"unlock" | "protect">("unlock")
+  const [mode, setMode] = useState<Mode>("unlock")
   const [file, setFile] = useState<File>()
   // Start from a file passed on from another tool ("Continue in…").
   useEffect(() => {
@@ -64,12 +73,15 @@ export default function Security() {
     setResult(undefined)
     try {
       const bytes = new Uint8Array(await file.arrayBuffer())
-      const output = await exportSecurePdf(
-        bytes,
-        mode === "unlock"
-          ? { kind: "unlock", currentPassword }
-          : { kind: "protect", currentPassword, password }
-      )
+      const output =
+        mode === "clean"
+          ? await exportCleanPdf(bytes, currentPassword)
+          : await exportSecurePdf(
+              bytes,
+              mode === "unlock"
+                ? { kind: "unlock", currentPassword }
+                : { kind: "protect", currentPassword, password }
+            )
       setResult(output)
       setCurrentPassword("")
       setPassword("")
@@ -91,14 +103,14 @@ export default function Security() {
           value={mode}
           disabled={busy}
           onValueChange={(value) => {
-            if (value === "unlock" || value === "protect") {
-              setMode(value)
+            if (MODES.includes(value as Mode)) {
+              setMode(value as Mode)
               clear()
             }
           }}
-          className="grid grid-cols-2 gap-3"
+          className="grid gap-3 sm:grid-cols-3"
         >
-          {(["unlock", "protect"] as const).map((value) => (
+          {MODES.map((value) => (
             <Label
               key={value}
               className="flex cursor-pointer items-center gap-2 rounded-xl border bg-card p-4"
@@ -161,7 +173,7 @@ export default function Security() {
                 protection !== "checking" &&
                 protection !== "invalid" && (
                   <fieldset disabled={busy} className="grid gap-4">
-                    {(mode === "unlock" || protection === "protected") && (
+                    {(mode !== "protect" || protection === "protected") && (
                       <div className="grid gap-2">
                         <Label htmlFor="current-password">
                           {t("tools.security.currentPassword")}
@@ -197,6 +209,15 @@ export default function Security() {
                               setPassword(event.target.value)
                             }
                           />
+                          {password &&
+                            [...password].length <
+                              RECOMMENDED_PASSWORD_LENGTH && (
+                              <p className="text-sm text-muted-foreground">
+                                {t("tools.security.weakPassword", {
+                                  count: RECOMMENDED_PASSWORD_LENGTH,
+                                })}
+                              </p>
+                            )}
                         </div>
                         <div className="grid gap-2">
                           <Label htmlFor="confirm-password">
@@ -237,7 +258,11 @@ export default function Security() {
                       bytes: result,
                       name: outputName(
                         file.name,
-                        mode === "unlock" ? "unlocked" : "protected"
+                        mode === "unlock"
+                          ? "unlocked"
+                          : mode === "protect"
+                            ? "protected"
+                            : "cleaned"
                       ),
                     }}
                     tool="security"
@@ -258,8 +283,10 @@ export default function Security() {
                     <Spinner className="size-4 text-current" />
                   ) : mode === "unlock" ? (
                     <Unlock />
-                  ) : (
+                  ) : mode === "protect" ? (
                     <LockKeyhole />
+                  ) : (
+                    <Eraser />
                   )}
                   {t(`tools.security.${mode}`)}
                 </Button>

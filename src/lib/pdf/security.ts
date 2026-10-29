@@ -1,4 +1,6 @@
 import type { WrappedPdfiumModule } from "@embedpdf/pdfium"
+import { loadPdf } from "./load"
+import { removeHiddenInformation, removeUnreferencedObjects } from "./sanitize"
 
 export type SecurityOptions =
   | { kind: "unlock"; currentPassword: string }
@@ -103,4 +105,25 @@ export function securePdf(
     if (document) engine.FPDF_CloseDocument(document)
     memory.free(input)
   }
+}
+
+/**
+ * Saves a copy without document properties, XMP metadata, bookmarks, tags, scripts or attachments.
+ * A protected PDF is unlocked with its current password first, so the copy has no password.
+ */
+export async function cleanPdf(
+  bytes: Uint8Array,
+  currentPassword: string,
+  engine: WrappedPdfiumModule
+) {
+  const unlocked = securePdf(bytes, { kind: "unlock", currentPassword }, engine)
+  let doc
+  try {
+    doc = await loadPdf(unlocked)
+  } catch {
+    throw new SecurityError("invalid")
+  }
+  removeHiddenInformation(doc)
+  removeUnreferencedObjects(doc)
+  return doc.save({ updateFieldAppearances: false })
 }

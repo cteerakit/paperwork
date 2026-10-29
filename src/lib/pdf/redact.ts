@@ -3,17 +3,14 @@ import {
   PDFDict,
   PDFName,
   PDFNumber,
-  PDFRef,
-  PDFStream,
   rgb,
   type PDFPage,
-  type PDFDocument,
-  type PDFObject,
 } from "pdf-lib"
 import type { WrappedPdfiumModule } from "@embedpdf/pdfium"
 import { apply, pageFrame, type Matrix } from "./geometry"
 import { loadPdf, type PdfBytes } from "./load"
 import { RedactionError } from "./redactionError"
+import { removeHiddenInformation, removeUnreferencedObjects } from "./sanitize"
 
 export interface Redaction {
   page: number
@@ -156,29 +153,13 @@ function rejectImageOverlaps(
   }
 }
 
-/** Remove obsolete streams left behind by rewriting content, without copying or flattening pages. */
-function removeUnreferencedObjects(doc: PDFDocument) {
-  const seen = new Set<PDFObject>()
-  const visit = (object: PDFObject | undefined) => {
-    if (!object || seen.has(object)) return
-    seen.add(object)
-    if (object instanceof PDFRef) visit(doc.context.lookup(object))
-    else if (object instanceof PDFDict) object.values().forEach(visit)
-    else if (object instanceof PDFArray) object.asArray().forEach(visit)
-    else if (object instanceof PDFStream) visit(object.dict)
-  }
-  Object.values(doc.context.trailerInfo).forEach(visit)
-  for (const [ref] of doc.context.enumerateIndirectObjects()) {
-    if (!seen.has(ref)) doc.context.delete(ref)
-  }
-}
-
 /** Rewrites intersecting content with PDFium; all unaffected PDF objects remain native. */
 export async function redactPdf(
   bytes: PdfBytes,
   areas: Redaction[],
   pdfium: WrappedPdfiumModule,
-  onProgress?: (done: number) => void
+  onProgress?: (done: number) => void,
+  { removeHiddenInfo = true }: { removeHiddenInfo?: boolean } = {}
 ) {
   if (!areas.length) throw new Error("Select an area to redact.")
   const source = await loadPdf(bytes)
@@ -336,6 +317,8 @@ export async function redactPdf(
         const page = result.getPage(area.page)
         page.drawRectangle({ ...pdfRect(page, area), color: rgb(0, 0, 0) })
       }
+      // Redacted words can also live in properties, bookmarks, tags and attachments.
+      if (removeHiddenInfo) removeHiddenInformation(result)
       removeUnreferencedObjects(result)
       return await result.save({ updateFieldAppearances: false })
     } finally {

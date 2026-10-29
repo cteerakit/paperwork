@@ -62,6 +62,8 @@ export default {
         body: JSON.stringify({
           content: `**Paperwork feedback**\n${message}`,
           allowed_mentions: { parse: [] },
+          // SUPPRESS_EMBEDS: Discord shouldn't fetch link previews for URLs someone typed.
+          flags: 4,
         }),
         signal: AbortSignal.timeout(10000),
       })

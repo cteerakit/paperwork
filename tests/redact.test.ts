@@ -122,7 +122,7 @@ it.each([0, 90, 180, 270])(
     expect(texts[1]).toBe("Untouched second page")
     const doc = await PDFDocument.load(output)
     const original = await PDFDocument.load(bytes)
-    expect(doc.getTitle()).toBe("Public document title")
+    expect(doc.getTitle()).toBeUndefined()
     expect(doc.getPage(0).getRotation()).toEqual(
       original.getPage(0).getRotation()
     )
@@ -350,4 +350,80 @@ it("removes a transparent hyperlink over selected text, including its target", a
   const saved = await PDFDocument.load(output)
   expect(saved.getPage(0).node.Annots()?.size() ?? 0).toBe(0)
   expect(decodedObjects(saved)).not.toContain("https://example.com/SECRET")
+})
+
+async function documentWithHiddenInformation() {
+  const doc = await PDFDocument.create()
+  doc.setTitle("SECRET title")
+  doc.setAuthor("HIDDEN author")
+  const page = doc.addPage([400, 300])
+  page.drawText("PUBLIC SECRET REMAINS", { x: 40, y: 240, size: 16 })
+  const { context, catalog } = doc
+  catalog.set(
+    PDFName.of("Metadata"),
+    context.register(context.stream("<x:xmpmeta>SECRET xmp</x:xmpmeta>"))
+  )
+  const outlines = context.nextRef()
+  const bookmark = context.register(
+    context.obj({ Title: PDFString.of("SECRET bookmark"), Parent: outlines })
+  )
+  context.assign(
+    outlines,
+    context.obj({ Type: "Outlines", First: bookmark, Last: bookmark, Count: 1 })
+  )
+  catalog.set(PDFName.of("Outlines"), outlines)
+  catalog.set(PDFName.of("PageMode"), PDFName.of("UseOutlines"))
+  catalog.set(
+    PDFName.of("StructTreeRoot"),
+    context.register(
+      context.obj({
+        Type: "StructTreeRoot",
+        K: context.obj({ S: "P", ActualText: PDFString.of("SECRET tag") }),
+      })
+    )
+  )
+  catalog.set(
+    PDFName.of("OpenAction"),
+    context.obj({ S: "JavaScript", JS: PDFString.of("app.alert('SECRET')") })
+  )
+  catalog.set(
+    PDFName.of("Names"),
+    context.obj({
+      EmbeddedFiles: context.obj({
+        Names: [PDFString.of("HIDDEN.txt"), context.obj({ Type: "Filespec" })],
+      }),
+    })
+  )
+  return doc.save()
+}
+
+it("removes properties, XMP, bookmarks, tags, scripts and attachments that can repeat redacted text", async () => {
+  const output = await redactPdf(
+    await documentWithHiddenInformation(),
+    [{ page: 0, x: 102, y: 47, width: 65, height: 18 }],
+    engine
+  )
+  const saved = await PDFDocument.load(output, { updateMetadata: false })
+  expect(saved.getTitle()).toBeUndefined()
+  expect(saved.getAuthor()).toBeUndefined()
+  for (const key of ["Metadata", "Outlines", "PageMode", "StructTreeRoot", "OpenAction"])
+    expect(saved.catalog.get(PDFName.of(key))).toBeUndefined()
+  expect(decodedObjects(saved)).not.toMatch(/SECRET|HIDDEN/)
+  const [text] = await pdfText(output)
+  expect(text).toContain("REMAINS")
+})
+
+it("keeps document properties when hidden information removal is turned off", async () => {
+  const output = await redactPdf(
+    await documentWithHiddenInformation(),
+    [{ page: 0, x: 102, y: 47, width: 65, height: 18 }],
+    engine,
+    undefined,
+    { removeHiddenInfo: false }
+  )
+  const saved = await PDFDocument.load(output, { updateMetadata: false })
+  expect(saved.getTitle()).toBe("SECRET title")
+  expect(saved.catalog.get(PDFName.of("Outlines"))).toBeDefined()
+  const [text] = await pdfText(output)
+  expect(text).not.toContain("SECRET")
 })

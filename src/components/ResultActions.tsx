@@ -43,7 +43,7 @@ export function ResultActions({
           {t("common.continueIn")}
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start" className="min-w-52">
-          {TOOLS.filter(({ id }) => id !== tool).map((target) => (
+          {TOOLS.filter(({ id, fromImages }) => id !== tool && !fromImages).map((target) => (
             <DropdownMenuItem key={target.id} onClick={() => continueIn(target)}>
               <target.icon />
               {t(`tools.${target.id}.title`)}

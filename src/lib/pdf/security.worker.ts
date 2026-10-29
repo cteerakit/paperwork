@@ -1,6 +1,7 @@
 import { init } from "@embedpdf/pdfium"
 import wasmUrl from "@embedpdf/pdfium/pdfium.wasm?url"
 import {
+  cleanPdf,
   securePdf,
   inspectPdfProtection,
   SecurityError,
@@ -11,6 +12,7 @@ import {
 export type SecurityRequest =
   | { kind: "inspect"; bytes: Uint8Array }
   | { kind: "export"; bytes: Uint8Array; options: SecurityOptions }
+  | { kind: "clean"; bytes: Uint8Array; currentPassword: string }
 export type SecurityResponse =
   | { kind: "inspected"; protection: "protected" | "unprotected" }
   | { kind: "complete"; bytes: Uint8Array }
@@ -30,7 +32,10 @@ self.onmessage = async ({ data }: MessageEvent<SecurityRequest>) => {
           protection,
         } satisfies SecurityResponse)
       } else {
-        const bytes = securePdf(data.bytes, data.options, engine)
+        const bytes =
+          data.kind === "clean"
+            ? await cleanPdf(data.bytes, data.currentPassword, engine)
+            : securePdf(data.bytes, data.options, engine)
         self.postMessage({ kind: "complete", bytes } satisfies SecurityResponse)
       }
     } finally {

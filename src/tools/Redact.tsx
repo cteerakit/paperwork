@@ -9,6 +9,8 @@ import { RedactionSearch } from "@/components/RedactionSearch"
 import { Spinner } from "@/components/Spinner"
 import { ToolLayout } from "@/components/ToolLayout"
 import { Button } from "@/components/ui/button"
+import { Label } from "@/components/ui/label"
+import { Switch } from "@/components/ui/switch"
 import { usePdfFile, useTask } from "@/hooks/usePdfFile"
 import { useResult } from "@/hooks/useResult"
 import { outputName } from "@/lib/download"
@@ -42,10 +44,16 @@ function Editor({ pdf, onClose }: { pdf: LoadedPdf; onClose: () => void }) {
   // Search results are reviewed on the page first; "redact all" turns them into one undoable selection.
   const [matches, setMatches] = useState<TextMatch[]>([])
   const [progress, setProgress] = useState(0)
+  const [removeHiddenInfo, setRemoveHiddenInfo] = useState(true)
   const save = () =>
     run(async () => {
       setProgress(0)
-      const bytes = await exportRedactedPdf(pdf.bytes, areas, setProgress)
+      const bytes = await exportRedactedPdf(
+        pdf.bytes,
+        areas,
+        setProgress,
+        removeHiddenInfo
+      )
       deliver(bytes, outputName(pdf.name, "redacted"))
       toast.success(t("common.done"))
     })
@@ -56,6 +64,22 @@ function Editor({ pdf, onClose }: { pdf: LoadedPdf; onClose: () => void }) {
       <p className="rounded-lg border bg-muted/40 p-3 text-sm">
         {t("tools.redact.notice")}
       </p>
+      <div className="flex items-start justify-between gap-4 rounded-lg border p-3">
+        <div className="grid gap-1">
+          <Label htmlFor="remove-hidden-info">
+            {t("tools.redact.removeHiddenInfo")}
+          </Label>
+          <p className="text-sm text-muted-foreground">
+            {t("tools.redact.removeHiddenInfoHint")}
+          </p>
+        </div>
+        <Switch
+          id="remove-hidden-info"
+          checked={removeHiddenInfo}
+          disabled={busy}
+          onCheckedChange={setRemoveHiddenInfo}
+        />
+      </div>
       <div className="flex flex-wrap items-center gap-2">
         <Button
           variant="outline"

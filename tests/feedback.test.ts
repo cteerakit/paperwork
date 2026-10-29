@@ -28,6 +28,7 @@ describe("feedback delivery", () => {
         body: JSON.stringify({
           content: "**Paperwork feedback**\nPlease add a tool @everyone",
           allowed_mentions: { parse: [] },
+          flags: 4,
         }),
       })
     )

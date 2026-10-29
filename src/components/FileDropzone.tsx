@@ -3,11 +3,14 @@ import { useRef, useState, type DragEvent } from "react"
 import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
+import { isImageFile } from "@/lib/images"
 import { cn } from "@/lib/utils"
 
 interface FileDropzoneProps {
   onFiles: (files: File[]) => void
   multiple?: boolean
+  /** What the tool takes: PDFs (the default) or images. */
+  accept?: "pdf" | "images"
   /** A smaller, single-line version for adding more files. */
   compact?: boolean
   className?: string
@@ -15,16 +18,16 @@ interface FileDropzoneProps {
 
 const isPdf = (f: File) => f.type === "application/pdf" || /\.pdf$/i.test(f.name)
 
-export function FileDropzone({ onFiles, multiple, compact, className }: FileDropzoneProps) {
+export function FileDropzone({ onFiles, multiple, accept: kind = "pdf", compact, className }: FileDropzoneProps) {
   const { t } = useTranslation()
   const input = useRef<HTMLInputElement>(null)
   const [dragging, setDragging] = useState(false)
 
   const accept = (list: FileList | null) => {
     const files = Array.from(list ?? [])
-    const pdfs = files.filter(isPdf)
-    if (pdfs.length < files.length) toast.warning(t("dropzone.notPdf"))
-    if (pdfs.length) onFiles(multiple ? pdfs : pdfs.slice(0, 1))
+    const usable = files.filter(kind === "images" ? isImageFile : isPdf)
+    if (usable.length < files.length) toast.warning(t(kind === "images" ? "dropzone.notImage" : "dropzone.notPdf"))
+    if (usable.length) onFiles(multiple ? usable : usable.slice(0, 1))
   }
 
   const onDrop = (event: DragEvent) => {
@@ -37,7 +40,7 @@ export function FileDropzone({ onFiles, multiple, compact, className }: FileDrop
     <input
       ref={input}
       type="file"
-      accept="application/pdf,.pdf"
+      accept={kind === "images" ? "image/*" : "application/pdf,.pdf"}
       multiple={multiple}
       className="hidden"
       onChange={(e) => {
@@ -95,7 +98,7 @@ export function FileDropzone({ onFiles, multiple, compact, className }: FileDrop
         <FileUp className="size-6 text-muted-foreground" />
       </div>
       <div>
-        <p className="font-medium">{t(multiple ? "dropzone.titleMultiple" : "dropzone.title")}</p>
+        <p className="font-medium">{t(kind === "images" ? "dropzone.titleImages" : multiple ? "dropzone.titleMultiple" : "dropzone.title")}</p>
         <p className="mt-1 text-sm text-muted-foreground">{t("dropzone.orDrop")}</p>
       </div>
       <p className="flex items-center gap-1.5 text-xs text-muted-foreground">

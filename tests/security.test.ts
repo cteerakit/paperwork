@@ -1,9 +1,9 @@
 import { readFile } from "node:fs/promises"
 import { init } from "@embedpdf/pdfium"
-import { PDFDocument } from "pdf-lib"
+import { PDFDocument, PDFName, PDFString } from "pdf-lib"
 import { getDocument } from "pdfjs-dist/legacy/build/pdf.mjs"
 import { expect, it } from "vitest"
-import { inspectPdfProtection, securePdf } from "@/lib/pdf/security"
+import { cleanPdf, inspectPdfProtection, securePdf } from "@/lib/pdf/security"
 
 it("requires the chosen password, rejects wrong passwords, and unlocks without losing text or metadata", async () => {
   const engine = await init({
@@ -78,6 +78,80 @@ it("requires the chosen password, rejects wrong passwords, and unlocks without l
         engine
       )
     ).toThrow("invalid")
+  } finally {
+    engine.FPDF_DestroyLibrary()
+  }
+})
+
+it("protects with AES-256 (PDF 2.0 security handler, revision 6)", async () => {
+  const engine = await init({
+    wasmBinary: await readFile(
+      "node_modules/@embedpdf/pdfium/dist/pdfium.wasm"
+    ),
+  })
+  engine.PDFiumExt_Init()
+  try {
+    const source = await PDFDocument.create()
+    source.addPage()
+    const protectedBytes = securePdf(
+      await source.save(),
+      { kind: "protect", currentPassword: "", password: "secret-123" },
+      engine
+    )
+    const encrypt = new TextDecoder("latin1")
+      .decode(protectedBytes)
+      .match(/<<(?:(?!endobj)[\s\S])*\/Filter\s*\/Standard(?:(?!endobj)[\s\S])*endobj/)?.[0]
+    expect(encrypt).toBeDefined()
+    expect(encrypt).toMatch(/\/V\s*5\b/)
+    expect(encrypt).toMatch(/\/R\s*6\b/)
+    expect(encrypt).toMatch(/\/CFM\s*\/AESV3\b/)
+  } finally {
+    engine.FPDF_DestroyLibrary()
+  }
+})
+
+it("removes hidden information, unlocking a protected PDF first", async () => {
+  const engine = await init({
+    wasmBinary: await readFile(
+      "node_modules/@embedpdf/pdfium/dist/pdfium.wasm"
+    ),
+  })
+  engine.PDFiumExt_Init()
+  try {
+    const source = await PDFDocument.create()
+    source.setTitle("Private title")
+    source.setAuthor("Private author")
+    source.addPage().drawText("Visible text")
+    source.catalog.set(
+      PDFName.of("Metadata"),
+      source.context.register(source.context.stream("<x:xmpmeta>Private</x:xmpmeta>"))
+    )
+    source.catalog.set(
+      PDFName.of("OpenAction"),
+      source.context.obj({ S: "JavaScript", JS: PDFString.of("app.alert(1)") })
+    )
+    const password = "secret-123"
+    const protectedBytes = securePdf(
+      await source.save(),
+      { kind: "protect", currentPassword: "", password },
+      engine
+    )
+    await expect(cleanPdf(protectedBytes, "wrong", engine)).rejects.toThrow("password")
+    const cleaned = await cleanPdf(protectedBytes, password, engine)
+    expect(inspectPdfProtection(cleaned, engine)).toBe("unprotected")
+    const output = await PDFDocument.load(cleaned, { updateMetadata: false })
+    expect(output.getTitle()).toBeUndefined()
+    expect(output.getAuthor()).toBeUndefined()
+    expect(output.catalog.get(PDFName.of("Metadata"))).toBeUndefined()
+    expect(output.catalog.get(PDFName.of("OpenAction"))).toBeUndefined()
+    expect(new TextDecoder("latin1").decode(cleaned)).not.toMatch(/Private|app\.alert/)
+    const task = getDocument({ data: cleaned.slice() })
+    try {
+      const content = await (await (await task.promise).getPage(1)).getTextContent()
+      expect(content.items.some((item) => "str" in item && item.str.includes("Visible text"))).toBe(true)
+    } finally {
+      await task.destroy()
+    }
   } finally {
     engine.FPDF_DestroyLibrary()
   }

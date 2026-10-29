@@ -16,6 +16,12 @@
         "step3": "下载图片；如果导出了多页，则会得到一个 ZIP 文件。",
         "limitation": "每一页都会变成一张平面图片，因此图片中的文字无法选择。尺寸特别大的页面会被缩小，以适应浏览器的限制。"
       },
+      "fromImages": {
+        "step1": "选择要放入 PDF 的图片，例如照片或扫描件。",
+        "step2": "拖动调整顺序，然后选择页面尺寸和边距。",
+        "step3": "创建 PDF 并下载，或在其他工具中继续处理。",
+        "limitation": "每张图片成为一页，图片中的文字无法选择或搜索。浏览器无法打开的格式（例如在 Safari 以外打开 HEIC）需要先转换。"
+      },
       "merge": {
         "step1": "选择要合并的 PDF 文件。",
         "step2": "拖动文件，按最终文档中的顺序排列。",
@@ -53,9 +59,9 @@
         "limitation": "文档中至少要保留一页。从输出中删除页面不会改变您的原始文件。"
       },
       "security": {
-        "step1": "选择解锁或保护，然后选择您的 PDF。",
+        "step1": "选择解锁、保护或移除隐藏信息，然后选择您的 PDF。",
         "step2": "需要时输入当前密码。若要保护文件，请输入并确认新密码。",
-        "step3": "处理文档，并下载已解锁或已保护的 PDF。",
+        "step3": "处理文档，并下载生成的 PDF。",
         "limitation": "如果文档需要密码，解锁时必须输入该密码；此工具无法找回忘记的密码。请将新密码保存在安全的地方。"
       },
       "redact": {
@@ -83,7 +89,8 @@
     "navigation": "页脚",
     "about": "关于 Paperwork",
     "pricing": "价格",
-    "changelog": "更新日志"
+    "changelog": "更新日志",
+    "privacy": "隐私"
   },
   "about": {
     "title": "一切都始于一张身份证。",
@@ -151,9 +158,11 @@
   "dropzone": {
     "title": "选择 PDF 文件",
     "titleMultiple": "选择 PDF 文件",
+    "titleImages": "选择图片",
     "orDrop": "或将文件拖放到这里",
     "addMore": "添加更多文件",
-    "notPdf": "这里只能使用 PDF 文件。"
+    "notPdf": "这里只能使用 PDF 文件。",
+    "notImage": "这里只能使用图片文件。"
   },
   "errors": {
     "encrypted": "此 PDF 受密码保护。请先移除密码，然后重试。",
@@ -241,6 +250,27 @@
       "summary_other": "{{count}} 张图片 · 每张约 {{width}} × {{height}} 像素",
       "memoryWarning": "图片数据量很大，浏览器可能会内存不足。请减少页数或降低分辨率。",
       "action": "转换为图片"
+    },
+    "fromImages": {
+      "title": "图片转 PDF",
+      "description": "将照片和扫描件合成一个 PDF。",
+      "pageSize": "页面尺寸",
+      "pageSizes": {
+        "a4": "A4",
+        "a4Hint": "每张图片缩放到 A4 页面，并按图片方向旋转页面。",
+        "letter": "Letter",
+        "letterHint": "每张图片缩放到 Letter 页面，并按图片方向旋转页面。",
+        "fit": "与图片相同",
+        "fitHint": "每页的尺寸与其图片相同。"
+      },
+      "margin": "边距",
+      "margins": {
+        "none": "无",
+        "small": "小",
+        "large": "大"
+      },
+      "unreadable": "你的浏览器无法打开此图片。",
+      "action": "创建 PDF"
     },
     "merge": {
       "title": "合并 PDF",
@@ -360,6 +390,8 @@
       "title": "涂黑 PDF",
       "description": "永久删除 PDF 中的敏感文字，并用黑色条块替换。",
       "notice": "保存后，所选的 PDF 文字将被永久删除，并添加黑色条块。其他文字仍可搜索和选择。背景图案会保留；涂黑文字上的链接会被移除。您的原始文件不会改变。",
+      "removeHiddenInfo": "移除隐藏信息",
+      "removeHiddenInfoHint": "同时移除文档属性、XMP 元数据、书签、标记、脚本和附件，这些内容可能重复包含被涂黑的文字。",
       "instructions": "在页面上选择文字，然后选择“涂黑所选文字”。保存前请检查每一页。已标记的文字区域：{{count}}。",
       "previous": "上一页",
       "next": "下一页",
@@ -401,18 +433,22 @@
     },
     "security": {
       "title": "解锁与保护 PDF",
-      "description": "移除 PDF 密码，或添加密码保护。",
+      "description": "移除 PDF 密码、添加密码保护，或移除隐藏信息。",
       "unlock": "解锁 PDF",
       "protect": "保护 PDF",
+      "clean": "移除隐藏信息",
       "unlockHint": "输入当前密码，即可保存一份没有密码保护的副本。",
       "protectHint": "设置打开此 PDF 时需要输入的密码。请将它保存在安全的地方。",
+      "cleanHint": "保存一份不含文档属性、XMP 元数据、书签、标记、脚本或附件的副本。页面内容、链接和表单字段会保留。如果 PDF 有密码，请输入密码；副本将不受密码保护。",
       "currentPassword": "当前密码",
       "currentHint": "如果此 PDF 无需密码即可打开，请留空。",
       "newPassword": "新密码",
       "confirmPassword": "确认新密码",
       "mismatch": "两次输入的密码不一致。",
+      "weakPassword": "短密码容易被猜到。请至少使用 {{count}} 个字符。",
       "unlockSuccess": "您的 PDF 已解除密码保护，可以使用了。",
       "protectSuccess": "您的受密码保护的 PDF 已准备好。",
+      "cleanSuccess": "已移除隐藏信息的 PDF 已准备好。",
       "errors": {
         "password": "密码不正确，请重试。",
         "invalid": "无法打开此文件。它可能已损坏，或者不是 PDF。",
@@ -424,6 +460,7 @@
   "feedback": {
     "title": "反馈",
     "description": "您希望我们更改或改进什么？",
+    "privacy": "您的消息将通过 Discord 发送给开发者。请勿包含个人信息。",
     "label": "您的反馈",
     "send": "发送反馈",
     "sending": "正在发送…",
@@ -457,6 +494,22 @@
       "improved": "改进"
     },
     "entries": {
+      "privacy": {
+        "title": "隐私与安全",
+        "items": {
+          "privacy": "新增隐私页面，说明 Paperwork 在您的设备上保存了什么，并提供清除按钮。",
+          "clean": "在“解锁和保护”中移除属性、元数据、书签和附件等隐藏信息。",
+          "redact": "涂黑时还会移除可能重复包含被涂黑文字的隐藏信息。",
+          "autosave": "自动保存的批注会在 7 天后删除。",
+          "security": "更严格的安全策略可阻止应用将您的数据发送到其他网站。"
+        }
+      },
+      "imagesToPdf": {
+        "title": "图片转 PDF",
+        "items": {
+          "imagesToPdf": "将照片和扫描件转换为 PDF，每张图片一页，可选 A4、Letter 或与图片相同的页面尺寸。"
+        }
+      },
       "workflows": {
         "title": "更多 PDF 处理方式",
         "items": {
@@ -500,5 +553,32 @@
         }
       }
     }
+  },
+  "privacy": {
+    "title": "您的文件保留在您的设备上",
+    "intro": "Paperwork 没有账户、分析工具或广告。以下是我们如何处理您的数据。",
+    "files": {
+      "title": "您的 PDF 和图片",
+      "body": "所有工具都在您的浏览器中运行。您的文件不会被上传，网站的安全策略也会阻止应用将数据发送到 Paperwork 以外的任何地方。"
+    },
+    "stored": {
+      "title": "此设备上保存的内容",
+      "body": "您选择保留的签名、姓名缩写和印章，正在编辑的批注（7 天后删除），以及主题和语言设置。这些内容只保存在此浏览器中。"
+    },
+    "feedback": {
+      "title": "反馈",
+      "body": "如果您发送反馈，消息会通过 Discord 转发给开发者。请勿包含个人信息。您的 IP 地址会被短暂用于限制可发送的消息数量。"
+    },
+    "hosting": {
+      "title": "托管",
+      "body": "Paperwork 托管在 Cloudflare 上。Cloudflare 会处理 IP 地址等常规请求信息，用于提供网站服务并防止滥用。"
+    },
+    "clear": {
+      "title": "清除本地数据",
+      "body": "从此浏览器中删除已保存的签名、自动保存的批注和设置。此操作无法撤销。",
+      "action": "清除本地数据",
+      "done": "已清除本地数据。"
+    },
+    "clearConfirm": "要删除 Paperwork 在此浏览器中保存的所有内容吗？"
   }
 }

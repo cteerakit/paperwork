@@ -7,16 +7,7 @@
     <meta name="theme-color" content="#6366f1" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <!-- social-metadata -->
-    <script>
-      // Apply the saved theme before first paint to avoid a flash of the wrong theme.
-      ;(function () {
-        var t = localStorage.getItem("theme")
-        var dark = t === "dark" || ((!t || t === "system") && matchMedia("(prefers-color-scheme: dark)").matches)
-        document.documentElement.classList.add(dark ? "dark" : "light")
-        var lang = localStorage.getItem("paperwork.lang")
-        if (lang) document.documentElement.lang = lang
-      })()
-    </script>
+    <script src="/theme-init.js"></script>
   </head>
   <body>
     <div id="root"></div>
