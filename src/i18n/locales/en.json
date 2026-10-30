@@ -128,6 +128,7 @@
     "subtitle": "Organize, merge, split, compress, sign and annotate PDFs. No sign-up required."
   },
   "common": {
+    "custom": "Custom",
     "privacy": "Your files never leave your device",
     "allTools": "All tools",
     "save": "Save",
@@ -362,6 +363,13 @@
       "layout": "Layout",
       "center": "Center",
       "tile": "Repeat",
+      "font": "Font",
+      "fonts": {
+        "sans": "Sans",
+        "serif": "Serif",
+        "mono": "Mono",
+        "signature": "Handwriting"
+      },
       "angle": "Angle",
       "action": "Add watermark",
       "chooseImage": "Choose an image",
@@ -510,6 +518,13 @@
       "improved": "Improved"
     },
     "entries": {
+      "watermarkControls": {
+        "title": "Easier watermark controls",
+        "items": {
+          "fonts": "Choose Sans, Serif, Mono or Handwriting for text watermarks. Serif and Handwriting support Thai as well as Latin text; other scripts use a supported fallback font.",
+          "controls": "Choose S, M, L or XL text, preset angles and opacity, and color swatches. Select Custom for precise values or your own color. Controls are easier to tap on mobile and more compact on desktop."
+        }
+      },
       "appUpdates": {
         "title": "Installed app updates",
         "items": {

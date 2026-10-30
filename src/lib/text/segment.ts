@@ -56,10 +56,18 @@ function scriptFont(ch: string, cjk: FontId): FontId | null {
   return "latin"
 }
 
-function preferred(id: FontId, family: FontFamily): FontId[] {
+/** Styled fonts per family and script; scripts not listed use the sans font. */
+const FAMILY_FONTS: Record<FontFamily, Partial<Record<FontId, FontId>>> = {
+  sans: {},
+  serif: { latin: "serif", thai: "serifThai" },
+  mono: { latin: "mono" },
   // Charm covers Latin and Thai, so signatures use it for both and fall back to Noto.
-  if (family === "signature" && (id === "latin" || id === "thai")) return ["charm", id]
-  return [id]
+  signature: { latin: "charm", thai: "charm" },
+}
+
+function preferred(id: FontId, family: FontFamily): FontId[] {
+  const styled = FAMILY_FONTS[family][id]
+  return styled ? [styled, id] : [id]
 }
 
 /** Font IDs the text needs, without loading anything. */

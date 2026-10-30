@@ -128,6 +128,7 @@
     "subtitle": "整理、合并、拆分、压缩、签名和批注 PDF。无需注册。"
   },
   "common": {
+    "custom": "自定义",
     "privacy": "您的文件不会离开您的设备",
     "allTools": "所有工具",
     "save": "保存",
@@ -356,6 +357,13 @@
       "layout": "布局",
       "center": "居中",
       "tile": "重复平铺",
+      "font": "字体",
+      "fonts": {
+        "sans": "无衬线",
+        "serif": "衬线",
+        "mono": "等宽",
+        "signature": "手写"
+      },
       "angle": "角度",
       "action": "添加水印",
       "chooseImage": "选择图片",
@@ -501,6 +509,13 @@
       "improved": "改进"
     },
     "entries": {
+      "watermarkControls": {
+        "title": "更易用的水印设置",
+        "items": {
+          "fonts": "文字水印可选择无衬线、衬线、等宽或手写字体。衬线和手写字体支持泰文和拉丁文字，其他文字会使用支持该文字的备用字体。",
+          "controls": "可选择 S、M、L、XL 文字大小，以及预设角度、不透明度和颜色。选择自定义可输入精确数值或选择其他颜色。手机上的按钮更易点击，桌面端的布局更加紧凑。"
+        }
+      },
       "appUpdates": {
         "title": "已安装应用的更新",
         "items": {

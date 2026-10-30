@@ -1,4 +1,5 @@
 import type { Box } from "../annotate/model"
+import type { FontFamily } from "../text/fonts"
 import { prepareLayout } from "../text/layout"
 import { PageWriter } from "./content"
 import { drawImage, embedImage } from "./draw"
@@ -14,6 +15,7 @@ export interface TextWatermarkOptions {
   angle: number
   layout: "center" | "tile"
   bold?: boolean
+  family?: FontFamily
   pages: number[]
   lang?: string
 }
@@ -52,6 +54,7 @@ export async function addTextWatermark(bytes: PdfBytes, options: TextWatermarkOp
   const { layout, missing } = await prepareLayout(options.text, {
     fontSize: options.fontSize,
     weight: options.bold ? "bold" : "regular",
+    family: options.family,
     lang: options.lang,
     align: "center",
   })

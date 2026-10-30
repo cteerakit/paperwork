@@ -65,6 +65,15 @@ describe("text engine", () => {
     expect(ko.layout.lines[0].glyphs[0].font.id).toBe("kr")
   })
 
+  it("uses a family's styled fonts where they cover the script and Noto Sans elsewhere", async () => {
+    const fontsOf = async (text: string, family: "serif" | "mono") => {
+      const { layout } = await prepareLayout(text, { fontSize: 20, family })
+      return new Set(layout.lines[0].glyphs.map((g) => g.font.id))
+    }
+    expect(await fontsOf("Draft ร่าง", "serif")).toEqual(new Set(["serif", "serifThai"]))
+    expect(await fontsOf("Draft ร่าง", "mono")).toEqual(new Set(["mono", "thai"]))
+  })
+
   it("reports characters no font can draw", async () => {
     const { missing, layout } = await prepareLayout("ok 😀", { fontSize: 20 })
     expect(missing).toEqual(["😀"])

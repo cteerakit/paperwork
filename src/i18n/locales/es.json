@@ -128,6 +128,7 @@
     "subtitle": "Organiza, une, divide, comprime, firma y anota PDF. Sin registrarte."
   },
   "common": {
+    "custom": "Personalizado",
     "privacy": "Tus archivos nunca salen de tu dispositivo",
     "allTools": "Todas las herramientas",
     "save": "Guardar",
@@ -362,6 +363,13 @@
       "layout": "Disposición",
       "center": "Centrada",
       "tile": "Repetida",
+      "font": "Fuente",
+      "fonts": {
+        "sans": "Sans",
+        "serif": "Serif",
+        "mono": "Mono",
+        "signature": "Manuscrita"
+      },
       "angle": "Ángulo",
       "action": "Añadir marca de agua",
       "chooseImage": "Elegir una imagen",
@@ -510,6 +518,13 @@
       "improved": "Mejorado"
     },
     "entries": {
+      "watermarkControls": {
+        "title": "Ajustes de marca de agua más sencillos",
+        "items": {
+          "fonts": "Elige Sans, Serif, Mono o Manuscrita para las marcas de agua de texto. Serif y Manuscrita admiten texto tailandés y latino; las demás escrituras usan una fuente alternativa compatible.",
+          "controls": "Elige tamaños de texto S, M, L o XL, ángulos y opacidad predefinidos y muestras de color. Selecciona Personalizado para introducir valores precisos o elegir otro color. Los controles son más fáciles de tocar en el móvil y más compactos en el ordenador."
+        }
+      },
       "appUpdates": {
         "title": "Actualizaciones de la aplicación instalada",
         "items": {

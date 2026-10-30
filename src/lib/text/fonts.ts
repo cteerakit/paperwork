@@ -21,11 +21,18 @@ export type FontId =
   | "jp"
   | "kr"
   | "charm"
+  | "serif"
+  | "serifThai"
+  | "mono"
 
 export type Weight = "regular" | "bold"
 
-/** "sans" is the default Noto stack; "signature" puts a handwriting font first. */
-export type FontFamily = "sans" | "signature"
+/**
+ * "sans" is the default Noto stack. The others put a styled font first for the
+ * scripts it covers and fall back to the sans stack for everything else.
+ * "signature" is a handwriting font.
+ */
+export type FontFamily = "sans" | "serif" | "mono" | "signature"
 
 interface FontDef {
   file: Record<Weight, string>
@@ -53,6 +60,9 @@ export const FONT_DEFS: Record<FontId, FontDef> = {
   jp: { file: noto("NotoSansJP", "otf"), large: true },
   kr: { file: noto("NotoSansKR", "otf"), large: true },
   charm: { file: { regular: "Charm-Regular.ttf", bold: "Charm-Bold.ttf" } },
+  serif: { file: noto("NotoSerif") },
+  serifThai: { file: noto("NotoSerifThai") },
+  mono: { file: noto("NotoSansMono") },
 }
 
 export interface LoadedFont {

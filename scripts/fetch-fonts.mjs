@@ -22,6 +22,10 @@ const NOTO_FAMILIES = [
   "NotoSansDevanagari",
   "NotoSansBengali",
   "NotoSansTamil",
+  // Alternative styles offered for watermark text.
+  "NotoSerif",
+  "NotoSerifThai",
+  "NotoSansMono",
 ]
 const CJK_REGIONS = ["SC", "TC", "JP", "KR"]
 const WEIGHTS = ["Regular", "Bold"]

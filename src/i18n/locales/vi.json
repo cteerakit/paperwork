@@ -128,6 +128,7 @@
     "subtitle": "Sắp xếp, ghép, tách, nén, ký và chú thích PDF. Không cần đăng ký."
   },
   "common": {
+    "custom": "Tùy chỉnh",
     "privacy": "Tệp của bạn không bao giờ rời khỏi thiết bị",
     "allTools": "Tất cả công cụ",
     "save": "Lưu",
@@ -356,6 +357,13 @@
       "layout": "Bố cục",
       "center": "Giữa trang",
       "tile": "Lặp lại",
+      "font": "Phông chữ",
+      "fonts": {
+        "sans": "Không chân",
+        "serif": "Có chân",
+        "mono": "Đơn cách",
+        "signature": "Viết tay"
+      },
       "angle": "Góc",
       "action": "Thêm hình mờ",
       "chooseImage": "Chọn hình ảnh",
@@ -501,6 +509,13 @@
       "improved": "Cải thiện"
     },
     "entries": {
+      "watermarkControls": {
+        "title": "Điều chỉnh hình mờ dễ dàng hơn",
+        "items": {
+          "fonts": "Chọn phông không chân, có chân, đơn cách hoặc viết tay cho hình mờ văn bản. Phông có chân và viết tay hỗ trợ cả chữ Thái và chữ Latinh; các hệ chữ khác dùng phông dự phòng phù hợp.",
+          "controls": "Chọn cỡ chữ S, M, L hoặc XL, cùng các góc, độ mờ và màu có sẵn. Chọn Tùy chỉnh để nhập giá trị chính xác hoặc chọn màu khác. Các nút dễ chạm hơn trên điện thoại và gọn hơn trên máy tính."
+        }
+      },
       "appUpdates": {
         "title": "Cập nhật ứng dụng đã cài đặt",
         "items": {
