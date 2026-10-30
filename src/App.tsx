@@ -14,6 +14,7 @@ import { Spinner } from "@/components/Spinner"
 import { toolLoaders } from "@/tools/loaders"
 import { PageMetadata } from "@/components/PageMetadata"
 import { ScrollToTop } from "@/components/ScrollToTop"
+import { PwaUpdate } from "@/components/PwaUpdate"
 
 const Security = lazy(toolLoaders.security)
 const Organize = lazy(toolLoaders.organize)
@@ -33,6 +34,7 @@ export function App() {
     <div className="flex min-h-svh flex-col">
       <PageMetadata />
       <LaunchHandler />
+      <PwaUpdate />
       <AppHeader />
       <main className="flex-1">
         <Suspense

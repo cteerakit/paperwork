@@ -1,4 +1,11 @@
 {
+  "pwa": {
+    "title": "Update available",
+    "description": "Download your work before updating. The app will reload.",
+    "update": "Update now",
+    "later": "Later",
+    "error": "Could not update. Please try again."
+  },
   "seo": {
     "navigation": "Main navigation",
     "howTo": "How to use this PDF tool",

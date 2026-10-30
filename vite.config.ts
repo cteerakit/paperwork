@@ -17,7 +17,7 @@ export default defineConfig({
     VitePWA({
       outDir: ".cloudflare/output/v0/workers/default/assets",
       registerType: "prompt",
-      injectRegister: "script-defer",
+      injectRegister: false,
       includeAssets: ["favicon.svg", "apple-touch-icon.png"],
       manifest: {
         id: "/",

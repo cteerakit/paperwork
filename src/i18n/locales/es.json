@@ -1,4 +1,11 @@
 {
+  "pwa": {
+    "title": "Actualización disponible",
+    "description": "Descarga tu trabajo antes de actualizar. La aplicación se recargará.",
+    "update": "Actualizar ahora",
+    "later": "Más tarde",
+    "error": "No se pudo actualizar. Inténtalo de nuevo."
+  },
   "seo": {
     "navigation": "Navegación principal",
     "howTo": "Cómo usar esta herramienta de PDF",

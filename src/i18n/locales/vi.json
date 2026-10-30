@@ -1,4 +1,11 @@
 {
+  "pwa": {
+    "title": "Có bản cập nhật",
+    "description": "Hãy tải xuống kết quả trước khi cập nhật. Ứng dụng sẽ tải lại.",
+    "update": "Cập nhật ngay",
+    "later": "Để sau",
+    "error": "Không thể cập nhật. Vui lòng thử lại."
+  },
   "seo": {
     "navigation": "Điều hướng chính",
     "howTo": "Cách sử dụng công cụ PDF này",
