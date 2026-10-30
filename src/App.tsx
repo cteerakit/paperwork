@@ -13,6 +13,7 @@ import { Home } from "@/tools/Home"
 import { Spinner } from "@/components/Spinner"
 import { toolLoaders } from "@/tools/loaders"
 import { PageMetadata } from "@/components/PageMetadata"
+import { ScrollToTop } from "@/components/ScrollToTop"
 
 const Security = lazy(toolLoaders.security)
 const Organize = lazy(toolLoaders.organize)
@@ -41,6 +42,7 @@ export function App() {
             </div>
           }
         >
+          <ScrollToTop />
           <Routes>
             <Route index element={<Home />} />
             <Route caseSensitive path="about" element={<About />} />
