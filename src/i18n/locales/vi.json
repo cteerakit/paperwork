@@ -501,6 +501,12 @@
       "improved": "Cải thiện"
     },
     "entries": {
+      "appUpdates": {
+        "title": "Cập nhật ứng dụng đã cài đặt",
+        "items": {
+          "updates": "Paperwork kiểm tra phiên bản mới khi bạn mở lại ứng dụng hoặc kết nối lại và hiển thị nút Cập nhật ngay. Hãy tải xuống kết quả trước khi cập nhật, hoặc chọn Để sau để tiếp tục làm việc."
+        }
+      },
       "privacy": {
         "title": "Quyền riêng tư và bảo mật",
         "items": {

@@ -12,6 +12,11 @@ export interface ChangelogEntry {
 /** Newest first. Add new releases at the top, with copy in every locale. */
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: "appUpdates",
+    date: "2026-10-30",
+    items: [{ key: "updates", type: "improved" }],
+  },
+  {
     id: "privacy",
     date: "2026-10-29",
     items: [

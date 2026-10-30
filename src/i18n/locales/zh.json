@@ -501,6 +501,12 @@
       "improved": "改进"
     },
     "entries": {
+      "appUpdates": {
+        "title": "已安装应用的更新",
+        "items": {
+          "updates": "重新打开应用或恢复网络连接时，Paperwork 会检查新版本并显示“立即更新”按钮。请在更新前下载工作成果，或选择“稍后”继续操作。"
+        }
+      },
       "privacy": {
         "title": "隐私与安全",
         "items": {

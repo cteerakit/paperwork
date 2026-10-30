@@ -510,6 +510,12 @@
       "improved": "Improved"
     },
     "entries": {
+      "appUpdates": {
+        "title": "Installed app updates",
+        "items": {
+          "updates": "Paperwork checks for new versions when you reopen the app or reconnect, and shows an Update now button. Download your work before updating, or choose Later to keep working."
+        }
+      },
       "privacy": {
         "title": "Privacy and security",
         "items": {

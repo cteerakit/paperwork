@@ -510,6 +510,12 @@
       "improved": "Mejorado"
     },
     "entries": {
+      "appUpdates": {
+        "title": "Actualizaciones de la aplicación instalada",
+        "items": {
+          "updates": "Paperwork busca nuevas versiones al volver a abrir la aplicación o recuperar la conexión y muestra el botón Actualizar ahora. Descarga tu trabajo antes de actualizar o elige Más tarde para seguir trabajando."
+        }
+      },
       "privacy": {
         "title": "Privacidad y seguridad",
         "items": {
