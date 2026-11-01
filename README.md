@@ -57,7 +57,7 @@ pnpm build
 pnpm deploy
 ```
 
-Production URL: https://paperwork.c-teerakit.workers.dev
+Production URL: https://paperwork.tools
 
 ## Social sharing and search metadata
 
@@ -69,7 +69,8 @@ so crawlers can read content and follow links without JavaScript. PDF workspaces
 load on the client and replace their static placeholder. Generated HTML is
 English; the existing language switch also translates the new guides into Thai.
 
-The build also emits WebApplication JSON-LD, `sitemap.xml`, `robots.txt`, and
+The build also emits WebSite and WebApplication JSON-LD (WebSite sets the site
+name Google shows in results), `sitemap.xml`, `robots.txt`, and
 a `noindex` 404 page. Client navigation updates the same metadata through
 `PageMetadata`, including restoring indexable metadata when leaving a missing
 page. Cloudflare drops trailing slashes to match canonical URLs. The service
@@ -83,7 +84,7 @@ pnpm check:seo
 ```
 
 After deploying, verify the production URL as a URL-prefix property in Google
-Search Console, then submit `https://paperwork.c-teerakit.workers.dev/sitemap.xml`
+Search Console, then submit `https://paperwork.tools/sitemap.xml`
 in its Sitemaps report. Use URL Inspection to check the home page and a tool
 page; monitor Page Indexing for unexpected exclusions or soft 404s. Search
 Console verification and submission are account actions performed separately.

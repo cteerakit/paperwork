@@ -1,4 +1,4 @@
-export const SITE_URL = "https://paperwork.c-teerakit.workers.dev"
+export const SITE_URL = "https://paperwork.tools"
 export const SOCIAL_IMAGE = `${SITE_URL}/og.png`
 export const SOCIAL_IMAGE_ALT =
   "Paperwork — Everyday PDF tools. No sign-up. Your files stay on your device."
@@ -122,22 +122,34 @@ export const OPEN_PAGE = {
   description: "Choose a tool for the PDF you opened with Paperwork.",
 }
 
-export const WEB_APPLICATION = {
+/** WebSite gives Google the site name shown above search results; WebApplication describes the app. */
+export const STRUCTURED_DATA = {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "@id": `${SITE_URL}/#application`,
-  name: "Paperwork",
-  url: SITE_URL,
-  description: SOCIAL_PAGES[0].description,
-  applicationCategory: "UtilitiesApplication",
-  operatingSystem: "Any",
-  browserRequirements: "Requires JavaScript and a modern web browser.",
-  isAccessibleForFree: true,
-  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      name: "Paperwork",
+      alternateName: ["paperwork.tools", "Paperwork PDF tools"],
+      url: `${SITE_URL}/`,
+    },
+    {
+      "@type": "WebApplication",
+      "@id": `${SITE_URL}/#application`,
+      name: "Paperwork",
+      url: `${SITE_URL}/`,
+      description: SOCIAL_PAGES[0].description,
+      applicationCategory: "UtilitiesApplication",
+      operatingSystem: "Any",
+      browserRequirements: "Requires JavaScript and a modern web browser.",
+      isAccessibleForFree: true,
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    },
+  ],
 }
 
 export const applicationJsonLd = () =>
-  JSON.stringify(WEB_APPLICATION).replaceAll("<", "\\u003c")
+  JSON.stringify(STRUCTURED_DATA).replaceAll("<", "\\u003c")
 
 export function socialPage(pathname: string) {
   return (

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict"
 import { readFile } from "node:fs/promises"
 import { resolve } from "node:path"
-import { SITE_URL, SOCIAL_PAGES, WEB_APPLICATION } from "../src/lib/social.ts"
+import { SITE_URL, SOCIAL_PAGES, STRUCTURED_DATA } from "../src/lib/social.ts"
 
 const directory = resolve(
   import.meta.dirname,
@@ -58,7 +58,7 @@ for (const page of SOCIAL_PAGES) {
   assert.ok(jsonLd, `${page.path}: structured data exists`)
   assert.deepEqual(
     JSON.parse(jsonLd),
-    WEB_APPLICATION,
+    STRUCTURED_DATA,
     `${page.path}: valid structured data`
   )
   for (const [, href] of html.matchAll(/<a\b[^>]*href="([^"]+)"/g)) {
