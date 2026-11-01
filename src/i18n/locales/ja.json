@@ -210,6 +210,10 @@
     },
     "undo": "元に戻す",
     "redo": "やり直す",
+    "clear": "クリア",
+    "clearPage": "{{page}} ページ目をクリア",
+    "clearAll": "すべてのページをクリア",
+    "cleared_other": "{{count}} 件の注釈を削除しました",
     "zoomIn": "拡大",
     "zoomOut": "縮小",
     "fitPage": "ページに合わせる",
@@ -509,6 +513,12 @@
       "improved": "改善"
     },
     "entries": {
+      "annotateClear": {
+        "title": "注釈をクリア",
+        "items": {
+          "clear": "注釈ツールのツールバーに「クリア」ボタンを追加しました。現在のページまたはすべてのページの注釈を一度に削除でき、元に戻すこともできます。"
+        }
+      },
       "watermarkControls": {
         "title": "透かしをもっと簡単に調整",
         "items": {

@@ -105,6 +105,7 @@ function Editor({ pdf, onClose }: { pdf: LoadedPdf; onClose: () => void }) {
         pdf={pdf}
         api={api}
         tools={TOOLS}
+        clearable
         lang={i18n.resolvedLanguage}
         sidebar={(ws) => (
           <div className="border-b pb-4 empty:hidden">

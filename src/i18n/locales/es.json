@@ -213,6 +213,11 @@
     },
     "undo": "Deshacer",
     "redo": "Rehacer",
+    "clear": "Borrar",
+    "clearPage": "Borrar página {{page}}",
+    "clearAll": "Borrar todas las páginas",
+    "cleared_one": "Se eliminó {{count}} anotación",
+    "cleared_other": "Se eliminaron {{count}} anotaciones",
     "zoomIn": "Acercar",
     "zoomOut": "Alejar",
     "fitPage": "Ajustar a la página",
@@ -518,6 +523,12 @@
       "improved": "Mejorado"
     },
     "entries": {
+      "annotateClear": {
+        "title": "Borrar anotaciones",
+        "items": {
+          "clear": "Anotar tiene un botón Borrar en la barra de herramientas. Borra la página actual o todas a la vez, y deshazlo si cambias de opinión."
+        }
+      },
       "watermarkControls": {
         "title": "Ajustes de marca de agua más sencillos",
         "items": {

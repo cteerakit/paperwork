@@ -213,6 +213,11 @@
     },
     "undo": "Undo",
     "redo": "Redo",
+    "clear": "Clear",
+    "clearPage": "Clear page {{page}}",
+    "clearAll": "Clear all pages",
+    "cleared_one": "Removed {{count}} annotation",
+    "cleared_other": "Removed {{count}} annotations",
     "zoomIn": "Zoom in",
     "zoomOut": "Zoom out",
     "fitPage": "Fit page",
@@ -518,6 +523,12 @@
       "improved": "Improved"
     },
     "entries": {
+      "annotateClear": {
+        "title": "Clear annotations",
+        "items": {
+          "clear": "Annotate has a Clear button in the toolbar. Clear the current page or every page at once, and undo it if you change your mind."
+        }
+      },
       "watermarkControls": {
         "title": "Easier watermark controls",
         "items": {

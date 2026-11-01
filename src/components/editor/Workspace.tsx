@@ -13,6 +13,7 @@ import {
   Redo2,
   Square,
   StickyNote,
+  Trash2,
   Type,
   Undo2,
   ZoomIn,
@@ -24,6 +25,12 @@ import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
 import { PageThumbnail } from "@/components/PageThumbnail"
 import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import type { Annotation, NoteObject } from "@/lib/annotate/model"
 import { fitSize, readImageFile } from "@/lib/images"
@@ -77,12 +84,14 @@ interface WorkspaceProps {
   sidebar?: (workspace: WorkspaceApi) => ReactNode
   /** Buttons at the end of the toolbar (e.g. Save). */
   actions?: ReactNode
+  /** Shows a menu to clear the current page or every page. */
+  clearable?: boolean
 }
 
 const isTyping = (target: EventTarget | null) =>
   target instanceof HTMLElement && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName))
 
-export function Workspace({ pdf, api, tools, lang, sidebar, actions }: WorkspaceProps) {
+export function Workspace({ pdf, api, tools, lang, sidebar, actions, clearable }: WorkspaceProps) {
   const { t } = useTranslation()
   const [page, setPage] = useState(0)
   const [tool, setTool] = useState<ToolId>("select")
@@ -212,6 +221,18 @@ export function Workspace({ pdf, api, tools, lang, sidebar, actions }: Workspace
     return c
   }, [api.objects])
 
+  // Clearing is a single undo step, so offer Undo instead of asking for confirmation.
+  const clear = (scope: "page" | "all") => {
+    const removed = scope === "page" ? (counts.get(page) ?? 0) : api.objects.length
+    if (!removed) return
+    api.setAll(scope === "page" ? api.objects.filter((o) => o.page !== page) : [])
+    setSelectedId(undefined)
+    setEditingId(undefined)
+    toast.success(t("editor.cleared", { count: removed }), {
+      action: { label: t("editor.undo"), onClick: api.undo },
+    })
+  }
+
   const workspaceApi: WorkspaceApi = { page, pageSize: size, add }
 
   return (
@@ -248,6 +269,37 @@ export function Workspace({ pdf, api, tools, lang, sidebar, actions }: Workspace
         {tools.length > 1 && <span className="mx-1 h-5 w-px bg-border" />}
         <ToolbarButton icon={Undo2} label={t("editor.undo")} onClick={api.undo} disabled={!api.canUndo} />
         <ToolbarButton icon={Redo2} label={t("editor.redo")} onClick={api.redo} disabled={!api.canRedo} />
+        {clearable && (
+          <DropdownMenu>
+            <Tooltip>
+              <TooltipTrigger
+                render={
+                  <DropdownMenuTrigger
+                    render={
+                      <Button
+                        variant="ghost"
+                        size="icon-sm"
+                        aria-label={t("editor.clear")}
+                        disabled={api.objects.length === 0}
+                      />
+                    }
+                  />
+                }
+              >
+                <Trash2 />
+              </TooltipTrigger>
+              <TooltipContent>{t("editor.clear")}</TooltipContent>
+            </Tooltip>
+            <DropdownMenuContent align="start">
+              <DropdownMenuItem variant="destructive" disabled={!counts.get(page)} onClick={() => clear("page")}>
+                {t("editor.clearPage", { page: page + 1 })}
+              </DropdownMenuItem>
+              <DropdownMenuItem variant="destructive" onClick={() => clear("all")}>
+                {t("editor.clearAll")}
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
         <span className="mx-1 h-5 w-px bg-border" />
         <ToolbarButton icon={ZoomOut} label={t("editor.zoomOut")} onClick={() => setZoom((z) => Math.max(0.25, z / 1.25))} />
         <button

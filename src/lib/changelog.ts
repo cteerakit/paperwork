@@ -12,6 +12,11 @@ export interface ChangelogEntry {
 /** Newest first. Add new releases at the top, with copy in every locale. */
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    id: "annotateClear",
+    date: "2026-11-01",
+    items: [{ key: "clear", type: "new" }],
+  },
+  {
     id: "watermarkControls",
     date: "2026-10-30",
     items: [

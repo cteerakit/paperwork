@@ -210,6 +210,10 @@
     },
     "undo": "Hoàn tác",
     "redo": "Làm lại",
+    "clear": "Xóa",
+    "clearPage": "Xóa trang {{page}}",
+    "clearAll": "Xóa tất cả các trang",
+    "cleared_other": "Đã xóa {{count}} chú thích",
     "zoomIn": "Phóng to",
     "zoomOut": "Thu nhỏ",
     "fitPage": "Vừa trang",
@@ -509,6 +513,12 @@
       "improved": "Cải thiện"
     },
     "entries": {
+      "annotateClear": {
+        "title": "Xóa chú thích",
+        "items": {
+          "clear": "Công cụ Chú thích có nút Xóa trên thanh công cụ. Xóa trang hiện tại hoặc tất cả các trang cùng lúc, và hoàn tác nếu bạn đổi ý."
+        }
+      },
       "watermarkControls": {
         "title": "Điều chỉnh hình mờ dễ dàng hơn",
         "items": {

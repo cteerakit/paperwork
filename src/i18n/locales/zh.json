@@ -210,6 +210,10 @@
     },
     "undo": "撤销",
     "redo": "重做",
+    "clear": "清除",
+    "clearPage": "清除第 {{page}} 页",
+    "clearAll": "清除所有页面",
+    "cleared_other": "已删除 {{count}} 个批注",
     "zoomIn": "放大",
     "zoomOut": "缩小",
     "fitPage": "适应页面",
@@ -509,6 +513,12 @@
       "improved": "改进"
     },
     "entries": {
+      "annotateClear": {
+        "title": "清除批注",
+        "items": {
+          "clear": "批注工具栏新增“清除”按钮。可一次清除当前页或所有页面的批注，改变主意时还能撤销。"
+        }
+      },
       "watermarkControls": {
         "title": "更易用的水印设置",
         "items": {
