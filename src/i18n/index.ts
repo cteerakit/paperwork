@@ -5,24 +5,9 @@ import en from "./locales/en.json"
 import th from "./locales/th.json"
 
 import { LANGUAGES, type LanguageCode } from "./languages"
+import { changeLanguage as changeLanguageOf, loadLocale } from "./loadLocale"
 
 export { LANGUAGES, type LanguageCode }
-
-/** English and Thai ship with the app; the rest load when first needed, to keep the first download small. */
-const LAZY_LOCALES = {
-  ja: () => import("./locales/ja.json"),
-  zh: () => import("./locales/zh.json"),
-  vi: () => import("./locales/vi.json"),
-  es: () => import("./locales/es.json"),
-}
-
-async function loadLocale(language: string | undefined) {
-  // "zh-CN" and "ja-JP" use the strings of "zh" and "ja".
-  const code = language?.split("-")[0]
-  if (!code || !(code in LAZY_LOCALES) || i18n.hasResourceBundle(code, "translation")) return
-  const { default: strings } = await LAZY_LOCALES[code as keyof typeof LAZY_LOCALES]()
-  i18n.addResourceBundle(code, "translation", strings)
-}
 
 void i18n
   .use(LanguageDetector)
@@ -46,15 +31,20 @@ void i18n
  * Resolves once the strings of the language chosen at startup are loaded, so the first screen isn't
  * drawn in English first. It never rejects: if a locale can't load, the app stays in English.
  */
-export const i18nReady = loadLocale(i18n.language)
-  .then(() => (i18n.resolvedLanguage === i18n.language.split("-")[0] ? undefined : i18n.changeLanguage(i18n.language)))
-  .then(() => undefined, () => undefined)
+export const i18nReady = loadLocale(i18n, i18n.language)
+  .then(() =>
+    i18n.resolvedLanguage === i18n.language.split("-")[0]
+      ? undefined
+      : i18n.changeLanguage(i18n.language)
+  )
+  .then(
+    () => undefined,
+    () => undefined
+  )
 
 /** Switches language, loading its strings first. */
-export async function changeLanguage(code: LanguageCode) {
-  await loadLocale(code)
-  await i18n.changeLanguage(code)
-}
+export const changeLanguage = (code: LanguageCode) =>
+  changeLanguageOf(i18n, code)
 
 const syncHtmlLang = (lng: string) => {
   document.documentElement.lang = lng

@@ -1,8 +1,10 @@
 import { createInstance } from "i18next"
 import { renderToStaticMarkup } from "react-dom/server"
 import { I18nextProvider } from "react-i18next"
-import { Link, StaticRouter } from "react-router"
+import { StaticRouter } from "react-router"
 import { AppFooter } from "@/components/AppFooter"
+import { AppHeader } from "@/components/AppHeader"
+import { ThemeProvider } from "@/components/theme-provider"
 import { ToolLayout } from "@/components/ToolLayout"
 import en from "@/i18n/locales/en.json"
 import es from "@/i18n/locales/es.json"
@@ -58,25 +60,15 @@ export async function renderPage(path: string, language: LanguageCode = "en") {
 
   return renderToStaticMarkup(
     <I18nextProvider i18n={i18n}>
-      <StaticRouter location={path}>
-        <div className="flex min-h-svh flex-col">
-          <header className="border-b">
-            <nav
-              aria-label={i18n.t("seo.navigation")}
-              className="mx-auto flex max-w-6xl flex-wrap items-center gap-5 px-4 py-4 text-sm"
-            >
-              <Link to="/" className="font-semibold">
-                Paperwork
-              </Link>
-              <Link to="/">{i18n.t("common.allTools")}</Link>
-              <Link to="/about">{i18n.t("footer.about")}</Link>
-              <Link to="/pricing">{i18n.t("footer.pricing")}</Link>
-            </nav>
-          </header>
-          <main className="flex-1">{content}</main>
-          <AppFooter />
-        </div>
-      </StaticRouter>
+      <ThemeProvider>
+        <StaticRouter location={path}>
+          <div className="flex min-h-svh flex-col">
+            <AppHeader />
+            <main className="flex-1">{content}</main>
+            <AppFooter />
+          </div>
+        </StaticRouter>
+      </ThemeProvider>
     </I18nextProvider>
   )
 }
