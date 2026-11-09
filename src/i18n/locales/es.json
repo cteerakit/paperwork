@@ -488,16 +488,7 @@
     }
   },
   "feedback": {
-    "title": "Comentarios",
-    "description": "¿Qué te gustaría que cambiáramos o mejoráramos?",
-    "privacy": "Tu mensaje se envía al desarrollador a través de Discord. No incluyas información personal.",
-    "label": "Tus comentarios",
-    "send": "Enviar comentarios",
-    "sending": "Enviando…",
-    "sent": "¡Gracias! Tus comentarios se han enviado.",
-    "error": "No se pudieron enviar tus comentarios. Inténtalo de nuevo.",
-    "limited": "Demasiados envíos. Espera un minuto e inténtalo de nuevo.",
-    "close": "Cerrar"
+    "title": "Comentarios"
   },
   "pricing": {
     "title": "Un plan. Cero dólares.",
@@ -616,7 +607,7 @@
     },
     "feedback": {
       "title": "Comentarios",
-      "body": "Si envías comentarios, tu mensaje se reenvía al desarrollador a través de Discord. No incluyas información personal. Tu dirección IP se usa brevemente para limitar cuántos mensajes se pueden enviar."
+      "body": "Si envías comentarios, el formulario lo proporciona Shipped (shipped.tools) y tu mensaje llega al desarrollador a través de ese servicio. Solo se carga cuando lo abres y nunca recibe tus PDF. No incluyas información personal."
     },
     "hosting": {
       "title": "Alojamiento",

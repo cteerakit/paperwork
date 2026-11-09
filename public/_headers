@@ -1,9 +1,11 @@
 # Security headers for every static page and asset (Cloudflare Workers static assets).
 # connect-src 'self' lets the browser enforce the promise that documents never leave the device:
 # scripts can only talk to Paperwork's own origin. 'wasm-unsafe-eval' is needed for PDFium,
-# pdf.js and HarfBuzz WebAssembly; it doesn't allow JavaScript eval.
+# pdf.js and HarfBuzz WebAssembly; it doesn't allow JavaScript eval. shipped.tools serves the
+# feedback widget script and its form iframe; the form posts from inside the iframe, so connect-src
+# stays 'self'.
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self' blob:; connect-src 'self' blob: data:; img-src 'self' blob: data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; media-src 'self' blob:; manifest-src 'self'; object-src 'none'; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval' https://shipped.tools; worker-src 'self' blob:; connect-src 'self' blob: data:; img-src 'self' blob: data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; media-src 'self' blob:; manifest-src 'self'; object-src 'none'; frame-src https://shipped.tools; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin

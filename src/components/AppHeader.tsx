@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { changeLanguage, LANGUAGES } from "@/i18n"
-import { FeedbackDialog } from "@/components/FeedbackDialog"
+import { FeedbackButton } from "@/components/FeedbackButton"
 
 export function AppHeader() {
   const { t } = useTranslation()
@@ -25,7 +25,7 @@ export function AppHeader() {
           {t("app.name")}
         </Link>
         <div className="ml-auto flex items-center gap-1">
-          <FeedbackDialog />
+          <FeedbackButton />
           <LanguageSwitcher />
           <ThemeToggle />
         </div>

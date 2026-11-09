@@ -488,16 +488,7 @@
     }
   },
   "feedback": {
-    "title": "Feedback",
-    "description": "What would you like us to change or improve?",
-    "privacy": "Your message is sent to the developer through Discord. Please don't include personal information.",
-    "label": "Your feedback",
-    "send": "Send feedback",
-    "sending": "Sending…",
-    "sent": "Thanks! Your feedback has been sent.",
-    "error": "Could not send your feedback. Please try again.",
-    "limited": "Too many submissions. Please wait a minute and try again.",
-    "close": "Close"
+    "title": "Feedback"
   },
   "pricing": {
     "title": "One plan. Zero dollars.",
@@ -616,7 +607,7 @@
     },
     "feedback": {
       "title": "Feedback",
-      "body": "If you send feedback, your message is forwarded to the developer through Discord. Don't include personal information. Your IP address is used briefly to limit how many messages can be sent."
+      "body": "If you send feedback, the form is provided by Shipped (shipped.tools) and your message goes to the developer through that service. It loads only when you open it, and it never receives your PDFs. Don't include personal information."
     },
     "hosting": {
       "title": "Hosting",

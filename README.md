@@ -100,18 +100,11 @@ If the production domain changes, update `SITE_URL` before building.
 
 ## Feedback
 
-The header's Feedback dialog sends messages through `POST /api/feedback` to
-Discord. It sends only the message, with no PDF attachments. Submissions are
-limited to 1,500 characters and three requests per minute per IP.
-
-Set `DISCORD_FEEDBACK_WEBHOOK` in the gitignored `.dev.vars` file for local
-development. For production, set the same Worker secret before deploying:
-
-```sh
-pnpm dlx wrangler secret put DISCORD_FEEDBACK_WEBHOOK --name paperwork
-```
-
-Keep the webhook out of source control and client-side environment variables.
+The header's Feedback button opens the [Shipped](https://shipped.tools)
+feedback widget (`index.html`, widget `pcgALWgkYiQB`, `data-launcher="none"`).
+The form runs in an iframe on shipped.tools and loads only when opened; it
+never sees PDFs. `public/_headers` allows `https://shipped.tools` in
+`script-src` and `frame-src` for it.
 
 Workers Builds settings for the GitHub integration:
 

@@ -478,16 +478,7 @@
     }
   },
   "feedback": {
-    "title": "Phản hồi",
-    "description": "Bạn muốn chúng tôi thay đổi hoặc cải thiện điều gì?",
-    "privacy": "Tin nhắn của bạn được gửi đến nhà phát triển qua Discord. Vui lòng không ghi thông tin cá nhân.",
-    "label": "Phản hồi của bạn",
-    "send": "Gửi phản hồi",
-    "sending": "Đang gửi…",
-    "sent": "Cảm ơn bạn! Phản hồi của bạn đã được gửi.",
-    "error": "Không thể gửi phản hồi của bạn. Vui lòng thử lại.",
-    "limited": "Bạn đã gửi quá nhiều lần. Vui lòng đợi một phút rồi thử lại.",
-    "close": "Đóng"
+    "title": "Phản hồi"
   },
   "pricing": {
     "title": "Một gói. Không đồng nào.",
@@ -606,7 +597,7 @@
     },
     "feedback": {
       "title": "Góp ý",
-      "body": "Nếu bạn gửi góp ý, tin nhắn sẽ được chuyển đến nhà phát triển qua Discord. Đừng ghi thông tin cá nhân. Địa chỉ IP của bạn được dùng tạm thời để giới hạn số tin nhắn có thể gửi."
+      "body": "Biểu mẫu góp ý do Shipped (shipped.tools) cung cấp và tin nhắn của bạn được gửi đến nhà phát triển qua dịch vụ đó. Biểu mẫu chỉ tải khi bạn mở và không bao giờ nhận tệp PDF của bạn. Đừng ghi thông tin cá nhân."
     },
     "hosting": {
       "title": "Lưu trữ",
